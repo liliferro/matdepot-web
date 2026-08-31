@@ -112,6 +112,7 @@ button { background: none; border: 0; cursor: pointer; color: inherit; }
   gap: 24px;
 }
 .brand { display: flex; align-items: center; gap: 12px; }
+.brand > span:not(.brand-mark) { display: flex; flex-direction: column; min-width: 0; }
 .brand-mark {
   width: 36px; height: 36px; background: var(--c-bone); color: var(--c-carbon);
   display: grid; place-items: center; border-radius: 4px;
