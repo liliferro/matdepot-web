@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Producto · Mat Depot</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div id="md-header"></div>
+
+<section class="page-banner" id="banner"></section>
+
+<section class="section--tight">
+  <div class="container">
+    <div class="prod-detail" id="detail"></div>
+
+    <div style="margin-top:96px">
+      <span class="eyebrow">Aplicaciones</span>
+      <h2 class="h2" style="margin-top:20px;margin-bottom:32px" id="apps-title">Dónde se usa</h2>
+      <div class="info-grid" id="apps-grid"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section bone">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:end;gap:32px;flex-wrap:wrap;margin-bottom:32px">
+      <h2 class="h2" style="max-width:18ch">Productos relacionados</h2>
+      <a class="btn btn--ghost" href="productos.html">Ver catálogo completo <span class="arrow"></span></a>
+    </div>
+    <div class="related" id="related"></div>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="container">
+    <div class="cta-split">
+      <h2 class="big-saying">Cotiza este producto.</h2>
+      <div style="display:grid;gap:14px;justify-items:start">
+        <p class="lead" style="color:var(--c-concrete)">Te asesoramos con la especificación correcta según tu espacio y tráfico.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a class="btn btn--invert" href="contacto.html" id="cta-form">Solicitar cotización <span class="arrow"></span></a>
+          <a class="btn btn--ghost-light" id="cta-wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="md-footer"></div>
+
+<script src="assets/catalogo.js"></script>
+<script src="assets/chrome.js"></script>
+<script>
+const params = new URLSearchParams(location.search);
+const id = params.get("id") || "antifatiga";
+const p = window.MD_CATALOG.find(x => x.slug === id) || window.MD_CATALOG[0];
+
+// banner
+document.getElementById("banner").innerHTML = `
+  <div class="container">
+    <div class="crumbs">
+      <a href="index.html">Inicio</a><span class="sep">/</span>
+      <a href="productos.html">Productos</a><span class="sep">/</span>
+      <span>${p.name}</span>
+    </div>
+    <span class="eyebrow" style="margin-top:8px">${p.sectors.join(' · ')} · ${p.category}</span>
+    <h1 class="h-display" style="color:var(--c-bone);max-width:18ch;margin-top:24px">${p.name}.</h1>
+    <p class="lead" style="color:var(--c-concrete);max-width:62ch">${p.short}</p>
+  </div>`;
+
+// gallery + specs
+const specsRows = Object.entries(p.specs).map(([k,v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("");
+const gallery = p.images.map((src, i) => `
+  <div class="prod-img prod-img--photo">
+    <img src="${src}" alt="${p.name}${i ? ` · vista ${i+1}` : ''}" ${i ? 'loading="lazy"' : ''}>
+    <span class="prod-img__cap">${i === 0 ? 'VISTA PRINCIPAL' : `VISTA ${String(i+1).padStart(2,'0')}`}</span>
+  </div>`).join("");
+document.getElementById("detail").innerHTML = `
+  <div>
+    <div class="prod-gallery">${gallery}</div>
+  </div>
+  <div>
+    <span class="eyebrow">Descripción técnica</span>
+    <p class="lead" style="margin-top:16px">${p.intro}</p>
+    <div class="spec-table"><dl>${specsRows}</dl></div>
+    ${p.features.length ? `<div class="feat-list">
+      <span class="eyebrow" style="margin-bottom:14px">Características</span>
+      <ul>${p.features.map(f=>`<li>${f}</li>`).join("")}</ul>
+    </div>` : ''}
+    <div class="app-list">${p.uses.slice(0,4).map(u=>`<span class="tag">${u}</span>`).join("")}</div>
+    <div class="prod-cta">
+      <a class="btn" href="contacto.html?prod=${p.slug}">Cotizar este producto <span class="arrow"></span></a>
+      <a class="btn btn--ghost" id="prod-wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>`;
+
+document.getElementById("prod-wa").href = window.MD_CONTACT.waUrl;
+document.getElementById("cta-wa").href = window.MD_CONTACT.waUrl;
+
+// apps blocks
+document.getElementById("apps-grid").innerHTML = p.uses.map((u, i) => `
+  <div class="info-block">
+    <span class="mono">${String(i+1).padStart(2,'0')} · Aplicación</span>
+    <h4>${u}</h4>
+  </div>`).join("");
+
+// related — same sectors / apps
+const related = window.MD_CATALOG
+  .filter(x => x.slug !== p.slug && (x.apps.some(a => p.apps.includes(a)) || x.sectors.some(s => p.sectors.includes(s))))
+  .slice(0, 4);
+const relWrap = document.getElementById("related");
+related.forEach((r, i) => {
+  relWrap.insertAdjacentHTML("beforeend", `
+    <a class="cat-card" href="producto.html?id=${r.slug}">
+      <div class="cat-card__media cat-card__media--photo">
+        <img src="${r.images[0]}" alt="${r.name}" loading="lazy">
+        <span class="cat-card__num">${r.slug.toUpperCase().slice(0,12)}</span>
+      </div>
+      <div>
+        <span class="cat-card__name">${r.name}</span>
+        <div class="cat-card__tags" style="margin-top:12px">${r.sectors.slice(0,1).map(s=>`<span class="tag">${s}</span>`).join("")}</div>
+      </div>
+      <span class="cat-card__cta">Ver ficha <span class="arrow"></span></span>
+    </a>`);
+});
+
+document.title = `${p.name} · Mat Depot`;
+</script>
+</body>
+</html>

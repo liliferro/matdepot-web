@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Contacto · Mat Depot</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div id="md-header"></div>
+
+<section class="page-banner">
+  <div class="container">
+    <div class="crumbs"><a href="index.html">Inicio</a><span class="sep">/</span><span>Contacto</span></div>
+    <h1 class="h-display" style="color:var(--c-bone);max-width:16ch">Cotiza tu proyecto.</h1>
+    <p class="lead" style="color:var(--c-concrete)">Asesoría técnica gratuita. Te respondemos con recomendación específica según uso, tráfico y superficie.</p>
+  </div>
+</section>
+
+<section class="section--tight">
+  <div class="container">
+    <div class="contact-grid">
+      <form class="form" id="contact-form" novalidate>
+        <span class="eyebrow">Solicitar cotización</span>
+        <h2 class="h2" style="margin:8px 0 24px">Cuéntanos del proyecto.</h2>
+
+        <div class="form-row">
+          <div class="field"><label for="f-name">Nombre completo *</label><input id="f-name" required></div>
+          <div class="field"><label for="f-company">Empresa</label><input id="f-company"></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="f-email">Email *</label><input id="f-email" type="email" required></div>
+          <div class="field"><label for="f-phone">Teléfono *</label><input id="f-phone" type="tel" required></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="f-cat">Producto de interés</label>
+            <select id="f-cat"><option value="">— Selecciona una opción —</option></select>
+          </div>
+          <div class="field"><label for="f-traffic">Nivel de tráfico</label>
+            <select id="f-traffic">
+              <option value="">— Selecciona —</option>
+              <option>Bajo</option><option>Medio</option><option>Alto</option><option>Uso pesado</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label for="f-msg">Cuéntanos del espacio · superficie · medidas aproximadas *</label>
+          <textarea id="f-msg" required></textarea>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
+          <button class="btn" type="submit">Enviar solicitud <span class="arrow"></span></button>
+          <a class="btn btn--ghost" id="wa-link" href="#" target="_blank" rel="noopener">Mejor por WhatsApp</a>
+        </div>
+        <p id="form-status" class="mono" style="margin-top:12px;color:var(--c-steel)"></p>
+      </form>
+
+      <aside>
+        <span class="eyebrow">Contacto directo</span>
+        <div class="contact-list" style="margin-top:24px">
+          <div class="contact-item">
+            <span class="mono">Teléfono · línea 1</span>
+            <span class="val"><a id="tel1" href="tel:5596265258"></a></span>
+          </div>
+          <div class="contact-item">
+            <span class="mono">Teléfono · línea 2</span>
+            <span class="val"><a id="tel2" href="tel:5596265259"></a></span>
+          </div>
+          <div class="contact-item">
+            <span class="mono">WhatsApp</span>
+            <span class="val"><a id="wa-item" href="#" target="_blank" rel="noopener"></a></span>
+          </div>
+          <div class="contact-item">
+            <span class="mono">Email</span>
+            <span class="val"><a id="email-item" href="#"></a></span>
+          </div>
+          <div class="contact-item">
+            <span class="mono">Ubicación</span>
+            <span class="val" id="addr"></span>
+          </div>
+          <div class="contact-item">
+            <span class="mono">Horario</span>
+            <span class="val">Lun – Vie · 9:00 – 18:00</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<div id="md-footer"></div>
+<script src="assets/catalogo.js"></script>
+<script src="assets/chrome.js"></script>
+<script>
+const c = window.MD_CONTACT;
+document.getElementById("tel1").textContent = c.tel1;
+document.getElementById("tel2").textContent = c.tel2;
+const waA = document.getElementById("wa-item"); waA.textContent = c.wa; waA.href = c.waUrl;
+const eA  = document.getElementById("email-item"); eA.textContent = c.email; eA.href = "mailto:" + c.email;
+document.getElementById("addr").textContent = c.address;
+document.getElementById("wa-link").href = c.waUrl;
+
+// product select
+const sel = document.getElementById("f-cat");
+window.MD_CATALOG.forEach(p => {
+  const o = document.createElement("option");
+  o.value = p.slug; o.textContent = p.name; sel.appendChild(o);
+});
+const preset = new URLSearchParams(location.search).get("prod");
+if (preset) sel.value = preset;
+
+document.getElementById("contact-form").addEventListener("submit", e => {
+  e.preventDefault();
+  const status = document.getElementById("form-status");
+  status.textContent = "ENVIADO · Te contactaremos en menos de 24h hábiles. Gracias.";
+  status.style.color = "var(--c-carbon)";
+});
+</script>
+</body>
+</html>

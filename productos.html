@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Productos · Mat Depot</title>
+<meta name="description" content="Catálogo de tapetes y pisos técnicos disponibles en Mat Depot para industria, comercio, gimnasios y cocinas.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div id="md-header"></div>
+
+<section class="page-banner">
+  <div class="container">
+    <div class="crumbs"><a href="index.html">Inicio</a><span class="sep">/</span><span>Productos</span></div>
+    <h1 class="h-display" style="color:var(--c-bone);max-width:14ch">Catálogo completo.</h1>
+    <p class="lead" style="color:var(--c-concrete)">Tapetes y pisos técnicos para industria, comercio, gimnasios y áreas de operación. Mayoreo, menudeo y proyectos a medida.</p>
+  </div>
+</section>
+
+<section class="section--tight">
+  <div class="container">
+    <div class="prod-toolbar">
+      <div class="filters" id="filters"></div>
+      <span class="result-count" id="result-count"></span>
+    </div>
+    <div class="cat-grid" id="prod-grid" style="margin-top:32px"></div>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="container">
+    <div class="cta-split">
+      <h2 class="big-saying">¿No encuentras lo que buscas?</h2>
+      <div style="display:grid;gap:14px;justify-items:start">
+        <p class="lead" style="color:var(--c-concrete)">Trabajamos productos a medida y especificaciones especiales. Cuéntanos tu proyecto.</p>
+        <a class="btn btn--invert" href="contacto.html">Cotizar a medida <span class="arrow"></span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="md-footer"></div>
+
+<script src="assets/catalogo.js"></script>
+<script src="assets/chrome.js"></script>
+<script>
+const filterBar = document.getElementById("filters");
+const grid = document.getElementById("prod-grid");
+const countEl = document.getElementById("result-count");
+let active = "all";
+
+window.MD_FILTERS.forEach(f => {
+  filterBar.insertAdjacentHTML("beforeend",
+    `<button class="filter" data-id="${f.id}" aria-pressed="${f.id==='all'?'true':'false'}">${f.name}</button>`);
+});
+
+function render() {
+  const items = active === "all"
+    ? window.MD_CATALOG
+    : window.MD_CATALOG.filter(p => p.apps.includes(active));
+  countEl.textContent = `${String(items.length).padStart(2,'0')} resultados`;
+  grid.innerHTML = "";
+  items.forEach((p, i) => {
+    grid.insertAdjacentHTML("beforeend", `
+      <a class="cat-card" href="producto.html?id=${p.slug}">
+        <div class="cat-card__media cat-card__media--photo">
+          <img src="${p.images[0]}" alt="${p.name}" loading="lazy">
+          <span class="cat-card__num">${String(i+1).padStart(2,'0')} · ${p.slug.toUpperCase().slice(0,12)}</span>
+        </div>
+        <div>
+          <span class="cat-card__name">${p.name}</span>
+          <p style="font-size:13px;color:var(--c-iron);line-height:1.45;margin:8px 0 0">${p.short}</p>
+          <div class="cat-card__tags" style="margin-top:14px">${p.sectors.slice(0,2).map(s=>`<span class="tag">${s}</span>`).join("")}</div>
+        </div>
+        <span class="cat-card__cta">Ver ficha técnica <span class="arrow"></span></span>
+      </a>`);
+  });
+}
+
+filterBar.addEventListener("click", e => {
+  const btn = e.target.closest(".filter");
+  if (!btn) return;
+  active = btn.dataset.id;
+  filterBar.querySelectorAll(".filter").forEach(b => b.setAttribute("aria-pressed", b===btn ? "true":"false"));
+  render();
+});
+
+render();
+</script>
+</body>
+</html>
