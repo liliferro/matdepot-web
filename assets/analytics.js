@@ -1,10 +1,11 @@
 /* No personal form values or free-text searches are sent to analytics. */
 (function () {
   const id = 'G-LC7M7BHNSN';
+  window['ga-disable-'+id] = true;
   window.dataLayer = window.dataLayer || [];
   window.gtag = function () { window.dataLayer.push(arguments); };
   gtag('consent', 'default', {ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'});
-  let enabled = false;
+  let enabled = false, initialized = false;
   const read = (key, session=false) => { try { return JSON.parse((session?sessionStorage:localStorage).getItem(key)); } catch { return null; } };
   const save = (key, value, session=false) => { try { (session?sessionStorage:localStorage).setItem(key,JSON.stringify(value)); } catch {} };
   const item = () => window.MD_CATALOG?.find(p => location.pathname === '/tapetes/'+p.slug+'.html');
@@ -19,7 +20,10 @@
   }
   function enable() {
     if(enabled)return; enabled=true;
+    window['ga-disable-'+id] = false;
     gtag('consent','update',{analytics_storage:'granted'});
+    if(initialized){lead();return;}
+    initialized=true;
     gtag('js',new Date());
     const safe=new URL(location.origin+location.pathname);
     for(const k of ['utm_source','utm_medium','utm_campaign','utm_content','utm_term']) {
@@ -35,7 +39,11 @@
   function choice(value) {
     save('md-analytics-consent',value);
     if(value==='granted')enable();
-    else if(enabled){gtag('consent','update',{analytics_storage:'denied'});enabled=false;}
+    else {
+      window['ga-disable-'+id] = true;
+      if(enabled)gtag('consent','update',{analytics_storage:'denied'});
+      enabled=false;
+    }
     document.getElementById('cookie-choice').hidden=true;
   }
   document.addEventListener('DOMContentLoaded',()=>{
