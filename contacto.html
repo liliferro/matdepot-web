@@ -24,7 +24,11 @@
 <section class="section--tight">
   <div class="container">
     <div class="contact-grid">
-      <form class="form" id="contact-form">
+      <form class="form" id="contact-form" action="https://formsubmit.co/matdepotmx@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="Nueva solicitud de cotización · Mat Depot">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://www.matdepotmex.com/gracias.html">
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
         <span class="eyebrow">Solicitar cotización</span>
         <h2 class="h2" style="margin:8px 0 24px">Cuéntanos del proyecto.</h2>
 
@@ -38,23 +42,23 @@
         </div>
         <div class="form-row">
           <div class="field"><label for="f-cat">Producto de interés</label>
-            <select id="f-cat"><option value="">— Selecciona una opción —</option></select>
+            <select id="f-cat" name="producto"><option value="">— Selecciona una opción —</option></select>
           </div>
           <div class="field"><label for="f-traffic">Nivel de tráfico</label>
-            <select id="f-traffic">
+            <select id="f-traffic" name="trafico">
               <option value="">— Selecciona —</option>
               <option>Bajo</option><option>Medio</option><option>Alto</option><option>Uso pesado</option>
             </select>
           </div>
         </div>
         <div class="field"><label for="f-msg">Cuéntanos del espacio · superficie · medidas aproximadas *</label>
-          <textarea id="f-msg" required></textarea>
+          <textarea id="f-msg" name="message" maxlength="10000" required></textarea>
         </div>
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
-          <button class="btn" type="submit">Preparar WhatsApp <span class="arrow"></span></button>
+          <button class="btn" type="submit">Enviar solicitud <span class="arrow"></span></button>
           <a class="btn btn--ghost" id="wa-link" href="#" target="_blank" rel="noopener">Abrir chat directo</a>
         </div>
-        <p>Al continuar se abrirá WhatsApp con tu solicitud. Revisa el mensaje y pulsa Enviar allí. Consulta nuestro <a href="aviso-privacidad.html" style="text-decoration:underline">aviso de privacidad</a>.</p>
+        <p>Enviaremos tu solicitud al equipo de Mat Depot. Consulta nuestro <a href="aviso-privacidad.html" style="text-decoration:underline">aviso de privacidad</a>.</p>
         <p role="status" aria-live="polite" id="form-status" class="mono" style="margin-top:12px;color:var(--c-steel)"></p>
       </form>
 
@@ -107,25 +111,20 @@ document.getElementById("wa-link").href = c.waUrl;
 const sel = document.getElementById("f-cat");
 window.MD_CATALOG.forEach(p => {
   const o = document.createElement("option");
-  o.value = p.slug; o.textContent = p.name; sel.appendChild(o);
+  o.value = p.name; o.textContent = p.name; sel.appendChild(o);
 });
 const preset = new URLSearchParams(location.search).get("prod");
-if (preset) sel.value = preset;
+if (preset) {
+  const product = window.MD_CATALOG.find(p => p.slug === preset);
+  if (product) sel.value = product.name;
+}
 
-document.getElementById("contact-form").addEventListener("submit", e => {
-  e.preventDefault();
-  const status = document.getElementById("form-status");
-  const value = id => document.getElementById(id).value.trim();
-  const message = ["Hola, quisiera cotizar un proyecto.",
-    `Nombre: ${value("f-name")}`, `Empresa: ${value("f-company") || "No indicada"}`,
-    `Email: ${value("f-email")}`, `Teléfono: ${value("f-phone")}`,
-    `Producto: ${sel.value ? sel.selectedOptions[0].textContent : "Solicito asesoría"}`,
-    `Tráfico: ${value("f-traffic") || "No indicado"}`, `Proyecto: ${value("f-msg")}`].join("\n");
-  const url = new URL(c.waUrl);
-  url.searchParams.set("text", message);
-  status.textContent = "Solicitud preparada. Completa el envío en WhatsApp.";
-  window.open(url.href, "_blank", "noopener,noreferrer");
-  status.style.color = "var(--c-carbon)";
+const form = document.getElementById("contact-form");
+form.addEventListener("submit", () => {
+  document.getElementById("form-status").textContent = "Procesando solicitud. Completa la verificación de seguridad para enviarla.";
+});
+window.addEventListener("pageshow", () => {
+  document.getElementById("form-status").textContent = "";
 });
 </script>
 </body>

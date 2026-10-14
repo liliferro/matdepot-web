@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Solicitud enviada · Mat Depot</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Solicita una cotización de tapetes y pisos técnicos. Contacta a Mat Depot por WhatsApp, teléfono o correo electrónico.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div id="md-header"></div>
+<main>
+<section class="page-banner">
+  <div class="container">
+    <span class="eyebrow">Gracias por contactarnos</span>
+    <h1 class="h-display" style="color:var(--c-bone)">Formulario enviado.</h1>
+    <p class="lead">Tu formulario fue enviado. Te contactaremos lo antes posible.</p>
+  </div>
+</section>
+<section class="section--tight">
+  <div class="container">
+    <h2 class="h2">¿Es una emergencia?</h2>
+    <p class="lead">Escríbenos por WhatsApp para solicitar atención directa.</p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:24px">
+      <a class="btn" id="urgent-wa" href="https://wa.me/5215544943014" target="_blank" rel="noopener">Escribir por WhatsApp <span class="arrow"></span></a>
+      <a class="btn btn--ghost" href="productos.html">Volver al catálogo</a>
+    </div>
+  </div>
+</section>
+</main>
+<div id="md-footer"></div>
+<script src="assets/catalogo.js"></script>
+<script src="assets/chrome.js"></script>
+<script>document.getElementById("urgent-wa").href = window.MD_CONTACT.waUrl;</script>
+</body>
+</html>
