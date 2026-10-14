@@ -649,7 +649,7 @@ window.MD_CATALOG = [
     "slug": "tapete-dielectrico",
     "name": "Tapete dieléctrico",
     "category": "Seguridad eléctrica",
-    "short": "Hule estriado gris certificado en la UE. 3 mm hasta 30 kV · 6 mm hasta 50 kV.",
+    "short": "Tapete de hule estriado gris para áreas eléctricas. Solicita la ficha técnica y el certificado del modelo antes de seleccionar.",
     "sectors": [
       "Subestaciones",
       "Mantenimiento eléctrico"
@@ -657,17 +657,17 @@ window.MD_CATALOG = [
     "apps": [
       "seguridad-electrica"
     ],
-    "intro": "Tapete dieléctrico de hule estriado fabricado y probado en Europa, con certificado emitido en la Unión Europea. Superficie estriada antiderrapante con base rugosa. El espesor de 3 mm resiste hasta 30 000 V y el de 6 mm hasta 50 000 V.",
+    "intro": "Tapete dieléctrico de hule estriado gris con base rugosa, disponible en espesores de 3 y 6 mm. La selección para una instalación eléctrica requiere confirmar la clase, la norma aplicable y la documentación del modelo con el proveedor antes de comprar.",
     "specs": {
       "Color": "Gris",
-      "Espesor": "3 mm → hasta 30 000 V · 6 mm → hasta 50 000 V",
+      "Espesor": "3 mm y 6 mm; consultar clase y documentación del modelo",
       "Ancho": "1 m y 1.20 m",
       "Presentación": "Rollo de 25 m"
     },
     "features": [
-      "Certificado emitido en la Unión Europea",
+      "Solicita el certificado y la ficha técnica del modelo",
       "Estriado antiderrapante con base rugosa",
-      "Fabricado y probado en Europa"
+      "Confirmar condiciones de uso con el proveedor"
     ],
     "uses": [
       "Frente de tableros eléctricos",
@@ -1295,5 +1295,5 @@ window.MD_FILTERS = [
 window.MD_CONTACT = {
   tel1: "(55) 9626 5258", tel2: "(55) 9626 5259", wa: "(55) 4494 3014",
   waUrl: "https://wa.me/5215544943014?text=Hola%2C%20estoy%20interesado(a)%20en%20sus%20productos.%20Quiero%20m%C3%A1s%20informaci%C3%B3n.",
-  email: "matdepotmex@gmail.com", address: "Tlalnepantla de Baz · Estado de México · MX"
+  email: "matdepotmx@gmail.com", address: "Tlalnepantla de Baz · Estado de México · MX"
 };

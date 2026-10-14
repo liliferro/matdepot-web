@@ -65,7 +65,7 @@ const p = window.MD_CATALOG.find(x => x.slug === id);
 if (!p) {
   document.title = "Producto no encontrado · Mat Depot";
   document.getElementById("banner").innerHTML = '<div class="container"><h1 class="h1">Producto no encontrado</h1><p>Consulta los productos disponibles en nuestro catálogo.</p><a class="btn btn--invert" href="productos.html">Ver catálogo</a></div>';
-  document.querySelectorAll("body > section:not(#banner)").forEach(el => el.hidden = true);
+  document.querySelectorAll("main > section:not(#banner), body > section:not(#banner)").forEach(el => el.hidden = true);
 } else {
 
 // banner

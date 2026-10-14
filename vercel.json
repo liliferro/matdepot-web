@@ -1,0 +1,682 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "npm run build",
+  "outputDirectory": "public",
+  "installCommand": "npm ci --ignore-scripts",
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/productos",
+      "destination": "/productos.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/contactanos",
+      "destination": "/contacto.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/quienessomos",
+      "destination": "/quienes-somos.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/ubicanos",
+      "destination": "/ubicacion.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-antiderrapante-en-rollo",
+      "destination": "/categorias/antiderrapantes.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "piso-para-areas-infantiles"
+        }
+      ],
+      "destination": "/tapetes/piso-para-areas-infantiles.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/piso-para-areas-infantiles",
+      "destination": "/tapetes/piso-para-areas-infantiles.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-para-alberca-y-areas-humedas"
+        }
+      ],
+      "destination": "/tapetes/tapete-para-alberca-y-areas-humedas.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-para-alberca-y-areas-humedas",
+      "destination": "/tapetes/tapete-para-alberca-y-areas-humedas.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-de-pvc-con-base-textil"
+        }
+      ],
+      "destination": "/tapetes/tapete-de-pvc-con-base-textil.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-de-pvc-con-base-textil",
+      "destination": "/tapetes/tapete-de-pvc-con-base-textil.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-de-pvc-con-base-textil-y-circulos"
+        }
+      ],
+      "destination": "/tapetes/tapete-de-pvc-con-base-textil-y-circulos.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-de-pvc-con-base-textil-y-circulos",
+      "destination": "/tapetes/tapete-de-pvc-con-base-textil-y-circulos.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-antiderrapante-americano"
+        }
+      ],
+      "destination": "/tapetes/tapete-antiderrapante-americano.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-antiderrapante-americano",
+      "destination": "/tapetes/tapete-antiderrapante-americano.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-antiderrapante-de-espiga"
+        }
+      ],
+      "destination": "/tapetes/tapete-antiderrapante-de-espiga.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-antiderrapante-de-espiga",
+      "destination": "/tapetes/tapete-antiderrapante-de-espiga.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-antiderrapante-decktop"
+        }
+      ],
+      "destination": "/tapetes/tapete-antiderrapante-decktop.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-antiderrapante-decktop",
+      "destination": "/tapetes/tapete-antiderrapante-decktop.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-antiderrapante-liso"
+        }
+      ],
+      "destination": "/tapetes/tapete-antiderrapante-liso.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-antiderrapante-liso",
+      "destination": "/tapetes/tapete-antiderrapante-liso.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-antiderrapante-mil-rayas"
+        }
+      ],
+      "destination": "/tapetes/tapete-antiderrapante-mil-rayas.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-antiderrapante-mil-rayas",
+      "destination": "/tapetes/tapete-antiderrapante-mil-rayas.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-antiderrapante-tachonado"
+        }
+      ],
+      "destination": "/tapetes/tapete-antiderrapante-tachonado.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-antiderrapante-tachonado",
+      "destination": "/tapetes/tapete-antiderrapante-tachonado.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-antiderrapante-tachonado-con-base-textil"
+        }
+      ],
+      "destination": "/tapetes/tapete-antiderrapante-tachonado-con-base-textil.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-antiderrapante-tachonado-con-base-textil",
+      "destination": "/tapetes/tapete-antiderrapante-tachonado-con-base-textil.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-de-hule-antiderrapante-estriado-con-base-textil"
+        }
+      ],
+      "destination": "/tapetes/tapete-de-hule-antiderrapante-estriado-con-base-textil.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-de-hule-antiderrapante-estriado-con-base-textil",
+      "destination": "/tapetes/tapete-de-hule-antiderrapante-estriado-con-base-textil.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-de-hule-liso-con-base-textil"
+        }
+      ],
+      "destination": "/tapetes/tapete-de-hule-liso-con-base-textil.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-de-hule-liso-con-base-textil",
+      "destination": "/tapetes/tapete-de-hule-liso-con-base-textil.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-antiestatico"
+        }
+      ],
+      "destination": "/tapetes/tapete-antiestatico.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-antiestatico",
+      "destination": "/tapetes/tapete-antiestatico.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-antifatiga-negro-de-uso-general"
+        }
+      ],
+      "destination": "/tapetes/tapete-antifatiga-negro-de-uso-general.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-antifatiga-negro-de-uso-general",
+      "destination": "/tapetes/tapete-antifatiga-negro-de-uso-general.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-esponjoso-con-franjas-amarillas"
+        }
+      ],
+      "destination": "/tapetes/tapete-esponjoso-con-franjas-amarillas.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-esponjoso-con-franjas-amarillas",
+      "destination": "/tapetes/tapete-esponjoso-con-franjas-amarillas.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-de-seguridad-de-pvc-para-trafico-pesado"
+        }
+      ],
+      "destination": "/tapetes/tapete-de-seguridad-de-pvc-para-trafico-pesado.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-de-seguridad-de-pvc-para-trafico-pesado",
+      "destination": "/tapetes/tapete-de-seguridad-de-pvc-para-trafico-pesado.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-dielectrico"
+        }
+      ],
+      "destination": "/tapetes/tapete-dielectrico.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-dielectrico",
+      "destination": "/tapetes/tapete-dielectrico.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-multiusos-de-uso-rudo"
+        }
+      ],
+      "destination": "/tapetes/tapete-multiusos-de-uso-rudo.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-multiusos-de-uso-rudo",
+      "destination": "/tapetes/tapete-multiusos-de-uso-rudo.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-para-artes-marciales-y-crossfit"
+        }
+      ],
+      "destination": "/tapetes/tapete-para-artes-marciales-y-crossfit.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-para-artes-marciales-y-crossfit",
+      "destination": "/tapetes/tapete-para-artes-marciales-y-crossfit.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-para-cocina"
+        }
+      ],
+      "destination": "/tapetes/tapete-para-cocina.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-para-cocina",
+      "destination": "/tapetes/tapete-para-cocina.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-para-establo"
+        }
+      ],
+      "destination": "/tapetes/tapete-para-establo.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-para-establo",
+      "destination": "/tapetes/tapete-para-establo.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-para-gimnasio-en-rollo-con-chispas-verdes"
+        }
+      ],
+      "destination": "/tapetes/tapete-para-gimnasio-en-rollo-con-chispas-verdes.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-para-gimnasio-en-rollo-con-chispas-verdes",
+      "destination": "/tapetes/tapete-para-gimnasio-en-rollo-con-chispas-verdes.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-de-hule-reciclado-epdm-con-chispas-azules"
+        }
+      ],
+      "destination": "/tapetes/tapete-de-hule-reciclado-epdm-con-chispas-azules.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-de-hule-reciclado-epdm-con-chispas-azules",
+      "destination": "/tapetes/tapete-de-hule-reciclado-epdm-con-chispas-azules.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-modular-con-chispas-plateadas"
+        }
+      ],
+      "destination": "/tapetes/tapete-modular-con-chispas-plateadas.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-modular-con-chispas-plateadas",
+      "destination": "/tapetes/tapete-modular-con-chispas-plateadas.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-modular-para-gimnasio-en-diferentes-colores"
+        }
+      ],
+      "destination": "/tapetes/tapete-modular-para-gimnasio-en-diferentes-colores.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-modular-para-gimnasio-en-diferentes-colores",
+      "destination": "/tapetes/tapete-modular-para-gimnasio-en-diferentes-colores.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-para-gimnasio-con-chispas-rojas"
+        }
+      ],
+      "destination": "/tapetes/tapete-para-gimnasio-con-chispas-rojas.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-para-gimnasio-con-chispas-rojas",
+      "destination": "/tapetes/tapete-para-gimnasio-con-chispas-rojas.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-para-gimnasio-de-hule-reciclado"
+        }
+      ],
+      "destination": "/tapetes/tapete-para-gimnasio-de-hule-reciclado.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-para-gimnasio-de-hule-reciclado",
+      "destination": "/tapetes/tapete-para-gimnasio-de-hule-reciclado.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-para-gimnasio-en-rollo-con-chispas-azules"
+        }
+      ],
+      "destination": "/tapetes/tapete-para-gimnasio-en-rollo-con-chispas-azules.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-para-gimnasio-en-rollo-con-chispas-azules",
+      "destination": "/tapetes/tapete-para-gimnasio-en-rollo-con-chispas-azules.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-para-gimnasio-modular-de-13-mm"
+        }
+      ],
+      "destination": "/tapetes/tapete-para-gimnasio-modular-de-13-mm.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-para-gimnasio-modular-de-13-mm",
+      "destination": "/tapetes/tapete-para-gimnasio-modular-de-13-mm.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-para-gimnasio-modular-de-7-mm"
+        }
+      ],
+      "destination": "/tapetes/tapete-para-gimnasio-modular-de-7-mm.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-para-gimnasio-modular-de-7-mm",
+      "destination": "/tapetes/tapete-para-gimnasio-modular-de-7-mm.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-publicitario"
+        }
+      ],
+      "destination": "/tapetes/tapete-publicitario.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-publicitario",
+      "destination": "/tapetes/tapete-publicitario.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-rizo"
+        }
+      ],
+      "destination": "/tapetes/tapete-rizo.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-rizo",
+      "destination": "/tapetes/tapete-rizo.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "antifatiga"
+        }
+      ],
+      "destination": "/tapetes/tapete-antifatiga-negro-de-uso-general.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "gimnasio"
+        }
+      ],
+      "destination": "/tapetes/tapete-para-gimnasio-de-hule-reciclado.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "dielectrico"
+        }
+      ],
+      "destination": "/tapetes/tapete-dielectrico.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "cocina"
+        }
+      ],
+      "destination": "/tapetes/tapete-para-cocina.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "publicitario"
+        }
+      ],
+      "destination": "/tapetes/tapete-publicitario.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "missing": [
+        {
+          "type": "query",
+          "key": "id"
+        }
+      ],
+      "destination": "/productos.html",
+      "statusCode": 301
+    }
+  ],
+  "headers": [
+    {
+      "source": "/gracias.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
+  ]
+}

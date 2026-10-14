@@ -24,7 +24,8 @@
 <section class="section--tight">
   <div class="container">
     <div class="contact-grid">
-      <form class="form" id="contact-form" action="https://formsubmit.co/matdepotmx@gmail.com" method="POST">
+      <form class="form" id="contact-form" data-clarity-mask="true" action="https://formsubmit.co/matdepotmx@gmail.com" method="POST">
+        <input type="hidden" name="lead_id" id="lead-id">
         <input type="hidden" name="_subject" value="Nueva solicitud de cotización · Mat Depot">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_next" value="https://www.matdepotmex.com/gracias.html">
@@ -37,8 +38,8 @@
           <div class="field"><label for="f-company">Empresa</label><input id="f-company" name="organization" autocomplete="organization"></div>
         </div>
         <div class="form-row">
-          <div class="field"><label for="f-email">Email *</label><input id="f-email" name="email" autocomplete="email" type="email" required></div>
-          <div class="field"><label for="f-phone">Teléfono *</label><input id="f-phone" name="tel" autocomplete="tel" type="tel" required></div>
+          <div class="field"><label for="f-email">Email *</label><input id="f-email" name="email" autocomplete="email" type="email" inputmode="email" required></div>
+          <div class="field"><label for="f-phone">Teléfono *</label><input id="f-phone" name="tel" autocomplete="tel" type="tel" inputmode="tel" required></div>
         </div>
         <div class="form-row">
           <div class="field"><label for="f-cat">Producto de interés</label>
@@ -54,6 +55,7 @@
         <div class="field"><label for="f-msg">Cuéntanos del espacio · superficie · medidas aproximadas *</label>
           <textarea id="f-msg" name="message" maxlength="10000" required></textarea>
         </div>
+        <label class="consent-check"><input type="checkbox" name="consentimiento" value="Aceptado" required> <span>He leído el <a href="aviso-privacidad.html">aviso de privacidad</a> y autorizo el uso de mis datos para atender esta solicitud.</span></label>
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
           <button class="btn" type="submit">Enviar solicitud <span class="arrow"></span></button>
           <a class="btn btn--ghost" id="wa-link" href="#" target="_blank" rel="noopener">Abrir chat directo</a>
@@ -111,7 +113,7 @@ document.getElementById("wa-link").href = c.waUrl;
 const sel = document.getElementById("f-cat");
 window.MD_CATALOG.forEach(p => {
   const o = document.createElement("option");
-  o.value = p.name; o.textContent = p.name; sel.appendChild(o);
+  o.value = p.name; o.dataset.slug = p.slug; o.textContent = p.name; sel.appendChild(o);
 });
 const preset = new URLSearchParams(location.search).get("prod");
 if (preset) {

@@ -115,7 +115,7 @@
   const footerSlot = document.getElementById("md-footer");
   if (headerSlot) headerSlot.outerHTML = header;
   if (footerSlot) footerSlot.outerHTML = footer;
-  document.body.insertAdjacentHTML("beforeend", fab);
+  if (!document.querySelector(".wa-fab")) document.body.insertAdjacentHTML("beforeend", fab);
 
   // burger toggle
   const nav = document.getElementById("md-nav");
