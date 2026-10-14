@@ -9,6 +9,7 @@ const links=()=>'<nav class="category-links" aria-label="Categorías de producto
 const card=(p,i=0,compare=false)=>`${compare?`<article class="catalog-card-wrap" data-slug="${p.slug}">`:''}<a class="cat-card" href="${productUrl(p)}"><div class="cat-card__media cat-card__media--photo"><img src="/${p.images[0]}" alt="${esc(p.name)}" loading="lazy"><span class="cat-card__num">${String(i+1).padStart(2,'0')}</span></div><div><span class="cat-card__name">${esc(p.name)}</span><p>${esc(p.short)}</p><div class="cat-card__tags">${p.sectors.map(s=>`<span class="tag">${esc(s)}</span>`).join('')}</div></div><span class="cat-card__cta">Ver ficha técnica →</span></a>${compare?'</article>':''}`;
 const baseGraph=[{'@type':'Organization','@id':origin+'/#organization',name:'Mat Depot',legalName:'Mat Depot, S.A. de C.V.',url:origin+'/',telephone:['+525596265258','+525596265259'],email:contact.email,address:{'@type':'PostalAddress',addressLocality:'Tlalnepantla de Baz',addressRegion:'Estado de México',addressCountry:'MX'},sameAs:['https://www.instagram.com/matdepotmex','https://www.linkedin.com/in/mat-depot-70b19937a/','https://youtube.com/@matdepot25','https://www.tiktok.com/@matdepot']},{'@type':'WebSite','@id':origin+'/#website',url:origin+'/',name:'Mat Depot',inLanguage:'es-MX',publisher:{'@id':origin+'/#organization'}}];
 fs.rmSync(out,{recursive:true,force:true});fs.mkdirSync(out,{recursive:true});fs.cpSync(path.join(root,'assets'),path.join(out,'assets'),{recursive:true});
+fs.copyFileSync(path.join(root,'assets/favicon.ico'),path.join(out,'favicon.ico'));
 const allUrls=[];
 function page(source,output,options={}){
  const dom=new JSDOM(read(source),{url:origin+'/'+(options.renderPath||output),runScripts:'outside-only'});const w=dom.window,d=w.document;
@@ -30,7 +31,12 @@ function page(source,output,options={}){
  if(options.title)d.title=options.title;
  if(options.description)d.querySelector('meta[name="description"]').content=options.description;
  const link=d.createElement('link');link.rel='canonical';link.href=canonical;d.head.append(link);
- const icon=d.createElement('link');icon.rel='icon';icon.type='image/svg+xml';icon.href='/assets/favicon.svg';d.head.append(icon);
+ for(const attrs of [
+  {rel:'icon',type:'image/x-icon',sizes:'16x16 32x32 48x48 64x64',href:'/favicon.ico?v=2'},
+  {rel:'icon',type:'image/png',sizes:'48x48',href:'/assets/favicon-48.png?v=2'},
+  {rel:'icon',type:'image/svg+xml',sizes:'any',href:'/assets/favicon.svg?v=2'},
+  {rel:'apple-touch-icon',sizes:'180x180',href:'/assets/apple-touch-icon.png?v=2'}
+ ]) { const icon=d.createElement('link');for(const [key,value]of Object.entries(attrs))icon.setAttribute(key,value);d.head.append(icon); }
  d.querySelectorAll('link[href*="fonts.googleapis.com"],link[href*="fonts.gstatic.com"]').forEach(n=>n.remove());
  const fonts=d.createElement('link');fonts.rel='stylesheet';fonts.href='/assets/fonts.css';d.head.append(fonts);
  const preload=d.createElement('link');preload.rel='preload';preload.as='font';preload.type='font/woff2';preload.crossOrigin='anonymous';preload.href='/assets/fonts/archivo-400.woff2';d.head.append(preload);
