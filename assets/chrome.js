@@ -25,7 +25,7 @@
           <span class="brand-sub">Tapetes técnicos · MX</span>
         </span>
       </a>
-      <ul class="nav-links">
+      <ul class="nav-links" id="md-menu">
         <li><a href="index.html"            ${isActive("index.html")          ? 'aria-current="page"' : ""}>Inicio</a></li>
         <li><a href="productos.html"        ${isActive("productos.html")      ? 'aria-current="page"' : ""}>Productos</a></li>
         <li><a href="quienes-somos.html"    ${isActive("quienes-somos.html")  ? 'aria-current="page"' : ""}>Nosotros</a></li>
@@ -36,7 +36,7 @@
         <a class="btn btn--ghost-light btn--sm" href="${wa}" target="_blank" rel="noopener">WhatsApp</a>
         <a class="btn btn--invert btn--sm" href="contacto.html">Cotizar <span class="arrow"></span></a>
       </div>
-      <button class="burger" aria-label="Menú" id="md-burger"><span></span></button>
+      <button class="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="md-menu" id="md-burger"><span></span></button>
     </nav>
   </header>`;
 
@@ -63,11 +63,11 @@
       <div>
         <h4>Productos</h4>
         <ul>
-          <li><a href="producto.html?id=antifatiga">Antifatiga</a></li>
-          <li><a href="producto.html?id=gimnasio">Gimnasio</a></li>
-          <li><a href="producto.html?id=dielectrico">Dieléctrico</a></li>
-          <li><a href="producto.html?id=cocina">Cocina</a></li>
-          <li><a href="producto.html?id=publicitario">Publicitario</a></li>
+          <li><a href="producto.html?id=tapete-antifatiga-negro-de-uso-general">Antifatiga</a></li>
+          <li><a href="producto.html?id=tapete-para-gimnasio-de-hule-reciclado">Gimnasio</a></li>
+          <li><a href="producto.html?id=tapete-dielectrico">Dieléctrico</a></li>
+          <li><a href="producto.html?id=tapete-para-cocina">Cocina</a></li>
+          <li><a href="producto.html?id=tapete-publicitario">Publicitario</a></li>
           <li><a href="productos.html">Ver todos →</a></li>
         </ul>
       </div>
@@ -100,14 +100,14 @@
         <a href="https://youtube.com/@matdepot25" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
         <a href="https://www.tiktok.com/@matdepot" target="_blank" rel="noopener" aria-label="TikTok">TT</a>
       </div>
-      <span>matdepot.mx</span>
+      <span>matdepotmex.com</span>
     </div>
   </footer>`;
 
   // ---------- WA FAB ----------
   const fab = `
   <a class="wa-fab" href="${wa}" target="_blank" rel="noopener" aria-label="WhatsApp">
-    <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.8-1.6-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2.1-.4 0-.5-.1-.1-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.6.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4zM12 2C6.5 2 2 6.5 2 12c0 1.7.5 3.4 1.3 4.8L2 22l5.3-1.4c1.4.7 2.9 1.1 4.7 1.1 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.8-1.6-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2.1-.4 0-.5-.1-.1-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.6.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4zM12 2C6.5 2 2 6.5 2 12c0 1.7.5 3.4 1.3 4.8L2 22l5.3-1.4c1.4.7 2.9 1.1 4.7 1.1 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
   </a>`;
 
   // ---------- INJECT ----------
@@ -121,6 +121,16 @@
   const nav = document.getElementById("md-nav");
   const burger = document.getElementById("md-burger");
   if (burger && nav) {
-    burger.addEventListener("click", () => nav.classList.toggle("open"));
+    const setOpen = open => {
+      nav.classList.toggle("open", open);
+      burger.setAttribute("aria-expanded", String(open));
+      burger.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+    };
+    burger.addEventListener("click", () => setOpen(!nav.classList.contains("open")));
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape" && nav.classList.contains("open")) { setOpen(false); burger.focus(); }
+    });
+    document.addEventListener("click", e => { if (!nav.contains(e.target)) setOpen(false); });
+    nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => setOpen(false)));
   }
 })();

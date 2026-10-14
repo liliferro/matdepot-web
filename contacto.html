@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Contacto · Mat Depot</title>
+<meta name="description" content="Solicita una cotización de tapetes y pisos técnicos. Contacta a Mat Depot por WhatsApp, teléfono o correo electrónico.">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,17 +24,17 @@
 <section class="section--tight">
   <div class="container">
     <div class="contact-grid">
-      <form class="form" id="contact-form" novalidate>
+      <form class="form" id="contact-form">
         <span class="eyebrow">Solicitar cotización</span>
         <h2 class="h2" style="margin:8px 0 24px">Cuéntanos del proyecto.</h2>
 
         <div class="form-row">
-          <div class="field"><label for="f-name">Nombre completo *</label><input id="f-name" required></div>
-          <div class="field"><label for="f-company">Empresa</label><input id="f-company"></div>
+          <div class="field"><label for="f-name">Nombre completo *</label><input id="f-name" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="f-company">Empresa</label><input id="f-company" name="organization" autocomplete="organization"></div>
         </div>
         <div class="form-row">
-          <div class="field"><label for="f-email">Email *</label><input id="f-email" type="email" required></div>
-          <div class="field"><label for="f-phone">Teléfono *</label><input id="f-phone" type="tel" required></div>
+          <div class="field"><label for="f-email">Email *</label><input id="f-email" name="email" autocomplete="email" type="email" required></div>
+          <div class="field"><label for="f-phone">Teléfono *</label><input id="f-phone" name="tel" autocomplete="tel" type="tel" required></div>
         </div>
         <div class="form-row">
           <div class="field"><label for="f-cat">Producto de interés</label>
@@ -50,10 +51,11 @@
           <textarea id="f-msg" required></textarea>
         </div>
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
-          <button class="btn" type="submit">Enviar solicitud <span class="arrow"></span></button>
-          <a class="btn btn--ghost" id="wa-link" href="#" target="_blank" rel="noopener">Mejor por WhatsApp</a>
+          <button class="btn" type="submit">Preparar WhatsApp <span class="arrow"></span></button>
+          <a class="btn btn--ghost" id="wa-link" href="#" target="_blank" rel="noopener">Abrir chat directo</a>
         </div>
-        <p id="form-status" class="mono" style="margin-top:12px;color:var(--c-steel)"></p>
+        <p>Al continuar se abrirá WhatsApp con tu solicitud. Revisa el mensaje y pulsa Enviar allí. Consulta nuestro <a href="aviso-privacidad.html" style="text-decoration:underline">aviso de privacidad</a>.</p>
+        <p role="status" aria-live="polite" id="form-status" class="mono" style="margin-top:12px;color:var(--c-steel)"></p>
       </form>
 
       <aside>
@@ -113,7 +115,16 @@ if (preset) sel.value = preset;
 document.getElementById("contact-form").addEventListener("submit", e => {
   e.preventDefault();
   const status = document.getElementById("form-status");
-  status.textContent = "ENVIADO · Te contactaremos en menos de 24h hábiles. Gracias.";
+  const value = id => document.getElementById(id).value.trim();
+  const message = ["Hola, quisiera cotizar un proyecto.",
+    `Nombre: ${value("f-name")}`, `Empresa: ${value("f-company") || "No indicada"}`,
+    `Email: ${value("f-email")}`, `Teléfono: ${value("f-phone")}`,
+    `Producto: ${sel.value ? sel.selectedOptions[0].textContent : "Solicito asesoría"}`,
+    `Tráfico: ${value("f-traffic") || "No indicado"}`, `Proyecto: ${value("f-msg")}`].join("\n");
+  const url = new URL(c.waUrl);
+  url.searchParams.set("text", message);
+  status.textContent = "Solicitud preparada. Completa el envío en WhatsApp.";
+  window.open(url.href, "_blank", "noopener,noreferrer");
   status.style.color = "var(--c-carbon)";
 });
 </script>

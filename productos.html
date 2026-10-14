@@ -52,8 +52,17 @@ const filterBar = document.getElementById("filters");
 const grid = document.getElementById("prod-grid");
 const countEl = document.getElementById("result-count");
 let active = "all";
+const sectorNames = {
+  industria: ["Industria", "Almacenes", "Mantenimiento", "Talleres"],
+  cocinas: ["Restaurantes", "Cocinas industriales"],
+  gimnasios: ["Gimnasios", "Dojos", "Áreas deportivas", "Box y CrossFit"],
+  comercio: ["Comercio", "Oficinas", "Corporativo", "Retail y hotelería", "Entradas comerciales", "Hoteles"],
+  electrico: ["Subestaciones", "Mantenimiento eléctrico"],
+  humedos: ["Albercas", "Balnearios y clubes"]
+};
+const availableFilters = [...window.MD_FILTERS, ...window.MD_SECTORS];
 
-window.MD_FILTERS.forEach(f => {
+availableFilters.forEach(f => {
   filterBar.insertAdjacentHTML("beforeend",
     `<button class="filter" data-id="${f.id}" aria-pressed="${f.id==='all'?'true':'false'}">${f.name}</button>`);
 });
@@ -61,7 +70,8 @@ window.MD_FILTERS.forEach(f => {
 function render() {
   const items = active === "all"
     ? window.MD_CATALOG
-    : window.MD_CATALOG.filter(p => p.apps.includes(active));
+    : window.MD_CATALOG.filter(p => sectorNames[active] ? p.sectors.some(s => sectorNames[active].includes(s)) : p.apps.includes(active));
+  filterBar.querySelectorAll(".filter").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.id === active)));
   countEl.textContent = `${String(items.length).padStart(2,'0')} resultados`;
   grid.innerHTML = "";
   items.forEach((p, i) => {
@@ -84,12 +94,16 @@ function render() {
 filterBar.addEventListener("click", e => {
   const btn = e.target.closest(".filter");
   if (!btn) return;
-  active = btn.dataset.id;
-  filterBar.querySelectorAll(".filter").forEach(b => b.setAttribute("aria-pressed", b===btn ? "true":"false"));
-  render();
+  location.hash = btn.dataset.id;
 });
 
-render();
+function readFilter() {
+  const hash = location.hash.slice(1);
+  active = availableFilters.some(f => f.id === hash) ? hash : "all";
+  render();
+}
+window.addEventListener("hashchange", readFilter);
+readFilter();
 </script>
 </body>
 </html>

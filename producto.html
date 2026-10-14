@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Producto · Mat Depot</title>
+<meta name="description" content="Consulta características, medidas y aplicaciones de los tapetes y pisos técnicos de Mat Depot.">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,8 +58,15 @@
 <script src="assets/chrome.js"></script>
 <script>
 const params = new URLSearchParams(location.search);
-const id = params.get("id") || "antifatiga";
-const p = window.MD_CATALOG.find(x => x.slug === id) || window.MD_CATALOG[0];
+const aliases = {"antifatiga": "tapete-antifatiga-negro-de-uso-general", "gimnasio": "tapete-para-gimnasio-de-hule-reciclado", "dielectrico": "tapete-dielectrico", "cocina": "tapete-para-cocina", "publicitario": "tapete-publicitario"};
+const requested = params.get("id");
+const id = aliases[requested] || requested || window.MD_CATALOG[0].slug;
+const p = window.MD_CATALOG.find(x => x.slug === id);
+if (!p) {
+  document.title = "Producto no encontrado · Mat Depot";
+  document.getElementById("banner").innerHTML = '<div class="container"><h1 class="h1">Producto no encontrado</h1><p>Consulta los productos disponibles en nuestro catálogo.</p><a class="btn btn--invert" href="productos.html">Ver catálogo</a></div>';
+  document.querySelectorAll("body > section:not(#banner)").forEach(el => el.hidden = true);
+} else {
 
 // banner
 document.getElementById("banner").innerHTML = `
@@ -99,8 +107,11 @@ document.getElementById("detail").innerHTML = `
     </div>
   </div>`;
 
-document.getElementById("prod-wa").href = window.MD_CONTACT.waUrl;
-document.getElementById("cta-wa").href = window.MD_CONTACT.waUrl;
+const productWhatsApp = new URL(window.MD_CONTACT.waUrl);
+productWhatsApp.searchParams.set("text", `Hola, me interesa cotizar: ${p.name}.`);
+document.getElementById("prod-wa").href = productWhatsApp.href;
+document.getElementById("cta-wa").href = productWhatsApp.href;
+document.getElementById("cta-form").href = `contacto.html?prod=${encodeURIComponent(p.slug)}`;
 
 // apps blocks
 document.getElementById("apps-grid").innerHTML = p.uses.map((u, i) => `
@@ -130,6 +141,8 @@ related.forEach((r, i) => {
 });
 
 document.title = `${p.name} · Mat Depot`;
+document.querySelector('meta[name="description"]').content = p.short;
+}
 </script>
 </body>
 </html>

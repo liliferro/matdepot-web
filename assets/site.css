@@ -543,10 +543,11 @@ button { background: none; border: 0; cursor: pointer; color: inherit; }
 .prod-gallery {
   display: grid; gap: 8px;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  grid-auto-rows: 220px;
+  grid-auto-rows: auto;
 }
 .prod-gallery > div:first-child { grid-column: 1 / -1; aspect-ratio: 16/10; grid-row: span 1; height: auto; }
 .prod-img {
+  aspect-ratio: 4/3;
   background: var(--c-graphite); position: relative; overflow: hidden;
   background-image: radial-gradient(circle at 10px 10px, var(--c-iron) 4px, transparent 5px);
   background-size: 20px 20px;
@@ -580,7 +581,7 @@ button { background: none; border: 0; cursor: pointer; color: inherit; }
 }
 .spec-table dl {
   margin: 0;
-  display: grid; grid-template-columns: 180px 1fr;
+  display: grid; grid-template-columns: minmax(90px, .7fr) minmax(0, 1fr); column-gap: 16px;
 }
 .spec-table dt, .spec-table dd {
   padding: 14px 0;
@@ -692,7 +693,7 @@ button { background: none; border: 0; cursor: pointer; color: inherit; }
   font-size: clamp(40px, 6vw, 96px); line-height: .94; letter-spacing: -.028em;
   color: var(--c-bone);
   max-width: 18ch;
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
 }
 .dark .big-saying { color: var(--c-bone); }
 
@@ -703,3 +704,31 @@ button { background: none; border: 0; cursor: pointer; color: inherit; }
 .prose p { margin: 0 0 16px; }
 .prose ul { padding-left: 20px; }
 .prose ul li { margin-bottom: 8px; }
+
+/* Adaptación del texto a columnas estrechas y navegación accesible. */
+[hidden] { display: none !important; }
+.hero__inner > div, .page-banner .container, .cta-split > *, .two-col > * { container-type: inline-size; min-width: 0; }
+.h-display { font-size: clamp(32px, 10cqi, 120px); overflow-wrap: normal; line-height: 1.03; }
+.hero__title { font-size: clamp(40px, 14cqi, 88px); }
+.h1 { font-size: clamp(30px, 8cqi, 72px); overflow-wrap: normal; line-height: 1.08; }
+.big-saying { font-size: clamp(32px, 12cqi, 80px); line-height: 1.06; }
+.crumbs { flex-wrap: wrap; }
+.crumbs > *, .tag, .spec-table dd, .foot-contact, .contact-item .val { min-width: 0; overflow-wrap: anywhere; }
+.contact-item .val a { display: inline; }
+.cat-card, .info-block, .field, .form { min-width: 0; }
+.cat-card__name { font-size: clamp(18px, 1.6vw, 22px); overflow-wrap: break-word; }
+.btn { max-width: 100%; }
+.btn .arrow { flex-shrink: 0; }
+.eyebrow::before { flex-shrink: 0; }
+.burger { justify-self: end; }
+a:focus-visible, button:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+.prose ul { list-style: disc; }
+.prose a { text-decoration: underline; }
+@media (max-width: 540px) { .field input, .field select, .field textarea { font-size: 16px; } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
+}
+
+.hero .eyebrow, .page-banner .eyebrow { color: var(--c-aluminum); }
+.cat-card__num, .prod-img__cap, .image-block__caption { background: rgba(0,0,0,.8); color: var(--c-bone); }
