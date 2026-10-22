@@ -666,6 +666,40 @@
       ],
       "destination": "/productos.html",
       "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-gimnasio-negro-en-rollo-tipo-a"
+        }
+      ],
+      "destination": "/tapetes/tapete-gimnasio-negro-en-rollo-tipo-a.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-gimnasio-negro-en-rollo-tipo-a",
+      "destination": "/tapetes/tapete-gimnasio-negro-en-rollo-tipo-a.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/producto.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "tapete-gimnasio-negro-en-rollo-tipo-b"
+        }
+      ],
+      "destination": "/tapetes/tapete-gimnasio-negro-en-rollo-tipo-b.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-gimnasio-negro-en-rollo-tipo-b",
+      "destination": "/tapetes/tapete-gimnasio-negro-en-rollo-tipo-b.html",
+      "statusCode": 301
     }
   ],
   "headers": [

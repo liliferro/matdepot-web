@@ -1,7 +1,7 @@
 /* =========================================================================
    MAT DEPOT — Catálogo web
-   33 productos con fotografía y ficha técnica real del proveedor
-   Especificaciones cargadas desde "Organización de productos de la web"
+   35 productos con fotografía y ficha técnica real del proveedor
+   Especificaciones del catálogo original y fichas técnicas PHASA de rollos negros A/B
    ========================================================================= */
 
 window.MD_CATALOG = [
@@ -1268,6 +1268,88 @@ window.MD_CATALOG = [
       "assets/products/tapete-rizo-03.webp",
       "assets/products/tapete-rizo-01.webp",
       "assets/products/tapete-rizo-02.webp"
+    ]
+  },
+  {
+    "slug": "tapete-gimnasio-negro-en-rollo-tipo-a",
+    "name": "Tapete gimnasio negro en rollo tipo A",
+    "category": "Gimnasios",
+    "short": "Rollo de EPDM negro de 1 × 10 m y 5 mm de espesor. Acabado poroso y peso específico de 0.8 g/cm³.",
+    "sectors": [
+      "Gimnasios",
+      "Clubes deportivos"
+    ],
+    "apps": [
+      "impacto",
+      "antiderrapante"
+    ],
+    "intro": "Tapete de EPDM negro en rollo tipo A, con acabado poroso, para gimnasios y clubes deportivos. Su superficie antideslizante brinda estabilidad y su resistencia al impacto ayuda a proteger a los usuarios y al equipo de entrenamiento. Se instala con facilidad para cubrir áreas de diferentes tamaños y formas. Presentación de 1 m de ancho por 10 m de largo y 5 mm de espesor.",
+    "specs": {
+      "Material": "EPDM",
+      "Color": "Negro",
+      "Espesor": "5 mm",
+      "Ancho": "1 m",
+      "Largo": "10 m",
+      "Presentación": "Rollo de 10 m",
+      "Acabado": "Poroso",
+      "Peso específico": "0.8 g/cm³"
+    },
+    "features": [
+      "Superficie antideslizante",
+      "Alta resistencia al impacto",
+      "Protección para usuarios y equipo de entrenamiento",
+      "Instalación sencilla para cubrir diferentes tamaños y formas de área",
+      "Acabado poroso"
+    ],
+    "uses": [
+      "Gimnasios",
+      "Clubes deportivos",
+      "Áreas con equipo y maquinaria de entrenamiento"
+    ],
+    "images": [
+      "assets/products/tapete-gimnasio-negro-en-rollo-tipo-a-01.webp",
+      "assets/products/tapete-gimnasio-negro-en-rollo-tipo-a-02.webp"
+    ]
+  },
+  {
+    "slug": "tapete-gimnasio-negro-en-rollo-tipo-b",
+    "name": "Tapete gimnasio negro en rollo tipo B",
+    "category": "Gimnasios",
+    "short": "Rollo de EPDM negro de 1 × 10 m y 5 mm de espesor. Acabado liso sin poros y peso específico de 1.07 g/cm³.",
+    "sectors": [
+      "Gimnasios",
+      "Clubes deportivos"
+    ],
+    "apps": [
+      "impacto",
+      "antiderrapante"
+    ],
+    "intro": "Tapete de EPDM negro en rollo tipo B, con acabado liso sin poros, para gimnasios y clubes deportivos. Su superficie antideslizante brinda estabilidad y su resistencia al impacto ayuda a proteger a los usuarios y al equipo de entrenamiento. Se instala con facilidad para cubrir áreas de diferentes tamaños y formas. Presentación de 1 m de ancho por 10 m de largo y 5 mm de espesor.",
+    "specs": {
+      "Material": "EPDM",
+      "Color": "Negro",
+      "Espesor": "5 mm",
+      "Ancho": "1 m",
+      "Largo": "10 m",
+      "Presentación": "Rollo de 10 m",
+      "Acabado": "Liso sin poros",
+      "Peso específico": "1.07 g/cm³"
+    },
+    "features": [
+      "Superficie antideslizante",
+      "Alta resistencia al impacto",
+      "Protección para usuarios y equipo de entrenamiento",
+      "Instalación sencilla para cubrir diferentes tamaños y formas de área",
+      "Acabado liso sin poros"
+    ],
+    "uses": [
+      "Gimnasios",
+      "Clubes deportivos",
+      "Áreas con equipo y maquinaria de entrenamiento"
+    ],
+    "images": [
+      "assets/products/tapete-gimnasio-negro-en-rollo-tipo-b-01.webp",
+      "assets/products/tapete-gimnasio-negro-en-rollo-tipo-b-02.webp"
     ]
   }
 ];

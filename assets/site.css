@@ -772,3 +772,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid currentColor; outline
 }
 
 .crumbs { align-items: center; }
+
+/* Los rollos negros A/B se muestran completos, sin recortar el producto. */
+.cat-card__media--photo img[src*="tapete-gimnasio-negro-en-rollo-tipo-"],
+.prod-img--photo img[src*="tapete-gimnasio-negro-en-rollo-tipo-"] {
+  object-fit: contain;
+  background: #F4F1EA;
+}

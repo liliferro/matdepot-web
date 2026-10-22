@@ -70,7 +70,7 @@ function page(source,output,options={}){
  dom.window.close();
 }
 page('index.html','index.html',{renderInline:true,title:'Tapetes y pisos de hule para industria | Mat Depot',mutate(d){d.querySelector('#featured-cats').insertAdjacentHTML('beforebegin',links());}});
-page('productos.html','productos.html',{title:'Catálogo de tapetes y pisos técnicos | Mat Depot',description:'Compara 33 tapetes y pisos técnicos por aplicación, espesor, ancho y presentación. Solicita asesoría y cotización en Mat Depot.',mutate(d){
+page('productos.html','productos.html',{title:'Catálogo de tapetes y pisos técnicos | Mat Depot',description:`Compara ${products.length} tapetes y pisos técnicos por aplicación, espesor, ancho y presentación. Solicita asesoría y cotización en Mat Depot.`,mutate(d){
  d.querySelectorAll('script:not([src])').forEach(s=>s.remove());
  d.querySelector('.prod-toolbar').innerHTML=`<span id="result-count" role="status">${products.length} resultados</span>`;
  d.querySelector('.prod-toolbar').insertAdjacentHTML('beforebegin',links()+`<div class="catalog-controls" id="catalog-controls" hidden>

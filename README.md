@@ -19,7 +19,7 @@ python -m http.server 8765 -d public
 
 `public/` es una salida generada, excluida de Git. Vercel ejecuta el generador según `vercel.json`. No editar directamente `public/`: el siguiente build la sustituye.
 
-El generador publica 33 fichas de producto con HTML completo, 5 categorías, preguntas frecuentes y páginas corporativas. No utiliza un servidor de aplicación para mostrar el catálogo. Búsqueda, filtros y comparación mejoran el HTML existente en el navegador.
+El generador publica 35 fichas de producto con HTML completo, 5 categorías, preguntas frecuentes y páginas corporativas. No utiliza un servidor de aplicación para mostrar el catálogo. Búsqueda, filtros y comparación mejoran el HTML existente en el navegador.
 
 ## Medición
 
