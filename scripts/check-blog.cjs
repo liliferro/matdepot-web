@@ -21,9 +21,14 @@ for (const path of ['/blog.html', articlePath, ...posts.map(p=>'/blog/'+p.slug+'
     assert(posting && graph.some(g => g['@type'] === 'BreadcrumbList'));
     assert.equal(posting.headline, d.querySelector('h1').textContent);
     assert.equal(posting.datePublished, d.querySelector('time').dateTime);
+    assert(posting.articleSection);
+    assert(d.querySelector('meta[property="og:image:alt"]').content);
+    assert(d.querySelector('.blog-body a[href*="preguntas-frecuentes"]'),'article links to existing FAQ');
+    assert(d.querySelector('.blog-body a[href*="/categorias/"], .blog-body a[href="/productos.html"]'),'article links to catalogue');
     assert.equal(d.querySelector('meta[property="og:type"]').content, 'article');
     if(path!==articlePath){
       const post=posts.find(p=>path==='/blog/'+p.slug+'.html');
+      if(post.group==='Gimnasios')assert(d.querySelector('.blog-body a[href="'+articlePath+'"]'),'gym guide links to pillar');
       assert(d.querySelector('.blog-body > p').textContent.toLowerCase().includes(post.keyword),post.slug+' opening keyword');
       assert.equal(d.querySelectorAll('[data-tool]').length,1);
       assert(d.querySelector('script[src="/assets/blog-tools.js"]'));

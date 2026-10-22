@@ -1,0 +1,345 @@
+{
+  "scope": "12 live blog URLs; not an indexation or ranking test",
+  "pages": [
+    {
+      "path": "/blog.html",
+      "status": 200,
+      "canonical": "https://www.matdepotmex.com/blog.html",
+      "title": "Blog de tapetes y pisos técnicos | MatDepot",
+      "description": "Guías y herramientas para elegir pisos de gimnasio, tapetes industriales y de cocina. Compara opciones y prepara tu cotización con MatDepot.",
+      "h1": 1,
+      "robots": null,
+      "words": 1,
+      "headings": [
+        "Gimnasios",
+        "¿Cuál es el mejor piso para un gimnasio? Guía para elegir por zona",
+        "¿Piso para gimnasio en rollo o modular? Cómo decidir",
+        "¿Qué espesor de piso necesita tu gimnasio? Datos para elegir",
+        "¿Se puede instalar piso de hule sobre concreto o loseta?",
+        "Cómo limpiar el piso de un gimnasio y organizar su mantenimiento",
+        "Industria",
+        "¿Qué tapete elegir para un puesto de trabajo de pie?",
+        "Tapete antifatiga o antiderrapante: diferencias para comprar",
+        "¿Qué tapete elegir para un área con agua, aceite o grasa?",
+        "Cocinas",
+        "¿Cómo elegir un tapete para cocina industrial o restaurante?",
+        "Compras",
+        "Cómo comparar cotizaciones de tapetes y pisos técnicos",
+        "¿Qué datos necesitas para cotizar tapetes o pisos técnicos?",
+        "¿Ya sabes qué necesita tu proyecto?"
+      ],
+      "categoryLinks": [],
+      "faqLinks": [],
+      "pillarLinks": 0,
+      "share": 11,
+      "images": 0
+    },
+    {
+      "path": "/blog/mejor-piso-para-gimnasio.html",
+      "status": 200,
+      "canonical": "https://www.matdepotmex.com/blog/mejor-piso-para-gimnasio.html",
+      "title": "¿Cuál es el mejor piso para un gimnasio? | MatDepot",
+      "description": "Elige el mejor piso para un gimnasio según sus zonas. Compara hule en rollo y modular, revisa espesores y calcula el área para solicitar tu cotización.",
+      "h1": 1,
+      "robots": null,
+      "words": 1501,
+      "headings": [
+        "¿Qué piso elegir para cada zona del gimnasio?",
+        "¿Conviene más un piso de hule en rollo o modular?",
+        "¿Qué espesores y formatos tiene MatDepot?",
+        "¿Un piso más grueso siempre es mejor?",
+        "Calcula cuánto piso necesitas para tu gimnasio",
+        "Ingresa las medidas de tu proyecto",
+        "Estimación de tu proyecto",
+        "Qué revisar antes de instalar",
+        "Limpieza y presupuesto: dos decisiones que van juntas",
+        "Elige tu piso para gimnasio con las medidas y el uso de cada zona",
+        "Continúa con tu proyecto",
+        "Sobre esta guía"
+      ],
+      "categoryLinks": [
+        "/categorias/gimnasios.html",
+        "/categorias/gimnasios.html",
+        "/categorias/gimnasios.html#preguntas-frecuentes"
+      ],
+      "faqLinks": [
+        "/categorias/gimnasios.html#preguntas-frecuentes"
+      ],
+      "pillarLinks": 0,
+      "share": 1,
+      "images": 0
+    },
+    {
+      "path": "/blog/piso-gimnasio-rollo-o-modular.html",
+      "status": 200,
+      "canonical": "https://www.matdepotmex.com/blog/piso-gimnasio-rollo-o-modular.html",
+      "title": "Piso de gimnasio: rollo o modular | MatDepot",
+      "description": "Compara piso para gimnasio en rollo o modular según distribución, uniones, reposición y limpieza. Prepara los criterios de tu proyecto con el selector.",
+      "h1": 1,
+      "robots": null,
+      "words": 1121,
+      "headings": [
+        "Qué cambia en el trabajo de instalación",
+        "Compara presentaciones reales del catálogo",
+        "Selector de prioridades de tu proyecto",
+        "Encuentra el formato de piso para tu gimnasio",
+        "Limpieza y reposición: piensa en la operación diaria",
+        "Antes de aceptar una propuesta",
+        "Continúa con tu proyecto",
+        "Sobre esta guía"
+      ],
+      "categoryLinks": [],
+      "faqLinks": [],
+      "pillarLinks": 0,
+      "share": 1,
+      "images": 0
+    },
+    {
+      "path": "/blog/espesor-piso-gimnasio.html",
+      "status": 200,
+      "canonical": "https://www.matdepotmex.com/blog/espesor-piso-gimnasio.html",
+      "title": "Espesor de piso para gimnasio: cómo elegir | MatDepot",
+      "description": "El espesor de piso para gimnasio depende del uso y del sistema completo. Organiza cargas, equipos y condiciones antes de comparar modelos de 7 o 13 mm.",
+      "h1": 1,
+      "robots": null,
+      "words": 1044,
+      "headings": [
+        "Distingue peso apoyado e impacto",
+        "Qué puedes comprobar en las fichas de MatDepot",
+        "Prepara una ficha de uso por zona",
+        "Encuentra opciones según el uso de tu gimnasio",
+        "Qué hacer si el gimnasio está en planta alta",
+        "Cómo avanzar sin comprar de más",
+        "Continúa con tu proyecto",
+        "Sobre esta guía"
+      ],
+      "categoryLinks": [],
+      "faqLinks": [],
+      "pillarLinks": 0,
+      "share": 1,
+      "images": 0
+    },
+    {
+      "path": "/blog/instalar-piso-hule-concreto-loseta.html",
+      "status": 200,
+      "canonical": "https://www.matdepotmex.com/blog/instalar-piso-hule-concreto-loseta.html",
+      "title": "Instalar piso de hule: revisa la base | MatDepot",
+      "description": "Antes de instalar piso de hule sobre concreto o loseta, revisa humedad, nivelación, juntas y puertas. Usa el checklist para preparar la visita de instalación.",
+      "h1": 1,
+      "robots": null,
+      "words": 837,
+      "headings": [
+        "Qué observar en la base existente",
+        "Puertas, equipos y transiciones también cuentan",
+        "Checklist antes de coordinar la instalación",
+        "Revisa los pendientes de instalación",
+        "No elijas el adhesivo por tu cuenta",
+        "Qué debe quedar por escrito en la cotización",
+        "Continúa con tu proyecto",
+        "Sobre esta guía"
+      ],
+      "categoryLinks": [
+        "/categorias/gimnasios.html"
+      ],
+      "faqLinks": [],
+      "pillarLinks": 0,
+      "share": 1,
+      "images": 0
+    },
+    {
+      "path": "/blog/limpiar-piso-gimnasio.html",
+      "status": 200,
+      "canonical": "https://www.matdepotmex.com/blog/limpiar-piso-gimnasio.html",
+      "title": "Cómo limpiar el piso de un gimnasio | MatDepot",
+      "description": "Organiza cómo limpiar el piso de un gimnasio: material, residuos, productos compatibles y secado. Crea una lista de tareas para tu equipo de mantenimiento.",
+      "h1": 1,
+      "robots": null,
+      "words": 803,
+      "headings": [
+        "Empieza por el registro del producto",
+        "Organiza la rutina por situación",
+        "Prepara tu lista de mantenimiento",
+        "Prepara la rutina de mantenimiento",
+        "Cómo asignar responsabilidades sin complicar la operación",
+        "Qué hacer cuando la limpieza no resuelve el problema",
+        "Continúa con tu proyecto",
+        "Sobre esta guía"
+      ],
+      "categoryLinks": [
+        "/categorias/gimnasios.html"
+      ],
+      "faqLinks": [],
+      "pillarLinks": 0,
+      "share": 1,
+      "images": 0
+    },
+    {
+      "path": "/blog/tapete-trabajo-de-pie.html",
+      "status": 200,
+      "canonical": "https://www.matdepotmex.com/blog/tapete-trabajo-de-pie.html",
+      "title": "Tapetes para trabajo de pie: guía de selección | MatDepot",
+      "description": "Elige un tapete para trabajo de pie según movimiento, dimensiones, líquidos y limpieza. Prepara una ficha del puesto y compara opciones de MatDepot.",
+      "h1": 1,
+      "robots": null,
+      "words": 1066,
+      "headings": [
+        "Observa el recorrido, no solamente dónde están los pies",
+        "Dos presentaciones para iniciar la comparación",
+        "Describe tu puesto con esta herramienta",
+        "Encuentra tapetes para tu puesto de trabajo",
+        "Líquidos, limpieza y tránsito cambian la decisión",
+        "Una evaluación práctica antes de extender la compra",
+        "Continúa con tu proyecto",
+        "Sobre esta guía"
+      ],
+      "categoryLinks": [
+        "/categorias/antifatiga.html"
+      ],
+      "faqLinks": [],
+      "pillarLinks": 0,
+      "share": 1,
+      "images": 0
+    },
+    {
+      "path": "/blog/antifatiga-o-antiderrapante.html",
+      "status": 200,
+      "canonical": "https://www.matdepotmex.com/blog/antifatiga-o-antiderrapante.html",
+      "title": "Tapete antifatiga o antiderrapante | MatDepot",
+      "description": "Distingue un tapete antifatiga de uno antiderrapante. Identifica qué función necesita tu área y qué datos revisar antes de elegir un producto.",
+      "h1": 1,
+      "robots": null,
+      "words": 1002,
+      "headings": [
+        "Qué pregunta responde cada función",
+        "Un ejemplo de solicitud incompleta y cómo mejorarla",
+        "Identifica qué debes consultar",
+        "Encuentra productos según la función que necesitas",
+        "Qué mirar en el catálogo de MatDepot",
+        "Tres errores que conviene evitar",
+        "Cómo avanzar a una compra informada",
+        "Continúa con tu proyecto",
+        "Sobre esta guía"
+      ],
+      "categoryLinks": [
+        "/categorias/antiderrapantes.html"
+      ],
+      "faqLinks": [],
+      "pillarLinks": 0,
+      "share": 1,
+      "images": 0
+    },
+    {
+      "path": "/blog/tapetes-agua-aceite-grasa.html",
+      "status": 200,
+      "canonical": "https://www.matdepotmex.com/blog/tapetes-agua-aceite-grasa.html",
+      "title": "Tapetes para agua, aceite o grasa | MatDepot",
+      "description": "Para elegir tapetes para agua, aceite o grasa, identifica la sustancia y las condiciones de exposición. Prepara una consulta de compatibilidad del material.",
+      "h1": 1,
+      "robots": null,
+      "words": 1068,
+      "headings": [
+        "Prepara un registro de exposición",
+        "Drenaje no significa resistencia química",
+        "Genera una consulta de compatibilidad",
+        "Encuentra opciones para tu área con líquidos",
+        "Revisa el sistema completo",
+        "Qué debe confirmar la respuesta del proveedor",
+        "Continúa con tu proyecto",
+        "Sobre esta guía"
+      ],
+      "categoryLinks": [
+        "/categorias/areas-humedas.html",
+        "/categorias/antiderrapantes.html"
+      ],
+      "faqLinks": [],
+      "pillarLinks": 0,
+      "share": 1,
+      "images": 0
+    },
+    {
+      "path": "/blog/tapete-cocina-industrial.html",
+      "status": 200,
+      "canonical": "https://www.matdepotmex.com/blog/tapete-cocina-industrial.html",
+      "title": "Tapete para cocina industrial: guía | MatDepot",
+      "description": "Elige un tapete para cocina industrial según lavado, preparación o cocción. Revisa medidas, retiro y limpieza con un plan de operación por zona.",
+      "h1": 1,
+      "robots": null,
+      "words": 1052,
+      "headings": [
+        "Qué registrar en cada estación",
+        "Un formato del catálogo y cómo interpretar sus medidas",
+        "Planifica el uso y la limpieza por zona",
+        "Encuentra un tapete para tu estación de cocina",
+        "Cómo integrar el tapete en la rutina del equipo",
+        "Compara propuestas con el mismo alcance",
+        "Continúa con tu proyecto",
+        "Sobre esta guía"
+      ],
+      "categoryLinks": [
+        "/categorias/areas-humedas.html#preguntas-frecuentes"
+      ],
+      "faqLinks": [
+        "/categorias/areas-humedas.html#preguntas-frecuentes"
+      ],
+      "pillarLinks": 0,
+      "share": 1,
+      "images": 0
+    },
+    {
+      "path": "/blog/comparar-cotizaciones-tapetes.html",
+      "status": 200,
+      "canonical": "https://www.matdepotmex.com/blog/comparar-cotizaciones-tapetes.html",
+      "title": "Comparar cotizaciones de tapetes | MatDepot",
+      "description": "Aprende a comparar cotizaciones de tapetes por alcance, cantidad e instalación. Suma costos de dos propuestas con una calculadora de presupuesto en MXN.",
+      "h1": 1,
+      "robots": null,
+      "words": 753,
+      "headings": [
+        "Construye una comparación equivalente",
+        "Calculadora para comparar dos presupuestos",
+        "Compara el costo total de dos propuestas",
+        "Qué significa el costo por metro cuadrado del proyecto",
+        "Registra lo que el total no explica",
+        "Cómo usar el resultado para negociar o aclarar",
+        "Continúa con tu proyecto",
+        "Sobre esta guía"
+      ],
+      "categoryLinks": [],
+      "faqLinks": [
+        "/preguntas-frecuentes.html"
+      ],
+      "pillarLinks": 0,
+      "share": 1,
+      "images": 0
+    },
+    {
+      "path": "/blog/datos-cotizar-tapetes.html",
+      "status": 200,
+      "canonical": "https://www.matdepotmex.com/blog/datos-cotizar-tapetes.html",
+      "title": "Datos para cotizar tapetes y pisos | MatDepot",
+      "description": "Reúne los datos para cotizar tapetes: uso, medidas, superficie, entrega y condiciones. Genera un resumen de tu proyecto para enviarlo a MatDepot.",
+      "h1": 1,
+      "robots": null,
+      "words": 769,
+      "headings": [
+        "La información básica de una solicitud útil",
+        "Genera el resumen de tu proyecto",
+        "Prepara tu solicitud de cotización",
+        "Qué fotografías ayudan realmente",
+        "Cómo indicar una cantidad sin comprometer el pedido",
+        "Antes de enviar y antes de comprar",
+        "Continúa con tu proyecto",
+        "Sobre esta guía"
+      ],
+      "categoryLinks": [],
+      "faqLinks": [
+        "/preguntas-frecuentes.html#datos-cotizacion"
+      ],
+      "pillarLinks": 0,
+      "share": 1,
+      "images": 0
+    }
+  ],
+  "robots": "User-agent: *\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: Claude-SearchBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nSitemap: https://www.matdepotmex.com/sitemap.xml\n",
+  "allInSitemap": true
+}

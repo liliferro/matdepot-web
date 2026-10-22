@@ -1,4 +1,4 @@
-# Cómo limpiar el piso de un gimnasio y organizar su mantenimiento
+# Cómo organizar la limpieza del piso de un gimnasio
 
 Para limpiar el piso de un gimnasio, identifica primero el material y las instrucciones del modelo. Después organiza la retirada de suciedad, el tratamiento de residuos y el secado con productos y equipos compatibles. No todos los recubrimientos de hule admiten la misma concentración, máquina o procedimiento.
 

@@ -35,6 +35,8 @@ La diferencia principal está en el formato y en cómo se adapta al espacio. Com
 
 “Modular” no significa que cualquier producto pueda instalarse sin adhesivo. Tampoco un rollo exige siempre el mismo sistema de fijación. Confirma el procedimiento del modelo elegido y su compatibilidad con la base.
 
+Para desarrollar esta comparación, consulta la guía de [piso para gimnasio en rollo o modular](/blog/piso-gimnasio-rollo-o-modular.html).
+
 ## ¿Qué espesores y formatos tiene MatDepot?
 
 El catálogo consultado permite comparar estas presentaciones:
@@ -56,6 +58,8 @@ No necesariamente. El espesor es una característica; también importan la compo
 Una máquina apoyada permanentemente y una pesa que cae generan condiciones diferentes. Por eso, antes de elegir piso para gimnasio en una zona de pesas, comunica cuánto pesan los implementos, cómo se utilizan y si se dejan caer.
 
 Si el local está sobre otros espacios ocupados, incorpora una evaluación del ruido y las vibraciones. No debe asumirse que colocar hule resolverá por sí solo la transmisión de sonido a través del edificio.
+
+Puedes organizar los datos de cargas y actividad con el [selector de espesor de piso para gimnasio](/blog/espesor-piso-gimnasio.html).
 
 ## Calcula cuánto piso necesitas para tu gimnasio
 
@@ -101,3 +105,6 @@ Para orientar la selección, prepara estos datos:
 Para respuestas breves sobre formatos, espesores y cantidades, consulta las [preguntas frecuentes de pisos para gimnasios](https://www.matdepotmex.com/categorias/gimnasios.html#preguntas-frecuentes).
 
 Fuentes de producto: fichas comerciales de MatDepot enlazadas en la tabla. Las medidas se contrastaron con el catálogo del sitio; no se realizaron ensayos físicos de los productos.
+
+
+Para preparar los siguientes pasos, usa el [checklist de instalación sobre concreto o loseta](/blog/instalar-piso-hule-concreto-loseta.html), organiza el [mantenimiento del piso del gimnasio](/blog/limpiar-piso-gimnasio.html) y revisa el alcance con la [calculadora para comparar cotizaciones](/blog/comparar-cotizaciones-tapetes.html).
