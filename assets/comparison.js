@@ -1,8 +1,8 @@
 (function () {
   'use strict';
   const catalog = window.MD_CATALOG;
-  const panel = document.getElementById('comparison');
-  if (!panel || !catalog) return;
+  const panel = document.querySelector('section#comparison');
+  if (!catalog) return;
   const byId = id => document.getElementById(id);
   const cards = [...document.querySelectorAll('#prod-grid > [data-slug]')];
   const key = 'md-comparison-v1';
@@ -24,7 +24,7 @@
   };
   const link = (text, href) => { const a = make('a', text); a.href = href; return a; };
   const value = (p, field) => String(p.specs[field] ?? '').trim();
-  const announce = text => { byId('compare-status').textContent = text; };
+  const announce = text => { byId('compare-status').hidden = false; byId('compare-status').textContent = text; };
   const sorted = [...catalog].sort((a, b) => a.name.localeCompare(b.name, 'es'));
   function picker(current, index) {
     const wrap = make('div', undefined, 'field');
@@ -46,8 +46,14 @@
   }
   function render() {
     try { sessionStorage.setItem(key, JSON.stringify(selected)); } catch (_) { /* Keep working without storage. */ }
-    panel.hidden = false;
+    const href = '/comparar.html' + (selected.length ? '?comparar=' + encodeURIComponent(selected.join(',')) : '');
+    document.querySelectorAll('.compare-open,.compare-view').forEach(a => {
+      a.href = href;
+      if (a.classList.contains('compare-open')) a.textContent = 'Comparar productos' + (selected.length ? ' (' + selected.length + '/3)' : '');
+    });
+    if (panel) panel.hidden = false;
     announce(selected.length + ' de 3 productos seleccionados.');
+    if (!panel && !selected.length) byId('compare-status').hidden = true;
     cards.forEach(card => {
       const button = card.querySelector('.compare-toggle');
       const active = selected.includes(card.dataset.slug);
@@ -55,6 +61,7 @@
       button.textContent = active ? 'Quitar de comparación' : 'Añadir a comparación';
       card.querySelector('.compare-view').hidden = !active;
     });
+    if (!panel) return;
     const products = selected.map(s => catalog.find(p => p.slug === s));
     const slots = byId('compare-slots');
     slots.replaceChildren();
@@ -118,14 +125,18 @@
       else { announce('Puedes comparar hasta 3 productos. Quita o cambia uno en la tabla.'); return; }
       render();
     };
-    const view = link('Ver comparación ↑', '#comparison');
+    const view = link('Ver comparación →', '/comparar.html');
     view.className = 'compare-view';
-    view.onclick = () => byId('comparison-title').focus();
     card.append(button, view);
   });
-  byId('clear-compare').onclick = () => {
+  if (panel) byId('clear-compare').onclick = () => {
     selected = []; byId('compare-differences').checked = false; render(); byId('compare-slot-0').focus();
   };
-  byId('compare-differences').onchange = render;
+  if (panel) byId('compare-differences').onchange = render;
+  window.addEventListener('pageshow', event => {
+    if (!event.persisted) return;
+    try { selected = valid(JSON.parse(sessionStorage.getItem(key))); } catch (_) {}
+    render();
+  });
   render();
 })();

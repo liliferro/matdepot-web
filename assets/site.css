@@ -750,6 +750,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid currentColor; outline
 .comparison,#comparison-title { scroll-margin-top:140px; }
 .comparison-scroll::after { content:'Desplaza la tabla horizontalmente para ver todos los productos.';display:none; }
 .compare-view { text-align:center;padding:10px;min-height:44px;text-decoration:underline; }
+.catalog-controls .compare-open { align-self:stretch;justify-content:center;text-align:center; }
+.catalog-compare-status { margin:8px 0;font-size:14px; }
 .comparison-toolbar,.comparison-actions { display:flex;align-items:center;gap:16px;flex-wrap:wrap; }
 .comparison-toolbar { margin:20px 0;justify-content:space-between; }
 .comparison-toolbar label { display:flex;align-items:center;gap:10px;min-height:44px; }

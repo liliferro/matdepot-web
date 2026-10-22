@@ -25,7 +25,7 @@ function page(source,output,options={}){
  const skip=d.createElement('a');skip.className='skip-link';skip.href='#main-content';skip.textContent='Saltar al contenido';d.body.prepend(skip);
  d.documentElement.lang='es-MX';
  d.querySelectorAll('.nav-links a[aria-current]').forEach(a=>a.removeAttribute('aria-current'));
- const active=output.startsWith('tapetes/')||output.startsWith('categorias/')?'productos.html':output;
+ const active=output==='comparar.html'||output.startsWith('tapetes/')||output.startsWith('categorias/')?'productos.html':output;
  d.querySelectorAll('.nav-links a').forEach(a=>{if(a.getAttribute('href')===active)a.setAttribute('aria-current','page');});
  const noscript=d.createElement('noscript');noscript.innerHTML='<style>@media(max-width:1024px){.nav-links{display:flex;position:static;grid-column:1/-1;max-height:none}.burger{display:none}}</style>';d.head.append(noscript);
  if(options.title)d.title=options.title;
@@ -77,8 +77,16 @@ page('productos.html','productos.html',{title:'Catálogo de tapetes y pisos téc
  <div class="field"><label for="catalog-search">Buscar nombre, medida o especificación</label><input id="catalog-search" type="search" maxlength="120" placeholder="Ej. cocina, 13 mm, rollo"></div>
  <div class="field"><label for="catalog-filter">Aplicación o sector</label><select id="catalog-filter"></select></div>
  ${['espesor','ancho','presentacion'].map(k=>`<div class="field"><label for="catalog-${k}">${k==='presentacion'?'Presentación':k[0].toUpperCase()+k.slice(1)}</label><select id="catalog-${k}"><option value="">Todos</option></select></div>`).join('')}
- <div class="field"><label for="catalog-order">Orden</label><select id="catalog-order"><option value="az">Nombre: A–Z</option><option value="za">Nombre: Z–A</option></select></div><button class="btn btn--ghost" id="clear-filters" type="button">Limpiar filtros</button></div>
- <section class="comparison" id="comparison" aria-labelledby="comparison-title" hidden>
+ <div class="field"><label for="catalog-order">Orden</label><select id="catalog-order"><option value="az">Nombre: A–Z</option><option value="za">Nombre: Z–A</option></select></div><button class="btn btn--ghost" id="clear-filters" type="button">Limpiar filtros</button><a class="btn compare-open" id="comparison" href="/comparar.html">Comparar productos</a></div><p id="compare-status" class="catalog-compare-status" role="status" aria-live="polite"></p>
+`);
+ d.querySelector('#prod-grid').innerHTML=products.map((p,i)=>card(p,i,true)).join('');
+ d.querySelector('#prod-grid').insertAdjacentHTML('afterend','<p id="no-results" hidden>No hay productos con esa combinación. Prueba otras medidas o limpia los filtros.</p>');
+ const script=d.createElement('script');script.src='/assets/catalog-ui.js';d.body.append(script);
+ const comparison=d.createElement('script');comparison.src='/assets/comparison.js';d.body.append(comparison);
+}});
+page('ubicacion.html','comparar.html',{title:'Comparador de productos | Mat Depot',description:'Compara hasta tres tapetes y pisos de Mat Depot con las especificaciones publicadas en sus fichas.',mutate(d){
+ d.querySelectorAll('body > section,script:not([src])').forEach(e=>e.remove());
+ d.querySelector('footer').insertAdjacentHTML('beforebegin',shell('Comparador de productos','Selecciona hasta tres productos para revisar sus características técnicas.',`<a class="btn btn--ghost" href="/productos.html">← Volver al catálogo</a> <section class="comparison" id="comparison" aria-labelledby="comparison-title" hidden>
  <span class="eyebrow">Tu selección · Hasta 3 productos</span><h2 class="h2" id="comparison-title" tabindex="-1">Compara tus opciones</h2>
  <p>Elige productos del catálogo y revisa sus especificaciones lado a lado. Los datos provienen de las fichas publicadas de Mat Depot; consulta cada ficha para ver sus características y usos completos.</p>
  <p id="compare-status" role="status" aria-live="polite"></p><div id="compare-slots"></div>
@@ -86,10 +94,7 @@ page('productos.html','productos.html',{title:'Catálogo de tapetes y pisos téc
  <p id="compare-summary"></p><p class="source-note">“No especificado” significa que el dato no aparece en la ficha; no implica que el producto carezca de esa característica. Confirma las especificaciones al cotizar.</p>
  <p id="compare-electrical-note" class="source-note" hidden>El certificado del tapete dieléctrico no está publicado aquí. No utilices esta comparación para deducir una tensión de trabajo segura.</p>
  <div class="comparison-scroll" tabindex="0" role="region" aria-label="Tabla de comparación, desplaza horizontalmente para ver todos los productos"><table id="comparison-table"></table></div>
- <p id="compare-empty-differences" hidden>No hay diferencias entre los valores publicados disponibles. Desactiva “Solo diferencias” para revisar también los datos faltantes.</p></section>`);
- d.querySelector('#prod-grid').innerHTML=products.map((p,i)=>card(p,i,true)).join('');
- d.querySelector('#prod-grid').insertAdjacentHTML('afterend','<p id="no-results" hidden>No hay productos con esa combinación. Prueba otras medidas o limpia los filtros.</p>');
- const script=d.createElement('script');script.src='/assets/catalog-ui.js';d.body.append(script);
+ <p id="compare-empty-differences" hidden>No hay diferencias entre los valores publicados disponibles. Desactiva “Solo diferencias” para revisar también los datos faltantes.</p></section><noscript><p>Activa JavaScript para seleccionar y comparar productos. Puedes consultar todas las fichas en el <a href="/productos.html">catálogo</a>.</p></noscript>`));
  const comparison=d.createElement('script');comparison.src='/assets/comparison.js';d.body.append(comparison);
 }});
 for(const [file,title]of Object.entries({'contacto.html':'Cotiza tapetes y pisos para tu proyecto | Mat Depot','quienes-somos.html':'Proveedor de tapetes y pisos en México | Mat Depot','ubicacion.html':'Ubicación y envíos desde Tlalnepantla | Mat Depot','aviso-privacidad.html':'Aviso de privacidad y uso de datos | Mat Depot','gracias.html':'Solicitud enviada y contacto por WhatsApp | Mat Depot'}))page(file,file,{title,mutate(d){

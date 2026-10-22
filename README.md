@@ -23,11 +23,11 @@ El generador publica 35 fichas de producto con HTML completo, 5 categorías, pre
 
 ## Comparador
 
-En `/productos.html#comparison` se pueden seleccionar hasta tres productos desde las tarjetas o el selector del catálogo. Cada columna permite cambiar o quitar el producto y abrir su ficha o cotización. La selección se conserva en `sessionStorage` durante la sesión; si el navegador bloquea ese almacenamiento, la comparación sigue funcionando en la página actual.
+En `/comparar.html` se pueden seleccionar hasta tres productos desde las tarjetas del catálogo o el selector de la página de comparación. El catálogo muestra un botón «Comparar productos» junto a «Limpiar filtros», sin la tabla ni el panel de comparación. Cada columna permite cambiar o quitar el producto y abrir su ficha o cotización. La selección se conserva en `sessionStorage` durante la sesión; si el navegador bloquea ese almacenamiento, la comparación sigue funcionando en la página actual.
 
 `assets/comparison.js` lee exclusivamente `MD_CATALOG[].specs`, la misma fuente utilizada por las fichas. No infiere atributos desde nombres o fotografías. “Solo diferencias” compara los valores textuales publicados; los campos ausentes se muestran como “No especificado” y no se cuentan como diferencias. Las unidades y redacción de las fichas no se convierten ni normalizan. En móvil, la tabla se desplaza horizontalmente y mantiene visible el nombre de la característica.
 
-Se admite un enlace inicial `/productos.html?comparar=slug-1,slug-2#comparison`. Los identificadores desconocidos o repetidos se descartan y se limita la selección a tres. `npm test` comprueba también selección, cambio, límite, datos originales, faltantes, filtros, enlaces, persistencia y foco de teclado. Utilizar Node 24.15 o posterior (Vercel: 24.x).
+Se admite un enlace inicial `/comparar.html?comparar=slug-1,slug-2`. Los identificadores desconocidos o repetidos se descartan y se limita la selección a tres. `npm test` comprueba también selección, cambio, límite, datos originales, faltantes, filtros, enlaces, persistencia y foco de teclado. Utilizar Node 24.15 o posterior (Vercel: 24.x).
 
 ## Medición
 

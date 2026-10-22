@@ -1,27 +1,26 @@
 const fs = require('node:fs');
 const assert = require('node:assert/strict');
 const { JSDOM } = require('jsdom');
-const html = fs.readFileSync('public/productos.html', 'utf8');
+const html = fs.readFileSync('public/comparar.html', 'utf8');
 function setup(stored, query = '') {
-  const dom = new JSDOM(html, { url: 'https://www.matdepotmex.com/productos.html' + query, runScripts: 'outside-only' });
+  const dom = new JSDOM(html, { url: 'https://www.matdepotmex.com/comparar.html' + query, runScripts: 'outside-only' });
   const w = dom.window;
   if (stored !== undefined) w.sessionStorage.setItem('md-comparison-v1', stored);
-  for (const file of ['catalogo', 'catalog-ui', 'comparison']) w.eval(fs.readFileSync('assets/' + file + '.js', 'utf8'));
+  for (const file of ['catalogo', 'comparison']) w.eval(fs.readFileSync('assets/' + file + '.js', 'utf8'));
   return dom;
 }
 const dom = setup('{broken');
 const w = dom.window, d = w.document, el = id => d.getElementById(id);
 const catalog = w.MD_CATALOG;
 function choose(id, slug) { el(id).value = slug; el(id).dispatchEvent(new w.Event('change', { bubbles: true })); }
-function clickCard(slug) { d.querySelector('[data-slug="' + slug + '"] .compare-toggle').click(); }
-assert.equal(d.querySelectorAll('.compare-toggle').length, 35);
+
+assert.equal(d.querySelectorAll('.compare-toggle').length, 0);
 assert.equal(el('comparison').hidden, false);
 assert.equal(el('comparison-table').parentElement.hidden, true);
 const first = catalog[0], second = catalog[1], third = catalog[2], fourth = catalog[3];
-clickCard(first.slug); choose('compare-slot-1', second.slug); clickCard(third.slug);
+choose('compare-slot-0', first.slug); choose('compare-slot-1', second.slug); choose('compare-slot-2', third.slug);
 assert.equal(d.querySelectorAll('#comparison-table thead th').length, 4);
-clickCard(fourth.slug);
-assert.match(el('compare-status').textContent, /hasta 3/);
+assert.equal(el('compare-slots').children.length, 0);
 assert.equal(d.querySelectorAll('#comparison-table thead th').length, 4);
 assert(![...el('compare-slot-0').options].some(o => o.value === second.slug));
 // Values must be identical to the existing product specifications, including missing values.
@@ -35,9 +34,6 @@ for (const a of d.querySelectorAll('#comparison-table a')) {
   if (a.textContent === 'Cotizar') assert(catalog.some(p => a.getAttribute('href') === '/contacto.html?prod=' + p.slug));
   else assert(fs.existsSync('public' + a.getAttribute('href')));
 }
-choose('catalog-filter', 'gimnasios');
-assert.equal(d.querySelectorAll('#comparison-table thead th').length, 4);
-assert(d.querySelector('[data-slug="' + first.slug + '"]').hidden);
 choose('compare-slot-0', fourth.slug);
 assert.equal(d.activeElement.id, 'compare-slot-0');
 assert.equal(JSON.parse(w.sessionStorage.getItem('md-comparison-v1'))[0], fourth.slug);
@@ -60,15 +56,39 @@ const preset = setup(undefined, '?comparar=tapete-dielectrico');
 assert.equal(preset.window.document.getElementById('compare-electrical-note').hidden, false);
 preset.window.close();
 // Missing data alone must never become a claimed difference; blocked storage must not break selection.
-const missing = new JSDOM(html, { url: 'https://www.matdepotmex.com/productos.html', runScripts: 'outside-only' });
+const missing = new JSDOM(html, { url: 'https://www.matdepotmex.com/comparar.html', runScripts: 'outside-only' });
 missing.window.eval(fs.readFileSync('assets/catalogo.js', 'utf8'));
 missing.window.MD_CATALOG[0].specs = { Color: 'Negro' };
 missing.window.MD_CATALOG[1].specs = { Color: 'Negro', Espesor: '5 mm' };
 Object.defineProperty(missing.window, 'sessionStorage', { get() { throw Error('blocked'); } });
 missing.window.eval(fs.readFileSync('assets/comparison.js', 'utf8'));
-const buttons = missing.window.document.querySelectorAll('.compare-toggle'); buttons[0].click(); buttons[1].click();
+for (const [i, product] of missing.window.MD_CATALOG.slice(0, 2).entries()) { const select = missing.window.document.getElementById('compare-slot-' + i); select.value = product.slug; select.dispatchEvent(new missing.window.Event('change')); }
 assert.equal(missing.window.document.querySelectorAll('.comparison-different').length, 0);
 missing.window.document.getElementById('compare-differences').click();
 assert.equal(missing.window.document.getElementById('compare-empty-differences').hidden, false);
 missing.window.close();
+// Catalog stays compact and carries the selection to the independent page even without storage.
+const listing = new JSDOM(fs.readFileSync('public/productos.html', 'utf8'), { url: 'https://www.matdepotmex.com/productos.html', runScripts: 'outside-only' });
+const lw = listing.window, ld = lw.document;
+Object.defineProperty(lw, 'sessionStorage', { get() { throw Error('blocked'); } });
+for (const file of ['catalogo', 'catalog-ui', 'comparison']) lw.eval(fs.readFileSync('assets/' + file + '.js', 'utf8'));
+assert.equal(ld.querySelector('section#comparison'), null);
+assert.equal(ld.querySelector('#comparison-table'), null);
+assert(ld.querySelector('#catalog-controls .compare-open'));
+assert.equal(ld.querySelector('.compare-open').textContent, 'Comparar productos');
+const toggles = [...ld.querySelectorAll('.compare-toggle')];
+toggles.slice(0, 4).forEach(button => button.click());
+assert.match(ld.getElementById('compare-status').textContent, /hasta 3/);
+assert.equal(ld.querySelectorAll('.compare-toggle[aria-pressed="true"]').length, 3);
+assert.equal(ld.querySelector('.compare-open').textContent, 'Comparar productos (3/3)');
+const destination = new URL(ld.querySelector('.compare-open').href);
+assert.equal(destination.pathname, '/comparar.html');
+const transferred = setup(undefined, destination.search);
+assert.equal(transferred.window.document.querySelectorAll('#comparison-table thead th').length, 4);
+transferred.window.close();
+const filter = ld.getElementById('catalog-filter'); filter.value = 'gimnasios'; filter.dispatchEvent(new lw.Event('change'));
+assert.equal(ld.querySelector('.compare-open').href, destination.href);
+toggles[0].click();
+assert.equal(ld.querySelector('.compare-open').textContent, 'Comparar productos (2/3)');
+listing.window.close();
 console.log('Comparison passed: selection, limit, replacement, removal, exact source data, missing data, differences, filters, links, persistence, invalid/blocked storage and keyboard focus.');
