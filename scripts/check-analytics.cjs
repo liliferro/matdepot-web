@@ -80,5 +80,39 @@ async function setup(path, consent, stored = {}) {
   cmp.d.getElementById('clear-compare').click();
   assert.equal(cmp.events('compare_products').at(-1).cantidad_productos,0);
   cmp.dom.window.close();
+  for(const path of ['/blog.html','/blog/antifatiga-o-antiderrapante.html']) {
+    const s=await setup(path);
+    const links=[...s.d.querySelectorAll('[data-share-article]')];
+    assert.equal(links.length,path==='/blog.html'?11:1);
+    links[0].click();
+    assert.equal(s.events().length,0,'sharing respects denied consent');
+    s.d.getElementById('accept-analytics').click();
+    for(const link of links) {
+      const wa=new URL(link.href);
+      assert.equal(wa.origin+wa.pathname,'https://wa.me/');
+      assert(!wa.searchParams.has('phone'));
+      const text=wa.searchParams.get('text');
+      const shared=new URL(text.split('\n').at(-1));
+      assert.equal(shared.origin,'https://www.matdepotmex.com');
+      assert.equal(shared.pathname,'/blog/'+link.dataset.shareArticle+'.html');
+      assert.equal(shared.searchParams.get('utm_source'),'whatsapp');
+      assert.equal(shared.searchParams.get('utm_campaign'),'blog_share');
+      assert.equal(shared.searchParams.get('utm_content'),link.dataset.shareArticle);
+      link.click();
+      const event=s.events('share').at(-1);
+      assert.equal(event.item_id,link.dataset.shareArticle);
+      assert.equal(event.method,'whatsapp');
+      assert.equal(event.content_type,'article');
+      assert.equal(event.pagina,path);
+      assert.equal(event.ubicacion,path==='/blog.html'?'listado_blog':'articulo');
+    }
+    assert.equal(s.events('share').length,links.length,'one event per share click');
+    assert.equal(s.events('contact_whatsapp').length,0,'shares must not count as contact leads');
+    assert.equal(s.events('generate_lead').length,0);
+    s.d.getElementById('reject-analytics').click();
+    links[0].click();
+    assert.equal(s.events('share').length,links.length,'revoking consent stops share tracking');
+    s.dom.window.close();
+  }
   console.log('Analytics passed: consent, product context, WhatsApp clicks, quote/catalog clicks, form start, lead return/deduplication and comparison actions. No requests sent to Google or forms.');
 })().catch(e=>{console.error(e);process.exitCode=1;});

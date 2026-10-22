@@ -49,3 +49,13 @@ Las definiciones y el marcado afectan datos futuros; no reclasifican el históri
 Se verificó la configuración administrativa en GA4. La recepción de los eventos nuevos tras despliegue debe observarse con tráfico real o una sesión de prueba identificada; las pruebas locales no equivalen a confirmar recepción en Google. La entrega del correo y la calificación comercial siguen siendo verificaciones separadas.
 
 Para revertir el código, revertir el commit de instrumentación. Para revertir ajustes administrativos, desmarcar los dos eventos añadidos/restaurar opciones de medición según necesidad; no borrar eventos ni datos históricos. No modificar otras propiedades.
+
+## Compartir artículos por WhatsApp (2026-10-21)
+
+Botón junto a la fecha en los 11 artículos y sus tarjetas del blog. Abre WhatsApp con el título y enlace, sin destinatario preseleccionado. Evento recomendado `share`: `method=whatsapp`, `content_type=article`, `item_id=slug del artículo`, `pagina=ruta de origen`, `ubicacion=articulo|listado_blog`.
+
+Mide clics/intención de compartir, no mensajes enviados ni entregados. Respeta el consentimiento; no dispara `contact_whatsapp` ni `generate_lead`, y no se configura como conversión. La medición automática de clics salientes puede registrar también `click`; usar solo `share` para este KPI.
+
+Enlaces compartidos incluyen `utm_source=whatsapp`, `utm_medium=social`, `utm_campaign=blog_share` y `utm_content=slug` para identificar visitas procedentes de estos enlaces. Canonical sin parámetros. El conteo aparece en GA4 cuando recibe eventos consentidos; la recepción real se debe verificar con tráfico real. Las pruebas locales validan el evento y su separación de leads sin enviar datos de prueba a Google.
+
+Referencia: https://developers.google.com/analytics/devguides/collection/ga4/reference/events#share

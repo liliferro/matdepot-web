@@ -79,7 +79,10 @@
       const quoteProduct=url.origin===location.origin ? product(url.searchParams.get('prod')) : null;
       const p=targetProduct || quoteProduct || item() || selectedItem();
       const data={...context(p),ubicacion:a.classList.contains('wa-fab')?'flotante':a.closest('footer')?'pie':a.closest('header')?'encabezado':a.closest('#comparison')?'comparador':'contenido'};
-      if(url.protocol==='https:' && ['wa.me','api.whatsapp.com','web.whatsapp.com'].includes(url.hostname))mdTrack('contact_whatsapp',{...data,method:'whatsapp'});
+      if(a.dataset.shareArticle && url.protocol==='https:' && url.hostname==='wa.me' && url.pathname==='/') {
+        mdTrack('share',{...data,method:'whatsapp',content_type:'article',item_id:a.dataset.shareArticle,ubicacion:a.dataset.sharePlacement});
+      }
+      else if(url.protocol==='https:' && ['wa.me','api.whatsapp.com','web.whatsapp.com'].includes(url.hostname))mdTrack('contact_whatsapp',{...data,method:'whatsapp'});
       else if(href.startsWith('tel:'))mdTrack('contact_phone',{...data,linea:href.includes('5258')?'linea1':'linea2'});
       else if(href.startsWith('mailto:'))mdTrack('contact_email',data);
       else if(targetProduct)mdTrack('select_item',{...data,item_list_id:location.pathname,items:[gaItem(targetProduct)]});

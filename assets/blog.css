@@ -3,6 +3,9 @@
 .blog-heading .crumbs { color: var(--c-steel); flex-wrap: wrap; margin-bottom: 28px; }
 .blog-heading h1 { font-size: clamp(32px, 4.5vw, 54px); line-height: 1.1; letter-spacing: -.025em; max-width: 26ch; margin: 16px 0 24px; }
 .blog-byline { font-size: .95rem; color: var(--c-steel); }
+.blog-meta { display:flex; align-items:center; flex-wrap:wrap; gap:12px 18px; }
+.blog-main .blog-share { display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:10px 14px; background:transparent; border:1px solid #286342; color:#205334; font-size:.85rem; text-transform:none; letter-spacing:normal; white-space:normal; }
+.blog-main .blog-share:hover { background:#e3eee5; color:#173d26; }
 .blog-body { max-width: 900px; }
 .blog-body > p { max-width: 78ch; }
 .blog-body > p:first-child { font-size: 1.15rem; }
