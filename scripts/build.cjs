@@ -11,7 +11,7 @@ const categoryFaq=slug=>{const g=faqGroups.find(g=>g.category===slug);return g?`
 const productUrl=p=>'/tapetes/'+p.slug+'.html';
 const links=()=>'<nav class="category-links" aria-label="Categorías de productos">'+categories.map(c=>`<a href="/categorias/${c.slug}.html">${esc(c.name)}</a>`).join('')+'</nav>';
 const card=(p,i=0,compare=false)=>`${compare?`<article class="catalog-card-wrap" data-slug="${p.slug}">`:''}<a class="cat-card" href="${productUrl(p)}"><div class="cat-card__media cat-card__media--photo"><img src="/${p.images[0]}" alt="${esc(p.name)}" loading="lazy"><span class="cat-card__num">${String(i+1).padStart(2,'0')}</span></div><div><span class="cat-card__name">${esc(p.name)}</span><p>${esc(p.short)}</p><div class="cat-card__tags">${p.sectors.map(s=>`<span class="tag">${esc(s)}</span>`).join('')}</div></div><span class="cat-card__cta">Ver ficha técnica →</span></a>${compare?'</article>':''}`;
-const baseGraph=[{'@type':'Organization','@id':origin+'/#organization',name:'Mat Depot',legalName:'Mat Depot, S.A. de C.V.',url:origin+'/',telephone:['+525596265258','+525596265259'],email:contact.email,address:{'@type':'PostalAddress',addressLocality:'Tlalnepantla de Baz',addressRegion:'Estado de México',addressCountry:'MX'},sameAs:['https://www.instagram.com/matdepotmex','https://www.linkedin.com/in/mat-depot-70b19937a/','https://youtube.com/@matdepot25','https://www.tiktok.com/@matdepot']},{'@type':'WebSite','@id':origin+'/#website',url:origin+'/',name:'Mat Depot',inLanguage:'es-MX',publisher:{'@id':origin+'/#organization'}}];
+const baseGraph=[{'@type':['Organization','LocalBusiness'],'@id':origin+'/#organization',name:'Mat Depot',legalName:'Mat Depot, S.A. de C.V.',url:origin+'/',telephone:['+525596265258','+525596265259'],email:contact.email,address:{'@type':'PostalAddress',addressLocality:'Tlalnepantla de Baz',addressRegion:'Estado de México',addressCountry:'MX'},sameAs:['https://www.instagram.com/matdepotmex','https://www.linkedin.com/in/mat-depot-70b19937a/','https://youtube.com/@matdepot25','https://www.tiktok.com/@matdepot']},{'@type':'WebSite','@id':origin+'/#website',url:origin+'/',name:'Mat Depot',inLanguage:'es-MX',publisher:{'@id':origin+'/#organization'}}];
 fs.rmSync(out,{recursive:true,force:true});fs.mkdirSync(out,{recursive:true});fs.cpSync(path.join(root,'assets'),path.join(out,'assets'),{recursive:true});
 fs.copyFileSync(path.join(root,'assets/favicon.ico'),path.join(out,'favicon.ico'));
 const allUrls=[];
@@ -77,7 +77,7 @@ function page(source,output,options={}){
  if(!options.noindex && output!=='gracias.html')allUrls.push(canonical);
  dom.window.close();
 }
-page('index.html','index.html',{renderInline:true,title:'Tapetes y pisos de hule para industria | Mat Depot',mutate(d){d.querySelector('#featured-cats').insertAdjacentHTML('beforebegin',links());}});
+page('index.html','index.html',{renderInline:true,title:'Tapetes y pisos de hule en CDMX y Edomex | Mat Depot',mutate(d){d.querySelector('#featured-cats').insertAdjacentHTML('beforebegin',links());}});
 page('productos.html','productos.html',{title:'Catálogo de tapetes y pisos técnicos | Mat Depot',description:`Compara ${products.length} tapetes y pisos técnicos por aplicación, espesor, ancho y presentación. Solicita asesoría y cotización en Mat Depot.`,mutate(d){
  d.querySelectorAll('script:not([src])').forEach(s=>s.remove());
  d.querySelector('.prod-toolbar').innerHTML=`<span id="result-count" role="status">${products.length} resultados</span>`;
@@ -146,6 +146,7 @@ page('ubicacion.html','preguntas-frecuentes.html',{title:'Preguntas sobre tapete
 page('ubicacion.html','404.html',{title:'Página no encontrada | Mat Depot',noindex:true,mutate(d){d.querySelectorAll('body > section,script:not([src])').forEach(e=>e.remove());d.querySelector('footer').insertAdjacentHTML('beforebegin',shell('Página no encontrada','La dirección solicitada no corresponde a una página disponible.','<a class="btn" href="/productos.html">Consultar catálogo</a>'));}});
 // Legacy dynamic page remains a safe fallback for unknown identifiers; known IDs are redirected at the edge.
 require('./build-blog.cjs')({ page, read, origin });
+require('./build-guides.cjs')({ page, products, origin, shell, esc });
 page('producto.html','producto.html',{noindex:true,title:'Consultar producto del catálogo | Mat Depot'});
 fs.writeFileSync(path.join(out,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+allUrls.map(u=>'<url><loc>'+esc(u)+'</loc></url>').join('')+'</urlset>');
 fs.writeFileSync(path.join(out,'robots.txt'),'User-agent: *\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: Claude-SearchBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nSitemap: '+origin+'/sitemap.xml\n');
