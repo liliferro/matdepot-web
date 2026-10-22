@@ -87,9 +87,6 @@ page('productos.html','productos.html',{title:'Catálogo de tapetes y pisos téc
 page('ubicacion.html','comparar.html',{title:'Comparador de productos | Mat Depot',description:'Compara hasta tres tapetes y pisos de Mat Depot con las especificaciones publicadas en sus fichas.',mutate(d){
  d.querySelectorAll('body > section,script:not([src])').forEach(e=>e.remove());
  d.querySelector('footer').insertAdjacentHTML('beforebegin',shell('Comparador de productos','Selecciona hasta tres productos para revisar sus características técnicas.',`<a class="btn btn--ghost" href="/productos.html">← Volver al catálogo</a>
- <section class="comparison-products" aria-labelledby="comparison-products-title"><h2 class="h2" id="comparison-products-title" tabindex="-1">Elige tus productos</h2><p>Agrega hasta tres productos usando el botón de cada tarjeta.</p>
- <div class="comparison-picker-toolbar" id="comparison-picker-toolbar" hidden><p id="compare-status" role="status" aria-live="polite"></p><a class="btn" id="compare-jump" href="#comparison" hidden>Ver comparación</a><button class="btn btn--ghost" id="cancel-replace" type="button" hidden>Cancelar cambio</button></div>
- <div class="cat-grid" id="prod-grid">${products.map((p,i)=>card(p,i,true)).join('')}</div></section>
  <section class="comparison" id="comparison" aria-labelledby="comparison-title" hidden>
  <span class="eyebrow">Tu selección · Hasta 3 productos</span><h2 class="h2" id="comparison-title" tabindex="-1">Compara tus opciones</h2>
  <p>Elige productos del catálogo y revisa sus especificaciones lado a lado. Los datos provienen de las fichas publicadas de Mat Depot; consulta cada ficha para ver sus características y usos completos.</p>
@@ -98,7 +95,11 @@ page('ubicacion.html','comparar.html',{title:'Comparador de productos | Mat Depo
  <p id="compare-summary"></p><p class="source-note">“No especificado” significa que el dato no aparece en la ficha; no implica que el producto carezca de esa característica. Confirma las especificaciones al cotizar.</p>
  <p id="compare-electrical-note" class="source-note" hidden>El certificado del tapete dieléctrico no está publicado aquí. No utilices esta comparación para deducir una tensión de trabajo segura.</p>
  <div class="comparison-scroll" tabindex="0" role="region" aria-label="Tabla de comparación, desplaza horizontalmente para ver todos los productos"><table id="comparison-table"></table></div>
- <p id="compare-empty-differences" hidden>No hay diferencias entre los valores publicados disponibles. Desactiva “Solo diferencias” para revisar también los datos faltantes.</p></section><noscript><p>Activa JavaScript para seleccionar y comparar productos. Puedes consultar todas las fichas en el <a href="/productos.html">catálogo</a>.</p></noscript>`));
+ <p id="compare-empty-differences" hidden>No hay diferencias entre los valores publicados disponibles. Desactiva “Solo diferencias” para revisar también los datos faltantes.</p></section>
+ <section class="comparison-products" aria-labelledby="comparison-products-title"><h2 class="h2" id="comparison-products-title" tabindex="-1">Elige tus productos</h2><p>Agrega hasta tres productos usando el botón de cada tarjeta.</p>
+ <div class="comparison-picker-toolbar" id="comparison-picker-toolbar" hidden><p id="compare-status" role="status" aria-live="polite"></p><a class="btn" id="compare-jump" href="#comparison" hidden>Ver comparación</a><button class="btn btn--ghost" id="cancel-replace" type="button" hidden>Cancelar cambio</button></div>
+ <div class="cat-grid" id="prod-grid">${products.map((p,i)=>card(p,i,true)).join('')}</div></section>
+<noscript><p>Activa JavaScript para seleccionar y comparar productos. Puedes consultar todas las fichas en el <a href="/productos.html">catálogo</a>.</p></noscript>`));
  d.body.classList.add('comparison-page');
  const comparison=d.createElement('script');comparison.src='/assets/comparison.js';d.body.append(comparison);
 }});
