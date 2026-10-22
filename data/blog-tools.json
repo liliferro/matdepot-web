@@ -1,0 +1,431 @@
+{
+  "selector": {
+    "type": "planner",
+    "title": "Organiza tu comparación de formatos",
+    "fields": [
+      {
+        "label": "Prioridad principal",
+        "options": [
+          {
+            "label": "Reponer partes del piso",
+            "note": "Solicita cómo se sustituye una pieza o sección y si habrá material compatible disponible."
+          },
+          {
+            "label": "Cubrir un área continua",
+            "note": "Pide un trazado de paños y uniones para rollo y una distribución equivalente de módulos."
+          },
+          {
+            "label": "Delimitar zonas",
+            "note": "Compara cómo identificar áreas con formatos y colores disponibles, sin deducir su desempeño."
+          }
+        ]
+      },
+      {
+        "label": "Forma del espacio",
+        "options": [
+          {
+            "label": "Rectangular y libre",
+            "note": "Adjunta largo y ancho; compara orientación y cantidad comercial de ambos formatos."
+          },
+          {
+            "label": "Con columnas o recortes",
+            "note": "Adjunta un croquis con obstáculos y solicita un plan de cortes."
+          },
+          {
+            "label": "Varias áreas separadas",
+            "note": "Cotiza cada área y no supongas que los recortes de una serán aprovechables en otra."
+          }
+        ]
+      },
+      {
+        "label": "Uso de pesas",
+        "options": [
+          {
+            "label": "Se apoyan sin caída prevista",
+            "note": "Describe cargas y apoyos de los equipos."
+          },
+          {
+            "label": "Hay caídas de pesas",
+            "note": "Confirma el sistema previsto para masa, altura y frecuencia de impactos antes de escoger formato."
+          },
+          {
+            "label": "Aún no está definido",
+            "note": "Define la actividad antes de cerrar la selección técnica."
+          }
+        ]
+      }
+    ]
+  },
+  "ficha-uso": {
+    "type": "planner",
+    "title": "Prepara la ficha de uso de tu zona",
+    "fields": [
+      {
+        "label": "Actividad principal",
+        "options": [
+          {
+            "label": "Máquinas y cardio",
+            "note": "Solicita pesos, apoyos y requisitos de instalación de los equipos."
+          },
+          {
+            "label": "Pesas libres",
+            "note": "Registra tipo de implemento, cargas, altura y frecuencia de caída."
+          },
+          {
+            "label": "Entrenamiento funcional",
+            "note": "Describe saltos, arrastres, accesorios y movimientos previstos."
+          }
+        ]
+      },
+      {
+        "label": "Ubicación",
+        "options": [
+          {
+            "label": "Planta baja",
+            "note": "Describe la base y confirma las condiciones del inmueble para las cargas previstas."
+          },
+          {
+            "label": "Planta alta",
+            "note": "Consulta capacidad del inmueble y transmisión de ruido o vibraciones; no lo deduzcas del tapete."
+          },
+          {
+            "label": "Por definir",
+            "note": "Confirma ubicación y base antes de comprar."
+          }
+        ]
+      },
+      {
+        "label": "Documentación del uso",
+        "options": [
+          {
+            "label": "Tengo equipos y cargas identificados",
+            "note": "Adjunta la lista a la solicitud y pide confirmación para el sistema propuesto."
+          },
+          {
+            "label": "Tengo solo un plano",
+            "note": "Añade inventario de equipos y actividades por zona."
+          },
+          {
+            "label": "Estoy planeando el gimnasio",
+            "note": "Usa la consulta para definir qué información necesitas reunir; aún no selecciones un espesor definitivo."
+          }
+        ]
+      }
+    ]
+  },
+  "preinstalacion": {
+    "type": "checklist",
+    "title": "Revisa los pendientes de instalación",
+    "items": [
+      [
+        "Identifiqué la base y las reparaciones existentes",
+        "Documenta concreto, loseta o recubrimiento anterior con fotografías."
+      ],
+      [
+        "Revisé antecedentes de humedad con el responsable de la obra",
+        "Consulta el método y criterio de comprobación requeridos por el sistema."
+      ],
+      [
+        "Registré juntas, desniveles y piezas sueltas",
+        "Solicita que se defina la preparación y su alcance."
+      ],
+      [
+        "Revisé puertas, coladeras y transiciones",
+        "Pide una solución de remates y niveles terminados."
+      ],
+      [
+        "Tengo instrucciones del modelo y su fijación",
+        "Confirma materiales compatibles y procedimiento de instalación."
+      ],
+      [
+        "Acordé retiro de equipos, acceso y puesta en servicio",
+        "Define responsables y plazo según las instrucciones del trabajo."
+      ]
+    ]
+  },
+  "mantenimiento": {
+    "type": "checklist",
+    "title": "Prepara la rutina de mantenimiento",
+    "items": [
+      [
+        "Identifiqué el modelo de cada zona",
+        "Registra modelo, formato y ubicación antes de definir productos de limpieza."
+      ],
+      [
+        "Tengo instrucciones de limpieza del modelo",
+        "Solicita procedimiento y equipos compatibles."
+      ],
+      [
+        "Confirmé productos y diluciones autorizadas",
+        "No aumentes concentraciones ni mezcles productos por tu cuenta."
+      ],
+      [
+        "Asignamos responsables para tareas e incidentes",
+        "Anota quién limpia, registra hallazgos y solicita revisión."
+      ],
+      [
+        "Definimos cómo comprobar secado y reapertura",
+        "Acuerda un criterio aplicable al procedimiento, no un plazo supuesto."
+      ],
+      [
+        "Tenemos registro de bordes, juntas y alteraciones",
+        "Incluye fecha, zona y fotografías de las incidencias."
+      ]
+    ]
+  },
+  "puesto": {
+    "type": "planner",
+    "title": "Describe el puesto de trabajo",
+    "fields": [
+      {
+        "label": "Movimiento",
+        "options": [
+          {
+            "label": "Frente a una estación",
+            "note": "Mide la zona ocupada y los giros hacia equipos cercanos."
+          },
+          {
+            "label": "A lo largo de una línea",
+            "note": "Dibuja el recorrido y revisa extremos, interrupciones y posibles cortes."
+          },
+          {
+            "label": "Entre varias estaciones",
+            "note": "Identifica los recorridos y evalúa cada estación por separado."
+          }
+        ]
+      },
+      {
+        "label": "Entorno",
+        "options": [
+          {
+            "label": "Normalmente seco",
+            "note": "Describe el procedimiento de limpieza y posibles derrames."
+          },
+          {
+            "label": "Con agua",
+            "note": "Confirma drenaje y limpieza debajo del recubrimiento."
+          },
+          {
+            "label": "Con aceite o grasa",
+            "note": "Identifica la sustancia y consulta compatibilidad del modelo."
+          }
+        ]
+      },
+      {
+        "label": "Paso de equipos",
+        "options": [
+          {
+            "label": "Sin carritos",
+            "note": "Revisa puertas, bordes y accesos de las personas."
+          },
+          {
+            "label": "Con carritos",
+            "note": "Comunica ruedas, cargas y maniobras antes de seleccionar producto."
+          },
+          {
+            "label": "Por confirmar",
+            "note": "Observa un turno completo para registrar tránsito habitual y ocasional."
+          }
+        ]
+      }
+    ]
+  },
+  "funcion": {
+    "type": "planner",
+    "title": "Identifica las funciones que debes revisar",
+    "fields": [
+      {
+        "label": "Problema principal",
+        "options": [
+          {
+            "label": "Trabajo de pie",
+            "note": "Evalúa opciones antifatiga con las condiciones del puesto, sin asumir efectos médicos."
+          },
+          {
+            "label": "Deslizamiento",
+            "note": "Solicita información de agarre aplicable a la superficie y a los líquidos presentes."
+          },
+          {
+            "label": "Ambos",
+            "note": "Pide evidencia de ambas funciones en el mismo modelo; una no demuestra la otra."
+          }
+        ]
+      },
+      {
+        "label": "Condición del área",
+        "options": [
+          {
+            "label": "Seca",
+            "note": "Incluye limpieza, residuos y cambios ocasionales durante el turno."
+          },
+          {
+            "label": "Húmeda",
+            "note": "Describe la fuente del agua y cómo se limpia y drena el área."
+          },
+          {
+            "label": "Aceite o grasa",
+            "note": "Identifica sustancias, exposición y compatibilidad antes de elegir."
+          }
+        ]
+      }
+    ]
+  },
+  "exposicion": {
+    "type": "planner",
+    "title": "Prepara la consulta de compatibilidad",
+    "fields": [
+      {
+        "label": "Sustancia presente",
+        "options": [
+          {
+            "label": "Agua",
+            "note": "Describe origen, acumulación y drenaje."
+          },
+          {
+            "label": "Aceite",
+            "note": "Añade identificación del aceite y documentación disponible."
+          },
+          {
+            "label": "Grasa de cocina",
+            "note": "Describe origen, exposición y productos usados para retirarla."
+          },
+          {
+            "label": "Producto químico o desconocido",
+            "note": "Identifica el producto antes de pedir confirmación de compatibilidad."
+          }
+        ]
+      },
+      {
+        "label": "Contacto",
+        "options": [
+          {
+            "label": "Ocasional",
+            "note": "Describe derrames previsibles y cómo se atienden."
+          },
+          {
+            "label": "Frecuente o continuo",
+            "note": "Comunica duración, cantidad y posibilidad de acumulación."
+          },
+          {
+            "label": "No lo he observado",
+            "note": "Registra las condiciones de un turno antes de cerrar requisitos."
+          }
+        ]
+      },
+      {
+        "label": "Temperatura de exposición",
+        "options": [
+          {
+            "label": "Conocida",
+            "note": "Añade la temperatura y cómo se obtuvo el dato en tu solicitud."
+          },
+          {
+            "label": "Desconocida",
+            "note": "Consulta cómo verificarla; no asumas compatibilidad térmica."
+          }
+        ]
+      }
+    ]
+  },
+  "cocina": {
+    "type": "planner",
+    "title": "Planifica una estación de cocina",
+    "fields": [
+      {
+        "label": "Estación",
+        "options": [
+          {
+            "label": "Lavado",
+            "note": "Revisa agua, detergentes, coladeras y acceso para limpiar debajo."
+          },
+          {
+            "label": "Preparación",
+            "note": "Registra residuos, recorrido y dimensiones del puesto."
+          },
+          {
+            "label": "Cocción",
+            "note": "Confirma grasas y temperatura real de exposición del material."
+          },
+          {
+            "label": "Paso o entrega",
+            "note": "Describe carritos, ruedas, puertas y maniobras."
+          }
+        ]
+      },
+      {
+        "label": "Retiro para limpieza",
+        "options": [
+          {
+            "label": "Previsto después del servicio",
+            "note": "Confirma peso, manipulación y procedimiento de retiro del modelo."
+          },
+          {
+            "label": "En horarios intermedios",
+            "note": "Define cómo mantener disponible la operación mientras se limpia y seca."
+          },
+          {
+            "label": "Aún sin definir",
+            "note": "Acuerda una rutina compatible con el producto antes de comprar."
+          }
+        ]
+      },
+      {
+        "label": "Responsable",
+        "options": [
+          {
+            "label": "Equipo de cocina",
+            "note": "Entrega instrucciones y registra quién revisa la colocación."
+          },
+          {
+            "label": "Personal de limpieza",
+            "note": "Coordina acceso, productos autorizados y revisión al terminar."
+          },
+          {
+            "label": "Por asignar",
+            "note": "Designa responsables del retiro, limpieza, secado y recolocación."
+          }
+        ]
+      }
+    ]
+  },
+  "costos": {
+    "type": "costs",
+    "title": "Compara el costo total de dos propuestas"
+  },
+  "solicitud": {
+    "type": "brief",
+    "title": "Prepara tu solicitud de cotización",
+    "fields": [
+      {
+        "label": "Uso del producto",
+        "placeholder": "Ej. Puesto de empaque o zona de máquinas",
+        "required": true
+      },
+      {
+        "label": "Medidas o cantidad, con unidad",
+        "placeholder": "Ej. 4 × 6 m; cantidad preliminar",
+        "required": true
+      },
+      {
+        "label": "Superficie y condiciones",
+        "placeholder": "Ej. Concreto, área seca; pendiente revisar nivel",
+        "required": true
+      },
+      {
+        "label": "Ciudad y código postal",
+        "placeholder": "Destino de entrega",
+        "required": true
+      },
+      {
+        "label": "Alcance y fecha deseada",
+        "placeholder": "Ej. Suministro; instalación por definir",
+        "required": false
+      },
+      {
+        "label": "Datos pendientes o notas",
+        "placeholder": "Ej. Confirmar formato, reserva y acceso",
+        "required": false
+      }
+    ]
+  }
+}

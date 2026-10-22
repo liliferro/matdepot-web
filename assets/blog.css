@@ -29,4 +29,21 @@
 .blog-card img { display: block; width: 100%; height: auto; }
 .blog-body .gym-calculator h2 { font-size: 1.5rem; }
 .blog-body .gym-calculator h3 { font-size: 1.4rem; margin-top: 0; }
+.blog-list { display: grid; gap: 28px; }
+.blog-filter { display: flex; flex-wrap: wrap; gap: 12px; margin: 24px 0; }
+.blog-filter a { padding: 10px 14px; border: 1px solid var(--c-aluminum); }
+.blog-group { scroll-margin-top: 130px; margin-top: 40px; }
+.blog-tool { padding: clamp(18px,3vw,28px); background: var(--c-bone); border: 1px solid var(--c-aluminum); margin: 28px 0; }
+.blog-tool [hidden] { display: none !important; }
+.blog-tool label { display:block; margin-bottom: 18px; font-weight:600; }
+.blog-tool input:not([type=checkbox]), .blog-tool select, .blog-tool textarea { display:block; width:100%; min-height:48px; padding:12px; margin-top:6px; color:#1a1a1a; background:white; border:1px solid #777; font:inherit; }
+.blog-tool textarea { resize:vertical; }
+.blog-tool .tool-check { display:flex; gap:12px; align-items:flex-start; min-height:44px; }
+.blog-tool input[type=checkbox] { width:22px; height:22px; flex:none; margin-top:3px; }
+.blog-tool pre { white-space:pre-wrap; overflow-wrap:anywhere; font:inherit; }
+.blog-tool fieldset { min-width:0; padding:16px; border:1px solid #aaa; }
+.blog-tool [aria-invalid=true] { border:2px solid #a22121; }
+.blog-tool [data-tool-error] { color:#8a1717; font-weight:bold; }
+.tool-costs { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px; }
+@media(max-width:600px) { .tool-costs { grid-template-columns:1fr; } }
 @media(max-width: 700px) { .blog-card { grid-template-columns: 1fr; padding: 18px; gap: 18px; } .blog-main { padding-inline: 16px; } }

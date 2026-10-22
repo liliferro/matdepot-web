@@ -20,6 +20,8 @@ function page(source,output,options={}){
  w.eval(read('assets/catalogo.js'));w.eval(read('assets/chrome.js'));
  if(options.renderInline){d.querySelectorAll('script:not([src])').forEach(s=>{w.eval(s.textContent);s.remove();});}
  if(options.mutate)options.mutate(d,w);
+ const relatedGuides=require('../data/blog-posts.json').filter(p=>output==='categorias/'+p.category+'.html'||(output==='preguntas-frecuentes.html'&&p.category==='general')||options.product?.slug===p.product);
+ if(relatedGuides.length){const target=d.querySelector('main')||d.querySelector('body > section:last-of-type');if(target)target.insertAdjacentHTML('beforeend',`<aside class="container section--tight"><h2>Guías y herramientas para tu proyecto</h2><ul>${relatedGuides.map(p=>`<li><a href="/blog/${p.slug}.html">${esc(p.title)}</a></li>`).join('')}</ul></aside>`);}
  if(output==='categorias/gimnasios.html')d.querySelector('.prose').insertAdjacentHTML('beforeend','<p><a href="/blog/mejor-piso-para-gimnasio.html">Guía: cómo elegir piso para gimnasio y calcular la superficie de tu proyecto</a></p>');
  const canonical=origin+(output==='index.html'?'/':'/'+output);
  if(!d.querySelector('main')){
