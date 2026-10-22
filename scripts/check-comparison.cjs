@@ -12,17 +12,19 @@ function setup(stored, query = '') {
 const dom = setup('{broken');
 const w = dom.window, d = w.document, el = id => d.getElementById(id);
 const catalog = w.MD_CATALOG;
-function choose(id, slug) { el(id).value = slug; el(id).dispatchEvent(new w.Event('change', { bubbles: true })); }
+function choose(id, slug) { d.querySelector('[data-slug="' + slug + '"] .compare-toggle').click(); }
 
-assert.equal(d.querySelectorAll('.compare-toggle').length, 0);
-assert.equal(el('comparison').hidden, false);
+assert.equal(d.querySelectorAll('.compare-toggle').length, 35);
+assert.equal(d.querySelectorAll('select').length, 0);
+assert.equal(el('comparison').hidden, true);
 assert.equal(el('comparison-table').parentElement.hidden, true);
 const first = catalog[0], second = catalog[1], third = catalog[2], fourth = catalog[3];
 choose('compare-slot-0', first.slug); choose('compare-slot-1', second.slug); choose('compare-slot-2', third.slug);
 assert.equal(d.querySelectorAll('#comparison-table thead th').length, 4);
-assert.equal(el('compare-slots').children.length, 0);
+choose('', fourth.slug);
+assert.match(el('compare-status').textContent, /hasta 3/);
 assert.equal(d.querySelectorAll('#comparison-table thead th').length, 4);
-assert(![...el('compare-slot-0').options].some(o => o.value === second.slug));
+
 // Values must be identical to the existing product specifications, including missing values.
 for (const row of d.querySelectorAll('#comparison-table tbody tr')) {
   const field = row.firstChild.childNodes[0].textContent;
@@ -34,8 +36,12 @@ for (const a of d.querySelectorAll('#comparison-table a')) {
   if (a.textContent === 'Cotizar') assert(catalog.some(p => a.getAttribute('href') === '/contacto.html?prod=' + p.slug));
   else assert(fs.existsSync('public' + a.getAttribute('href')));
 }
-choose('compare-slot-0', fourth.slug);
-assert.equal(d.activeElement.id, 'compare-slot-0');
+d.querySelector('.compare-change').click();
+assert.equal(d.activeElement.id, 'comparison-products-title');
+assert.equal(el('cancel-replace').hidden, false);
+choose('', fourth.slug);
+assert.equal(d.activeElement.id, 'comparison-title');
+assert.equal(el('cancel-replace').hidden, true);
 assert.equal(JSON.parse(w.sessionStorage.getItem('md-comparison-v1'))[0], fourth.slug);
 el('compare-differences').click();
 assert([...d.querySelectorAll('#comparison-table tbody tr')].every(r => r.classList.contains('comparison-different')));
@@ -46,7 +52,7 @@ assert.equal(restored.window.document.querySelectorAll('#comparison-table thead 
 restored.window.close();
 el('clear-compare').click();
 assert.equal(el('comparison-table').parentElement.hidden, true);
-assert.equal(d.activeElement.id, 'compare-slot-0');
+assert.equal(d.activeElement.id, 'comparison-products-title');
 assert.equal(el('compare-differences').checked, false);
 dom.window.close();
 const sanitized = setup(JSON.stringify([first.slug, first.slug, 'invalid', second.slug, third.slug, fourth.slug]));
@@ -62,7 +68,7 @@ missing.window.MD_CATALOG[0].specs = { Color: 'Negro' };
 missing.window.MD_CATALOG[1].specs = { Color: 'Negro', Espesor: '5 mm' };
 Object.defineProperty(missing.window, 'sessionStorage', { get() { throw Error('blocked'); } });
 missing.window.eval(fs.readFileSync('assets/comparison.js', 'utf8'));
-for (const [i, product] of missing.window.MD_CATALOG.slice(0, 2).entries()) { const select = missing.window.document.getElementById('compare-slot-' + i); select.value = product.slug; select.dispatchEvent(new missing.window.Event('change')); }
+for (const [i, product] of missing.window.MD_CATALOG.slice(0, 2).entries()) { missing.window.document.querySelector('[data-slug="' + product.slug + '"] .compare-toggle').click(); }
 assert.equal(missing.window.document.querySelectorAll('.comparison-different').length, 0);
 missing.window.document.getElementById('compare-differences').click();
 assert.equal(missing.window.document.getElementById('compare-empty-differences').hidden, false);

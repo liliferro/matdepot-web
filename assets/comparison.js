@@ -25,47 +25,32 @@
   const link = (text, href) => { const a = make('a', text); a.href = href; return a; };
   const value = (p, field) => String(p.specs[field] ?? '').trim();
   const announce = text => { byId('compare-status').hidden = false; byId('compare-status').textContent = text; };
-  const sorted = [...catalog].sort((a, b) => a.name.localeCompare(b.name, 'es'));
-  function picker(current, index) {
-    const wrap = make('div', undefined, 'field');
-    const label = make('label', current ? 'Cambiar producto' : 'Añadir producto');
-    const select = make('select');
-    select.id = 'compare-slot-' + index;
-    label.htmlFor = select.id;
-    select.add(new Option(current ? 'Selecciona otra opción' : 'Selecciona del catálogo', ''));
-    sorted.filter(p => !selected.includes(p.slug) || p.slug === current).forEach(p => select.add(new Option(p.name, p.slug)));
-    select.value = current || '';
-    select.addEventListener('change', () => {
-      if (!select.value) return;
-      if (current) selected[index] = select.value; else selected.push(select.value);
-      render();
-      byId('compare-slot-' + index)?.focus();
-    });
-    wrap.append(label, select);
-    return wrap;
-  }
+  let replacing = null;
+  function focusProducts() { byId('comparison-products-title').focus(); }
   function render() {
     try { sessionStorage.setItem(key, JSON.stringify(selected)); } catch (_) { /* Keep working without storage. */ }
     const href = '/comparar.html' + (selected.length ? '?comparar=' + encodeURIComponent(selected.join(',')) : '');
     document.querySelectorAll('.compare-open,.compare-view').forEach(a => {
-      a.href = href;
+      a.href = panel ? '#comparison' : href;
       if (a.classList.contains('compare-open')) a.textContent = 'Comparar productos' + (selected.length ? ' (' + selected.length + '/3)' : '');
     });
-    if (panel) panel.hidden = false;
+    if (panel) panel.hidden = selected.length === 0;
     announce(selected.length + ' de 3 productos seleccionados.');
     if (!panel && !selected.length) byId('compare-status').hidden = true;
     cards.forEach(card => {
       const button = card.querySelector('.compare-toggle');
       const active = selected.includes(card.dataset.slug);
       button.setAttribute('aria-pressed', String(active));
-      button.textContent = active ? 'Quitar de comparación' : 'Añadir a comparación';
+      button.textContent = active ? 'Quitar de comparación' : replacing !== null ? 'Elegir este producto' : 'Agregar a la comparación';
+      button.setAttribute('aria-label', button.textContent + ': ' + catalog.find(p => p.slug === card.dataset.slug).name);
       card.querySelector('.compare-view').hidden = !active;
     });
     if (!panel) return;
     const products = selected.map(s => catalog.find(p => p.slug === s));
-    const slots = byId('compare-slots');
-    slots.replaceChildren();
-    if (products.length < 3) slots.append(picker('', products.length));
+    byId('compare-jump').hidden = products.length === 0;
+    byId('compare-jump').textContent = 'Ver comparación (' + products.length + '/3)';
+    byId('cancel-replace').hidden = replacing === null;
+    if (replacing !== null) announce('Elige una tarjeta para sustituir ' + catalog.find(p => p.slug === replacing).name + '.');
     byId('clear-compare').disabled = products.length === 0;
     byId('compare-differences').disabled = products.length < 2;
     const table = byId('comparison-table');
@@ -75,19 +60,22 @@
     table.append(caption);
     const head = make('thead'), row = make('tr'), corner = make('th', 'Característica');
     corner.scope = 'col'; row.append(corner);
-    products.forEach((p, index) => {
+    products.forEach(p => {
       const th = make('th'); th.scope = 'col';
       const img = make('img'); img.src = '/' + p.images[0]; img.alt = ''; img.width = 160; img.height = 100;
       img.className = 'comparison-photo';
-      th.append(img, link(p.name, '/tapetes/' + p.slug + '.html'), picker(p.slug, index));
+      th.append(img, link(p.name, '/tapetes/' + p.slug + '.html'));
       const actions = make('div', undefined, 'comparison-actions');
       const remove = make('button', 'Quitar', 'compare-remove'); remove.type = 'button';
       remove.setAttribute('aria-label', 'Quitar ' + p.name);
       remove.onclick = () => {
-        selected = selected.filter(s => s !== p.slug); render();
-        (byId('compare-slot-' + Math.min(index, selected.length)) || byId('comparison-title')).focus();
+        selected = selected.filter(s => s !== p.slug); replacing = null; render();
+        (selected.length ? byId('comparison-title') : byId('comparison-products-title')).focus();
       };
-      actions.append(link('Ver ficha', '/tapetes/' + p.slug + '.html'), link('Cotizar', '/contacto.html?prod=' + encodeURIComponent(p.slug)), remove);
+      const change = make('button', 'Cambiar producto', 'compare-change'); change.type = 'button';
+      change.setAttribute('aria-label', 'Cambiar ' + p.name);
+      change.onclick = () => { replacing = p.slug; render(); focusProducts(); };
+      actions.append(change, link('Ver ficha', '/tapetes/' + p.slug + '.html'), link('Cotizar', '/contacto.html?prod=' + encodeURIComponent(p.slug)), remove);
       th.append(actions); row.append(th);
     });
     head.append(row); table.append(head);
@@ -116,11 +104,12 @@
     byId('compare-electrical-note').hidden = !selected.includes('tapete-dielectrico');
   }
   cards.forEach(card => {
-    const button = make('button', 'Añadir a comparación', 'compare-toggle'); button.type = 'button';
+    const button = make('button', 'Agregar a la comparación', 'compare-toggle'); button.type = 'button';
     button.setAttribute('aria-label', 'Comparar ' + catalog.find(p => p.slug === card.dataset.slug).name);
     button.onclick = () => {
       const slug = card.dataset.slug;
-      if (selected.includes(slug)) selected = selected.filter(s => s !== slug);
+      if (replacing !== null && !selected.includes(slug)) { selected[selected.indexOf(replacing)] = slug; replacing = null; render(); byId('comparison-title').focus(); return; }
+      if (selected.includes(slug)) { selected = selected.filter(s => s !== slug); if (replacing === slug) replacing = null; }
       else if (selected.length < 3) selected.push(slug);
       else { announce('Puedes comparar hasta 3 productos. Quita o cambia uno en la tabla.'); return; }
       render();
@@ -130,11 +119,14 @@
     card.append(button, view);
   });
   if (panel) byId('clear-compare').onclick = () => {
-    selected = []; byId('compare-differences').checked = false; render(); byId('compare-slot-0').focus();
+    selected = []; replacing = null; byId('compare-differences').checked = false; render(); focusProducts();
   };
   if (panel) byId('compare-differences').onchange = render;
+  if (panel) byId('cancel-replace').onclick = () => { replacing = null; render(); byId('comparison-title').focus(); };
+  if (panel) byId('comparison-picker-toolbar').hidden = false;
   window.addEventListener('pageshow', event => {
     if (!event.persisted) return;
+    replacing = null;
     try { selected = valid(JSON.parse(sessionStorage.getItem(key))); } catch (_) {}
     render();
   });

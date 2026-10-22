@@ -752,6 +752,15 @@ a:focus-visible, button:focus-visible { outline: 2px solid currentColor; outline
 .compare-view { text-align:center;padding:10px;min-height:44px;text-decoration:underline; }
 .catalog-controls .compare-open { align-self:stretch;justify-content:center;text-align:center; }
 .catalog-compare-status { margin:8px 0;font-size:14px; }
+.comparison-page .page-banner { padding:40px 0; }
+.comparison-page .page-banner .h-display { font-size:clamp(36px,5vw,64px); }
+.comparison-products { margin-top:32px; }
+#comparison-products-title { scroll-margin-top:140px; }
+.comparison-page #comparison,.comparison-page #comparison-title { scroll-margin-top:260px; }
+.comparison-picker-toolbar { position:sticky;top:110px;z-index:3;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;background:var(--c-paper);border:1px solid var(--c-concrete);padding:12px;margin:20px 0; }
+.comparison-picker-toolbar p { margin:0;flex:1 1 180px; }
+.compare-change { text-decoration:underline;min-height:44px; }
+.comparison-products .compare-toggle[aria-pressed="true"] { font-weight:700; }
 .comparison-toolbar,.comparison-actions { display:flex;align-items:center;gap:16px;flex-wrap:wrap; }
 .comparison-toolbar { margin:20px 0;justify-content:space-between; }
 .comparison-toolbar label { display:flex;align-items:center;gap:10px;min-height:44px; }
