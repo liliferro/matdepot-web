@@ -21,7 +21,7 @@ Revisa las fichas del [antifatiga de uso general](https://www.matdepotmex.com/ta
 
 ## Describe tu puesto con esta herramienta
 
-El asistente genera una ficha de condiciones para acompañar tu consulta. No recomienda un producto automáticamente porque faltaría verificar el material y el entorno real.
+El asistente recomienda opciones del catálogo según movimiento, entorno y paso de equipos. Verás la razón de cada selección, sus medidas y enlaces para comparar o cotizar. Si falta respaldo para una exposición química, te indicará qué consultar.
 
 <div data-blog-tool></div>
 

@@ -23,7 +23,7 @@ Antes de hacer el pedido, confirma cobertura útil del ensamble, remates y confi
 
 ## Planifica el uso y la limpieza por zona
 
-Completa este asistente para dejar registradas las condiciones de la estación. Repite el proceso para cada zona que tenga una operación diferente.
+Completa el asistente para ver el producto del catálogo correspondiente a tu estación, sus medidas y las condiciones que debes validar. Puedes abrir su ficha o solicitar una cotización directamente. Repite la selección para zonas con operaciones diferentes.
 
 <div data-blog-tool></div>
 

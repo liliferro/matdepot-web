@@ -1,7 +1,7 @@
 {
   "selector": {
     "type": "planner",
-    "title": "Organiza tu comparación de formatos",
+    "title": "Encuentra el formato de piso para tu gimnasio",
     "fields": [
       {
         "label": "Prioridad principal",
@@ -58,7 +58,7 @@
   },
   "ficha-uso": {
     "type": "planner",
-    "title": "Prepara la ficha de uso de tu zona",
+    "title": "Encuentra opciones según el uso de tu gimnasio",
     "fields": [
       {
         "label": "Actividad principal",
@@ -175,7 +175,7 @@
   },
   "puesto": {
     "type": "planner",
-    "title": "Describe el puesto de trabajo",
+    "title": "Encuentra tapetes para tu puesto de trabajo",
     "fields": [
       {
         "label": "Movimiento",
@@ -232,7 +232,7 @@
   },
   "funcion": {
     "type": "planner",
-    "title": "Identifica las funciones que debes revisar",
+    "title": "Encuentra productos según la función que necesitas",
     "fields": [
       {
         "label": "Problema principal",
@@ -272,7 +272,7 @@
   },
   "exposicion": {
     "type": "planner",
-    "title": "Prepara la consulta de compatibilidad",
+    "title": "Encuentra opciones para tu área con líquidos",
     "fields": [
       {
         "label": "Sustancia presente",
@@ -324,12 +324,25 @@
             "note": "Consulta cómo verificarla; no asumas compatibilidad térmica."
           }
         ]
+      },
+      {
+        "label": "Aplicación del área",
+        "options": [
+          {
+            "label": "Puesto de trabajo o cocina",
+            "note": "Revisa cobertura del puesto y limpieza debajo del tapete."
+          },
+          {
+            "label": "Alberca, vestidor o regadera",
+            "note": "Confirma uso con tránsito descalzo, drenaje y limpieza."
+          }
+        ]
       }
     ]
   },
   "cocina": {
     "type": "planner",
-    "title": "Planifica una estación de cocina",
+    "title": "Encuentra un tapete para tu estación de cocina",
     "fields": [
       {
         "label": "Estación",

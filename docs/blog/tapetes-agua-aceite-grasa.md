@@ -24,7 +24,7 @@ El [tapete para cocina de MatDepot](https://www.matdepotmex.com/tapetes/tapete-p
 
 ## Genera una consulta de compatibilidad
 
-La herramienta prepara un resumen de exposición. Sus indicaciones son preguntas para el proveedor; no emite un dictamen de compatibilidad del material.
+Selecciona la sustancia y la aplicación para ver opciones respaldadas por los usos publicados. Para agua, distingue puestos de trabajo de albercas y regaderas. Si la compatibilidad química no está documentada, el asistente solicitará revisión en lugar de asignar un producto como apto.
 
 <div data-blog-tool></div>
 

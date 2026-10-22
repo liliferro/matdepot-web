@@ -7,6 +7,7 @@ El artículo inicial y diez guías especializadas se generan como HTML estático
 - `data/blog-tools.json`: criterios de los asistentes y listas de comprobación.
 - `scripts/build-blog.cjs`: portada agrupada, metadatos, BlogPosting, breadcrumbs, enlaces y herramientas.
 - `scripts/blog-tools.cjs` y `assets/blog-tools.js`: interfaz estática y comportamiento de herramientas.
+- `assets/blog-recommendations.js`: reglas explícitas para los seis selectores. Productos obtenidos del catálogo al construir; muestra motivo, especificaciones, ficha, comparación y cotización. No asigna puntuaciones ficticias. La exposición química sin documentación produce una solicitud de asesoría, no una compatibilidad inventada. Los resúmenes se conservan como detalle secundario.
 
 La prioridad editorial responde a decisiones de selección y cotización; no es una clasificación por volúmenes medidos. Las fichas del catálogo son la fuente de dimensiones; no sustituyen ensayos de desempeño o instrucciones específicas del proveedor. El sitio indica autoría corporativa, asistencia de IA y ausencia de revisión técnica independiente.
 

@@ -25,7 +25,7 @@ Estas medidas ayudan a preparar cantidades; no hacen equivalentes los productos.
 
 ## Selector de prioridades de tu proyecto
 
-La herramienta organiza qué comparar según tus prioridades. No asigna una calificación técnica ni elige un espesor: genera preguntas concretas para solicitar dos propuestas comparables.
+Selecciona tus prioridades para ver productos del catálogo que corresponden al formato y uso que describes. Cada opción explica por qué aparece y permite abrir su ficha, compararla o cotizarla.
 
 <div data-blog-tool></div>
 

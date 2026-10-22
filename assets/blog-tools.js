@@ -8,8 +8,30 @@
     const field = name => form.elements.namedItem(name);
     const num = value => /^\d+(?:[.,]\d{1,2})?$/.test(value.trim()) ? Number(value.trim().replace(',','.')) : NaN;
     const money = value => new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN'}).format(value);
+    function showProducts(selection) {
+      const grid=root.querySelector('[data-recommendations]');grid.replaceChildren();
+      root.querySelector('[data-recommendation-notice]').textContent=selection.notice;
+      result.querySelector('h4').textContent=selection.items.length?'Productos para tu proyecto':'Revisemos la compatibilidad de tu proyecto';
+      selection.items.forEach(item=>{
+        const p=c.products.find(p=>p.slug===item.slug);if(!p)throw Error('Missing recommendation product');
+        const card=document.createElement('article');card.className='tool-product';
+        const img=document.createElement('img');img.src='/'+p.image;img.alt=p.name;img.width=p.size[0];img.height=p.size[1];img.loading='lazy';card.append(img);
+        const tag=document.createElement('p');tag.className='tool-product-label';tag.textContent=item.verify?'Opción para validar':'Recomendado por aplicación';card.append(tag);
+        const title=document.createElement('h5');title.textContent=p.name;card.append(title);
+        const reason=document.createElement('p');reason.textContent=item.reason;card.append(reason);
+        const specs=document.createElement('dl');
+        Object.entries(p.specs).filter(([key])=>['Espesor','Medidas','Ancho','Longitud','Presentación'].includes(key)).forEach(([key,value])=>{const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=key;dd.textContent=value;specs.append(dt,dd);});card.append(specs);
+        if(item.verify){const note=document.createElement('p');note.className='tool-product-note';note.textContent=item.verify;card.append(note);}
+        const actions=document.createElement('div');actions.className='tool-product-actions';
+        for(const [label,url] of [['Ver ficha','/tapetes/'+p.slug+'.html'],['Cotizar este producto','/contacto.html?prod='+encodeURIComponent(p.slug)]]){const link=document.createElement('a');link.textContent=label;link.href=url;link.className='btn';actions.append(link);}card.append(actions);grid.append(card);
+      });
+      const compare=root.querySelector('[data-recommendation-compare]');
+      compare.hidden=selection.items.length<2;
+      if(!compare.hidden)compare.href='/comparar.html?comparar='+selection.items.map(p=>p.slug).join(',');else compare.removeAttribute('href');
+      root.querySelector('.tool-secondary').open=false;
+    }
     function clear() {
-      if (!result.hidden) status.textContent = 'Cambiaste información. Genera un nuevo resumen para actualizarla.';
+      if (!result.hidden) status.textContent = c.type==='planner'?'Cambiaste tus necesidades. Consulta de nuevo los productos recomendados.':'Cambiaste información. Genera un nuevo resumen para actualizarla.';
       result.hidden = true; summary.value = ''; error.hidden = true;
       form.querySelectorAll('[aria-invalid]').forEach(el=>el.removeAttribute('aria-invalid'));
     }
@@ -26,7 +48,11 @@
           if(el.value==='' || !option){invalid(el,'Selecciona una opción en cada campo.');return;}
           lines.push(c.fields[i].label+': '+option.label, '→ '+option.note, '');
         }
-        lines.push('Criterios para consulta; no es una recomendación técnica definitiva ni una certificación.');
+        const selection=window.MD_BLOG_RECOMMENDATIONS.recommend(root.dataset.tool,c.fields.map((_,i)=>field('field-'+i).value));
+        showProducts(selection);
+        lines.push('Productos seleccionados:');
+        selection.items.forEach(item=>{const p=c.products.find(p=>p.slug===item.slug);lines.push(p.name+': '+item.reason, 'https://www.matdepotmex.com/tapetes/'+p.slug+'.html',item.verify);});
+        lines.push(selection.notice);
       }
       if (c.type === 'checklist') {
         const done=[],pending=[];

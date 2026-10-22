@@ -23,7 +23,7 @@ El ejemplo es ilustrativo. No corresponde a un cliente documentado ni implica qu
 
 ## Identifica qué debes consultar
 
-Selecciona el problema principal y las condiciones de uso. El resultado organiza las funciones que debes revisar y las preguntas pendientes; no constituye una evaluación de seguridad del área.
+Selecciona el problema principal y las condiciones de uso para ver productos relacionados con tus necesidades. El resultado muestra por qué se recomienda cada opción y permite consultar su ficha o cotizarla.
 
 <div data-blog-tool></div>
 

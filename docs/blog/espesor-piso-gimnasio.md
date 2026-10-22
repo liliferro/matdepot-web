@@ -23,7 +23,7 @@ Estos datos permiten distinguir presentaciones, pero no constituyen una tabla de
 
 ## Prepara una ficha de uso por zona
 
-Completa la herramienta con la situación real. Cuando un dato aún no esté definido, selecciona la opción correspondiente: es preferible dejar una pregunta pendiente que convertir una suposición en requisito de compra.
+Completa la herramienta para ver opciones del catálogo según la actividad. Compara sus espesores y formatos; cuando haya impactos o condiciones por definir, el resultado indicará qué confirmar antes de comprar.
 
 <div data-blog-tool></div>
 
