@@ -6,7 +6,9 @@ Sitio estático publicado en Vercel desde `main`.
 
 - Contenido y fichas: `assets/catalogo.js`.
 - Plantillas principales: archivos HTML de la raíz.
-- Categorías y preguntas frecuentes: `data/content.json`.
+- Categorías y respuestas generales conservadas: `data/content.json`.
+- Las 20 FAQ de compra y selección, agrupadas por aplicación y con enlaces: `data/faqs.json`. El generador publica ocho en la FAQ general, cuatro en antifatiga, dos en antiderrapantes, cuatro en gimnasios y dos sobre cocina en áreas húmedas. La FAQ general conserva además las respuestas sobre visitas al almacén y precios, e incluye un índice hacia las preguntas de cada categoría.
+- `assets/faq.js` abre la respuesta indicada por un enlace directo; las preguntas y respuestas están en el HTML y los desplegables funcionan sin JavaScript.
 - Tamaños de imágenes: `data/image-sizes.json` (actualizar al incorporar fotografías).
 - Generador: `scripts/build.cjs`.
 

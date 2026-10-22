@@ -802,6 +802,15 @@ a:focus-visible, button:focus-visible { outline: 2px solid currentColor; outline
 .category-links a { border:1px solid var(--c-concrete);padding:12px;min-height:44px; }
 .faq details { padding:20px 0;border-bottom:1px solid var(--c-concrete); }
 .faq summary { cursor:pointer;min-height:44px;font-weight:600; }
+.faq details, .faq-section, .faq-index, #compra-cotizacion { scroll-margin-top:110px; }
+.faq details:target { border-left:3px solid var(--c-steel);padding-left:16px; }
+.faq-actions { display:flex;flex-wrap:wrap;gap:12px 24px; }
+.faq-actions a { display:inline-flex;align-items:center;min-height:44px;text-decoration:underline; }
+.faq-section, .faq-index, .faq-product-links { margin:40px 0; }
+.faq-index-group { margin:28px 0; }
+.faq-index-group ul, .faq-product-links ul { padding-left:24px; }
+.faq-index-group li, .faq-product-links li { margin:12px 0; }
+.faq-index a, .faq-product-links a { text-decoration:underline; }
 .source-note { font-size:13px;color:var(--c-steel);line-height:1.6;margin-top:24px; }
 @media(max-width:640px) {
  .catalog-controls { grid-template-columns:minmax(0,1fr); }
