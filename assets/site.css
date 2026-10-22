@@ -709,14 +709,14 @@ button { background: none; border: 0; cursor: pointer; color: inherit; }
 [hidden] { display: none !important; }
 .hero__inner > div, .page-banner .container, .cta-split > *, .two-col > * { container-type: inline-size; min-width: 0; }
 .h-display { font-size: clamp(32px, 10cqi, 120px); overflow-wrap: normal; line-height: 1.03; }
-.hero__title { font-size: clamp(40px, 14cqi, 88px); }
+.hero__title { font-size: clamp(32px, 9cqi, 60px); text-wrap: balance; }
 .h1 { font-size: clamp(30px, 8cqi, 72px); overflow-wrap: normal; line-height: 1.08; }
 .big-saying { font-size: clamp(32px, 12cqi, 80px); line-height: 1.06; }
 .crumbs { flex-wrap: wrap; }
 .crumbs > *, .tag, .spec-table dd, .foot-contact, .contact-item .val { min-width: 0; overflow-wrap: anywhere; }
 .contact-item .val a { display: inline; }
 .cat-card, .info-block, .field, .form { min-width: 0; }
-.cat-card__name { font-size: clamp(18px, 1.6vw, 22px); overflow-wrap: break-word; }
+.cat-card__name { display:block; font-size: clamp(18px, 1.6vw, 22px); overflow-wrap: anywhere; white-space:normal; }
 .btn { max-width: 100%; }
 .btn .arrow { flex-shrink: 0; }
 .eyebrow::before { flex-shrink: 0; }

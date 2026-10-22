@@ -47,5 +47,5 @@ const sitemap = fs.readFileSync('public/sitemap.xml', 'utf8');
 assert(sitemap.includes(articlePath)); assert(sitemap.includes('/blog.html'));
 for(const post of posts)assert(sitemap.includes('/blog/'+post.slug+'.html'));
 const index=new JSDOM(fs.readFileSync('public/blog.html','utf8'));
-assert.equal(index.window.document.querySelectorAll('.blog-card').length,11);index.window.close();
+assert.equal(index.window.document.querySelectorAll('.blog-card').length,posts.length+1);index.window.close();
 console.log('Blog passed: indexability, canonical URLs, structured data, navigation, unique headings/anchors and embedded calculator.');

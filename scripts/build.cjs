@@ -11,7 +11,7 @@ const categoryFaq=slug=>{const g=faqGroups.find(g=>g.category===slug);return g?`
 const productUrl=p=>'/tapetes/'+p.slug+'.html';
 const links=()=>'<nav class="category-links" aria-label="Categorías de productos">'+categories.map(c=>`<a href="/categorias/${c.slug}.html">${esc(c.name)}</a>`).join('')+'</nav>';
 const card=(p,i=0,compare=false)=>`${compare?`<article class="catalog-card-wrap" data-slug="${p.slug}">`:''}<a class="cat-card" href="${productUrl(p)}"><div class="cat-card__media cat-card__media--photo"><img src="/${p.images[0]}" alt="${esc(p.name)}" loading="lazy"><span class="cat-card__num">${String(i+1).padStart(2,'0')}</span></div><div><span class="cat-card__name">${esc(p.name)}</span><p>${esc(p.short)}</p><div class="cat-card__tags">${p.sectors.map(s=>`<span class="tag">${esc(s)}</span>`).join('')}</div></div><span class="cat-card__cta">Ver ficha técnica →</span></a>${compare?'</article>':''}`;
-const baseGraph=[{'@type':'Organization','@id':origin+'/#organization',name:'Mat Depot',legalName:'Mat Depot, S.A. de C.V.',url:origin+'/',telephone:['+525596265258','+525596265259'],email:contact.email,address:{'@type':'PostalAddress',addressLocality:'Tlalnepantla de Baz',addressRegion:'Estado de México',addressCountry:'MX'},sameAs:['https://www.instagram.com/matdepotmex','https://www.linkedin.com/in/mat-depot-70b19937a/','https://youtube.com/@matdepot25','https://www.tiktok.com/@matdepot']},{'@type':'WebSite','@id':origin+'/#website',url:origin+'/',name:'Mat Depot',inLanguage:'es-MX',publisher:{'@id':origin+'/#organization'}}];
+const baseGraph=[{'@type':['Organization','LocalBusiness'],'@id':origin+'/#organization',name:'Mat Depot',legalName:'Mat Depot, S.A. de C.V.',url:origin+'/',telephone:['+525596265258','+525596265259'],email:contact.email,address:{'@type':'PostalAddress',streetAddress:'C. Popocatépetl 42, San Javier',postalCode:'54030',addressLocality:'Tlalnepantla de Baz',addressRegion:'Estado de México',addressCountry:'MX'},sameAs:['https://www.instagram.com/matdepotmex','https://www.linkedin.com/in/mat-depot-70b19937a/','https://youtube.com/@matdepot25','https://www.tiktok.com/@matdepot']},{'@type':'WebSite','@id':origin+'/#website',url:origin+'/',name:'Mat Depot',inLanguage:'es-MX',publisher:{'@id':origin+'/#organization'}}];
 fs.rmSync(out,{recursive:true,force:true});fs.mkdirSync(out,{recursive:true});fs.cpSync(path.join(root,'assets'),path.join(out,'assets'),{recursive:true});
 fs.copyFileSync(path.join(root,'assets/favicon.ico'),path.join(out,'favicon.ico'));
 const allUrls=[];
@@ -77,7 +77,7 @@ function page(source,output,options={}){
  if(!options.noindex && output!=='gracias.html')allUrls.push(canonical);
  dom.window.close();
 }
-page('index.html','index.html',{renderInline:true,title:'Tapetes y pisos de hule para industria | Mat Depot',mutate(d){d.querySelector('#featured-cats').insertAdjacentHTML('beforebegin',links());}});
+page('index.html','index.html',{renderInline:true,title:'Tapetes y pisos de hule en CDMX y Edomex | Mat Depot',mutate(d){d.querySelector('#featured-cats').insertAdjacentHTML('beforebegin',links());}});
 page('productos.html','productos.html',{title:'Catálogo de tapetes y pisos técnicos | Mat Depot',description:`Compara ${products.length} tapetes y pisos técnicos por aplicación, espesor, ancho y presentación. Solicita asesoría y cotización en Mat Depot.`,mutate(d){
  d.querySelectorAll('script:not([src])').forEach(s=>s.remove());
  d.querySelector('.prod-toolbar').innerHTML=`<span id="result-count" role="status">${products.length} resultados</span>`;
@@ -118,10 +118,11 @@ for(const [file,title]of Object.entries({'contacto.html':'Cotiza tapetes y pisos
 for(const p of products){
  const schema={'@type':'Product','@id':origin+productUrl(p)+'#product',url:origin+productUrl(p),name:p.name,description:p.short,image:p.images.map(i=>origin+'/'+i),category:p.category,additionalProperty:Object.entries(p.specs).map(([name,value])=>({'@type':'PropertyValue',name,value}))};
  const crumbs={'@type':'BreadcrumbList',itemListElement:[['Inicio',origin+'/'],['Productos',origin+'/productos.html'],[p.name,origin+productUrl(p)]].map(([name,item],i)=>({'@type':'ListItem',position:i+1,name,item}))};
- page('producto.html',productUrl(p).slice(1),{renderPath:'producto.html?id='+p.slug,renderInline:true,product:p,title:p.name+' | Ficha y cotización · Mat Depot',description:p.short,graph:[schema,crumbs],mutate(d){
+ page('producto.html',productUrl(p).slice(1),{renderPath:'producto.html?id='+p.slug,renderInline:true,product:p,title:p.slug==='tapete-dielectrico'?'Tapete dieléctrico: precio y documentación | Mat Depot':p.name+' | Ficha y cotización · Mat Depot',description:p.slug==='tapete-dielectrico'?'Consulta el tapete dieléctrico de Mat Depot: medidas, precio por cotización y documentación necesaria para confirmar clase y tensión de uso. Envíos en México.':p.short,graph:[schema,crumbs],mutate(d){
   d.querySelector('#banner .lead').textContent=p.intro;
   const detail=d.querySelector('#detail');const article=d.createElement('article');article.className=detail.className;article.id='detail';article.innerHTML=detail.innerHTML;detail.replaceWith(article);
   const note=d.createElement('p');note.className='source-note';note.textContent='Fuente de los datos: catálogo comercial de Mat Depot publicado en este sitio. Confirma especificaciones, existencias y documentación del modelo al solicitar tu cotización.';article.lastElementChild.append(note);
+  if(p.slug==='tapete-dielectrico'){article.lastElementChild.insertAdjacentHTML('beforeend',read('data/dielectrico-compra.html'));}
   if(p.slug==='tapete-dielectrico')note.textContent+=' El certificado no está publicado aquí; no utilices esta ficha para deducir una tensión de trabajo segura.';
   const relevant=categories.filter(c=>faqGroups.some(g=>g.category===c.slug) && (c.filter?p.apps.includes(c.filter):p.sectors.some(s=>['Gimnasios','Dojos','Áreas deportivas','Box y CrossFit'].includes(s))));
   if(p.slug==='tapete-para-cocina' && !relevant.some(c=>c.slug==='areas-humedas'))relevant.push(categories.find(c=>c.slug==='areas-humedas'));

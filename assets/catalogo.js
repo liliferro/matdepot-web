@@ -1377,5 +1377,5 @@ window.MD_FILTERS = [
 window.MD_CONTACT = {
   tel1: "(55) 9626 5258", tel2: "(55) 9626 5259", wa: "(55) 4494 3014",
   waUrl: "https://wa.me/5215544943014?text=Hola%2C%20estoy%20interesado(a)%20en%20sus%20productos.%20Quiero%20m%C3%A1s%20informaci%C3%B3n.",
-  email: "matdepotmx@gmail.com", address: "Tlalnepantla de Baz · Estado de México · MX"
+  email: "matdepotmx@gmail.com", address: "C. Popocatépetl 42, San Javier, C.P. 54030, Tlalnepantla de Baz, Estado de México"
 };

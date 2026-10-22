@@ -83,7 +83,7 @@ async function setup(path, consent, stored = {}) {
   for(const path of ['/blog.html','/blog/antifatiga-o-antiderrapante.html']) {
     const s=await setup(path);
     const links=[...s.d.querySelectorAll('[data-share-article]')];
-    assert.equal(links.length,path==='/blog.html'?11:1);
+    assert.equal(links.length,path==='/blog.html'?require('../data/blog-posts.json').length+1:1);
     links[0].click();
     assert.equal(s.events().length,0,'sharing respects denied consent');
     s.d.getElementById('accept-analytics').click();

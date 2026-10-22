@@ -138,7 +138,8 @@
     "tool": "costos",
     "related": [
       "datos-cotizar-tapetes",
-      "piso-gimnasio-rollo-o-modular"
+      "piso-gimnasio-rollo-o-modular",
+      "precio-piso-hule-m2"
     ],
     "keyword": "comparar cotizaciones de tapetes",
     "date": "2026-10-21"
@@ -158,5 +159,21 @@
     ],
     "keyword": "datos para cotizar tapetes",
     "date": "2026-10-21"
+  },
+  {
+    "slug": "precio-piso-hule-m2",
+    "title": "Precio de piso de hule por m²: cómo calcular y comparar tu cotización",
+    "seoTitle": "Precio de piso de hule por m² en México | MatDepot",
+    "description": "Consulta cómo comparar el precio de piso de hule por m²: formatos, espesores, instalación e impuestos. Calcula el costo de tu proyecto con importes en MXN.",
+    "group": "Compras",
+    "category": "gimnasios",
+    "product": "tapete-para-gimnasio-en-rollo-con-chispas-verdes",
+    "tool": "costos",
+    "related": [
+      "comparar-cotizaciones-tapetes",
+      "mejor-piso-para-gimnasio"
+    ],
+    "keyword": "precio de piso de hule por m²",
+    "date": "2026-10-22"
   }
 ]
