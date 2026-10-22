@@ -1,1 +1,1 @@
-{"name":"matdepot-web","version":"1.0.0","private":true,"scripts":{"build":"node scripts/build.cjs","test":"node scripts/check.cjs"},"devDependencies":{"jsdom":"30.1.2"},"engines":{"node":">=22"}}
+{"name":"matdepot-web","version":"1.0.0","private":true,"scripts":{"build":"node scripts/build.cjs","test":"node scripts/check.cjs && node scripts/check-comparison.cjs"},"devDependencies":{"jsdom":"30.1.2"},"engines":{"node":"^22.22.2 || >=24.15.0"}}
