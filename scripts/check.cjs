@@ -3,7 +3,12 @@ const root=path.resolve(__dirname,'../public');
 const walk=dir=>fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]);
 const files=walk(root).filter(f=>f.endsWith('.html'));let images=0,links=0;
 for(const file of files){
- const d=new JSDOM(fs.readFileSync(file,'utf8')).window.document;
+ const html=fs.readFileSync(file,'utf8');
+ const d=new JSDOM(html).window.document;
+ const email='matdepotmx@gmail.com';
+ for(const match of html.matchAll(/matdepot[a-z]*@gmail\.com/gi))assert.equal(match[0],email,file+' incorrect contact email');
+ for(const a of d.querySelectorAll('a[href^="mailto:"]'))assert.equal(a.getAttribute('href').split('?')[0],'mailto:'+email,file+' incorrect email link');
+ if(file.endsWith('/contacto.html'))assert.equal(d.querySelector('#contact-form').getAttribute('action'),'https://formsubmit.co/'+email);
  assert.equal(d.querySelectorAll('main').length,1,file+' main');assert.equal(d.querySelectorAll('link[rel=canonical]').length,1);
  for(const s of d.querySelectorAll('script[type="application/ld+json"]'))assert(JSON.parse(s.textContent)['@graph'].length>=2);
  for(const img of d.querySelectorAll('img')){assert(img.hasAttribute('alt'));assert(img.width>0&&img.height>0);images++;}

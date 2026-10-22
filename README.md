@@ -44,7 +44,7 @@ Se admite un enlace inicial `/comparar.html?comparar=slug-1,slug-2`. Los identif
 
 ## Formulario
 
-El receptor comercial autorizado es `matdepotmx@gmail.com`. FormSubmit exige activar el buzón y confirmar una entrega real. El aviso conserva el correo previamente publicado para solicitudes de privacidad: confirmar con la dirección antes de cambiar ese canal.
+El receptor comercial autorizado es `matdepotmx@gmail.com`. FormSubmit exige activar el buzón y confirmar una entrega real. El único correo autorizado en toda la web, incluido el aviso de privacidad, es `matdepotmx@gmail.com`. La validación de publicación comprueba enlaces de correo, destinatario del formulario y ausencia de variantes incorrectas.
 
 El sitio no guarda las solicitudes en una base de datos propia. No se debe afirmar que el retorno a `/gracias.html` confirma entrega en bandeja de entrada.
 
