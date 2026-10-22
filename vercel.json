@@ -6,6 +6,11 @@
   "installCommand": "npm ci --ignore-scripts",
   "redirects": [
     {
+      "source": "/guias/precio-piso-hule-m2.html",
+      "destination": "/blog/precio-piso-hule-m2.html",
+      "statusCode": 301
+    },
+    {
       "source": "/index.html",
       "destination": "/",
       "statusCode": 301

@@ -830,3 +830,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid currentColor; outline
   object-fit: contain;
   background: #F4F1EA;
 }
+
+/* Encabezados completos en catálogo y portada. */
+.hero__title { font-size: clamp(32px, 7.5cqi, 58px); line-height: 1.08; }
+.cat-card__name { white-space: normal; height: auto; max-height: none; overflow: visible; word-break: normal; overflow-wrap: anywhere; }
+.seo-summary { margin: 24px 0; padding: 20px; border-left: 3px solid var(--c-carbon); background: var(--c-bone); }

@@ -147,6 +147,7 @@ page('ubicacion.html','preguntas-frecuentes.html',{title:'Preguntas sobre tapete
 page('ubicacion.html','404.html',{title:'Página no encontrada | Mat Depot',noindex:true,mutate(d){d.querySelectorAll('body > section,script:not([src])').forEach(e=>e.remove());d.querySelector('footer').insertAdjacentHTML('beforebegin',shell('Página no encontrada','La dirección solicitada no corresponde a una página disponible.','<a class="btn" href="/productos.html">Consultar catálogo</a>'));}});
 // Legacy dynamic page remains a safe fallback for unknown identifiers; known IDs are redirected at the edge.
 require('./build-blog.cjs')({ page, read, origin });
+require('./build-guides.cjs')({ page, products, origin, shell, esc });
 page('producto.html','producto.html',{noindex:true,title:'Consultar producto del catálogo | Mat Depot'});
 fs.writeFileSync(path.join(out,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+allUrls.map(u=>'<url><loc>'+esc(u)+'</loc></url>').join('')+'</urlset>');
 fs.writeFileSync(path.join(out,'robots.txt'),'User-agent: *\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: Claude-SearchBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nSitemap: '+origin+'/sitemap.xml\n');
