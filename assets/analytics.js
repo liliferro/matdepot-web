@@ -8,14 +8,18 @@
   let enabled = false, initialized = false;
   const read = (key, session=false) => { try { return JSON.parse((session?sessionStorage:localStorage).getItem(key)); } catch { return null; } };
   const save = (key, value, session=false) => { try { (session?sessionStorage:localStorage).setItem(key,JSON.stringify(value)); } catch {} };
+  const product = slug => window.MD_CATALOG?.find(p => p.slug === slug);
   const item = () => window.MD_CATALOG?.find(p => location.pathname === '/tapetes/'+p.slug+'.html');
-  window.mdTrack = (name, data={}) => { if(enabled) gtag('event',name,data); };
+  const selectedItem = () => product(document.getElementById('f-cat')?.selectedOptions[0]?.dataset.slug);
+  const gaItem = p => ({item_id:p.slug,item_name:p.name,item_category:p.category});
+  const context = (p=item() || selectedItem()) => ({pagina:location.pathname,producto:p?.slug||'',categoria:p?.category||''});
+  window.mdTrack = (name, data={}) => { if(!enabled)return false; gtag('event',name,{...context(),...data}); return true; };
   function lead() {
     if(!location.pathname.endsWith('/gracias.html')) return;
     const pending=read('md-pending-lead',true);
     const received=new URLSearchParams(location.search).get('lead_id');
     if(!pending || pending.id!==received || Date.now()-pending.time>3600000 || read('md-counted-'+pending.id,true))return;
-    mdTrack('generate_lead',{lead_id:pending.id,currency:'MXN',producto_interes:pending.product,nivel_trafico:pending.traffic});
+    if(!mdTrack('generate_lead',{...context(product(pending.product)),lead_id:pending.id,method:'formulario',producto_interes:pending.product,nivel_trafico:pending.traffic}))return;
     save('md-counted-'+pending.id,true,true);
   }
   function enable() {
@@ -33,7 +37,7 @@
     let ref='';try { const u=new URL(document.referrer);ref=u.origin+u.pathname; } catch {}
     gtag('config',id,{page_location:safe.href,page_referrer:ref,allow_google_signals:false,allow_ad_personalization_signals:false});
     const script=document.createElement('script');script.async=true;script.src='https://www.googletagmanager.com/gtag/js?id='+id;document.head.append(script);
-    const p=item();if(p)mdTrack('view_item',{currency:'MXN',items:[{item_id:p.slug,item_name:p.name,item_category:p.category}]});
+    const p=item();if(p)mdTrack('view_item',{items:[gaItem(p)]});
     lead();
   }
   function choice(value) {
@@ -56,7 +60,7 @@
     const form=document.getElementById('contact-form');
     if(form){
       let started=false;
-      form.addEventListener('focusin',()=>{if(!started){mdTrack('form_start',{form_id:'cotizacion'});started=true;}});
+      form.addEventListener('focusin',()=>{if(!started)started=mdTrack('form_start',{form_id:'cotizacion'});});
       form.addEventListener('submit',()=>{
         const leadId='md-'+crypto.randomUUID();
         const selected=document.getElementById('f-cat').selectedOptions[0];
@@ -69,11 +73,23 @@
     }
     document.addEventListener('click',e=>{
       const a=e.target.closest('a[href]');if(!a)return;
-      const href=a.getAttribute('href');const p=item();
-      const data={ubicacion:a.classList.contains('wa-fab')?'flotante':a.closest('footer')?'pie':'contenido',pagina:location.pathname,producto:p?.slug||''};
-      if(href.startsWith('https://wa.me/'))mdTrack('contact_whatsapp',data);
+      const href=a.getAttribute('href');
+      const url=new URL(href,location.href);
+      const targetProduct=url.origin===location.origin ? window.MD_CATALOG?.find(p=>url.pathname==='/tapetes/'+p.slug+'.html') : null;
+      const quoteProduct=url.origin===location.origin ? product(url.searchParams.get('prod')) : null;
+      const p=targetProduct || quoteProduct || item() || selectedItem();
+      const data={...context(p),ubicacion:a.classList.contains('wa-fab')?'flotante':a.closest('footer')?'pie':a.closest('header')?'encabezado':a.closest('#comparison')?'comparador':'contenido'};
+      if(url.protocol==='https:' && ['wa.me','api.whatsapp.com','web.whatsapp.com'].includes(url.hostname))mdTrack('contact_whatsapp',{...data,method:'whatsapp'});
       else if(href.startsWith('tel:'))mdTrack('contact_phone',{...data,linea:href.includes('5258')?'linea1':'linea2'});
       else if(href.startsWith('mailto:'))mdTrack('contact_email',data);
+      else if(targetProduct)mdTrack('select_item',{...data,item_list_id:location.pathname,items:[gaItem(targetProduct)]});
+      else if(url.origin===location.origin && url.pathname==='/contacto.html' && (quoteProduct || a.classList.contains('btn')))mdTrack('request_quote_click',data);
+    });
+    document.addEventListener('md:compare',e=>{
+      const actions=['add','remove','replace','clear','differences'];
+      if(!actions.includes(e.detail?.action))return;
+      const products=(e.detail.slugs||[]).map(product).filter(Boolean).slice(0,3);
+      mdTrack('compare_products',{accion:e.detail.action,cantidad_productos:products.length,items:products.map(gaItem)});
     });
   });
 })();
