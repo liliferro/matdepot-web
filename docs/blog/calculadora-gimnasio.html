@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Calcula el piso de tu gimnasio | MatDepot</title>
+  <link rel="stylesheet" href="../../assets/calculadora-gimnasio.css">
+  <script src="../../assets/calculadora-gimnasio.js" defer></script>
+</head>
+<body>
+<main class="calculator-preview">
+  <p class="calculator-brand">MAT DEPOT · GUÍA PARA GIMNASIOS</p>
+  <section class="gym-calculator" data-gym-calculator aria-labelledby="calculator-title">
+    <h1 id="calculator-title">¿Cuánto piso necesitas para tu gimnasio?</h1>
+    <p>Ingresa las medidas de tu espacio. Si tiene forma de L o varias áreas, divídelo en rectángulos sin superponerlos y agrega una zona por cada uno.</p>
+    <noscript><p>Activa JavaScript para usar la calculadora. También puedes multiplicar largo × ancho de cada zona y sumar las superficies. Para losetas nominales de 50 × 50 cm, divide cada superficie entre 0.25 m² y redondea hacia arriba.</p></noscript>
+    <form data-calculator-form novalidate hidden>
+      <div data-zones></div>
+      <button class="calculator-secondary" type="button" data-add-zone>+ Agregar otra zona</button>
+      <div class="calculator-settings">
+        <label>¿Qué quieres calcular?
+          <select name="format">
+            <option value="modular">Losetas nominales de 50 × 50 cm</option>
+            <option value="roll">Superficie para piso en rollo</option>
+          </select>
+        </label>
+        <label>Reserva opcional (%)
+          <input name="reserve" type="text" inputmode="decimal" value="0" maxlength="5" aria-describedby="reserve-help">
+        </label>
+      </div>
+      <p class="calculator-help" id="reserve-help">Puedes indicar de 0 a 30%. No es una recomendación de desperdicio: la reserva depende de los cortes y de tu proyecto.</p>
+      <p class="calculator-help">Usa metros, con punto o coma decimal; por ejemplo, 4.50 o 4,50. No incluyas dos veces una misma superficie.</p>
+      <p data-error role="alert" class="calculator-error" hidden></p>
+      <button class="calculator-primary" type="submit">Calcular mi proyecto</button>
+      <button class="calculator-secondary" type="button" data-clear>Empezar de nuevo</button>
+    </form>
+    <p data-update-status role="status" aria-live="polite"></p>
+    <section data-results hidden aria-labelledby="results-title">
+      <h2 id="results-title" tabindex="-1">Estimación de tu proyecto</h2>
+      <div class="calculator-totals">
+        <div><span>Superficie medida</span><strong data-total-area></strong></div>
+        <div><span data-estimate-label></span><strong data-estimate></strong></div>
+      </div>
+      <div class="calculator-table-wrap" tabindex="0" role="region" aria-label="Resultados por zona">
+        <table><caption>Detalle por zona</caption><thead><tr><th scope="col">Zona</th><th scope="col">Superficie</th><th scope="col" data-quantity-heading></th></tr></thead><tbody data-zone-results></tbody></table>
+      </div>
+      <p data-calculation-note></p>
+      <p><strong>Es una estimación de cobertura, no un pedido definitivo.</strong> Confirma medidas útiles del ensamble, cortes, columnas y remates. La cantidad no determina el espesor ni la resistencia que necesita cada actividad.</p>
+      <label>Resumen para tu cotización
+        <textarea data-summary rows="7" readonly></textarea>
+      </label>
+      <p class="calculator-help">Puedes copiar este resumen y pegarlo en el mensaje de tu solicitud.</p>
+      <a class="calculator-primary" href="https://www.matdepotmex.com/contacto.html">Solicitar orientación y cotización</a>
+      <a class="calculator-text-link" href="https://www.matdepotmex.com/categorias/gimnasios.html">Ver pisos para gimnasios</a>
+    </section>
+    <template data-zone-template>
+      <fieldset class="calculator-zone">
+        <legend></legend>
+        <div class="calculator-zone-fields">
+          <label>Nombre de la zona<input name="zone-name" type="text" maxlength="60" placeholder="Ej. Máquinas o pesas"></label>
+          <label>Largo (m)<input name="length" type="text" inputmode="decimal" maxlength="10" placeholder="Ej. 10" required></label>
+          <label>Ancho (m)<input name="width" type="text" inputmode="decimal" maxlength="10" placeholder="Ej. 6" required></label>
+        </div>
+        <button class="calculator-remove" type="button" data-remove-zone>Quitar zona</button>
+      </fieldset>
+    </template>
+  </section>
+</main>
+</body>
+</html>

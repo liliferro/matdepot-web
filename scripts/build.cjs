@@ -20,6 +20,7 @@ function page(source,output,options={}){
  w.eval(read('assets/catalogo.js'));w.eval(read('assets/chrome.js'));
  if(options.renderInline){d.querySelectorAll('script:not([src])').forEach(s=>{w.eval(s.textContent);s.remove();});}
  if(options.mutate)options.mutate(d,w);
+ if(output==='categorias/gimnasios.html')d.querySelector('.prose').insertAdjacentHTML('beforeend','<p><a href="/blog/mejor-piso-para-gimnasio.html">Guía: cómo elegir piso para gimnasio y calcular la superficie de tu proyecto</a></p>');
  const canonical=origin+(output==='index.html'?'/':'/'+output);
  if(!d.querySelector('main')){
   const main=d.createElement('main');main.id='main-content';const footer=d.querySelector('.site-footer');
@@ -29,7 +30,7 @@ function page(source,output,options={}){
  const skip=d.createElement('a');skip.className='skip-link';skip.href='#main-content';skip.textContent='Saltar al contenido';d.body.prepend(skip);
  d.documentElement.lang='es-MX';
  d.querySelectorAll('.nav-links a[aria-current]').forEach(a=>a.removeAttribute('aria-current'));
- const active=output==='comparar.html'||output.startsWith('tapetes/')||output.startsWith('categorias/')?'productos.html':output;
+ const active=output.startsWith('blog/')?'blog.html':output==='comparar.html'||output.startsWith('tapetes/')||output.startsWith('categorias/')?'productos.html':output;
  d.querySelectorAll('.nav-links a').forEach(a=>{if(a.getAttribute('href')===active)a.setAttribute('aria-current','page');});
  const noscript=d.createElement('noscript');noscript.innerHTML='<style>@media(max-width:1024px){.nav-links{display:flex;position:static;grid-column:1/-1;max-height:none}.burger{display:none}}</style>';d.head.append(noscript);
  if(options.title)d.title=options.title;
@@ -46,7 +47,7 @@ function page(source,output,options={}){
  const preload=d.createElement('link');preload.rel='preload';preload.as='font';preload.type='font/woff2';preload.crossOrigin='anonymous';preload.href='/assets/fonts/archivo-400.woff2';d.head.append(preload);
  const graph=[...baseGraph,...(options.graph||[])];
  const json=d.createElement('script');json.type='application/ld+json';json.textContent=JSON.stringify({'@context':'https://schema.org','@graph':graph}).replace(/</g,'\\u003c');d.head.append(json);
- for(const [property,content]of Object.entries({'og:title':d.title,'og:description':d.querySelector('meta[name="description"]').content,'og:url':canonical,'og:type':options.product?'product':'website','og:image':origin+'/'+(options.product?.images[0]||products[14].images[0])})){
+ for(const [property,content]of Object.entries({'og:title':d.title,'og:description':d.querySelector('meta[name="description"]').content,'og:url':canonical,'og:type':options.article?'article':options.product?'product':'website','og:image':origin+'/'+(options.image||options.product?.images[0]||products[14].images[0])})){
   const meta=d.createElement('meta');meta.setAttribute('property',property);meta.content=content;d.head.append(meta);
  }
  const analytics=d.createElement('script');analytics.src='/assets/analytics.js';analytics.defer=true;d.head.append(analytics);
@@ -142,6 +143,7 @@ page('ubicacion.html','preguntas-frecuentes.html',{title:'Preguntas sobre tapete
 }});
 page('ubicacion.html','404.html',{title:'Página no encontrada | Mat Depot',noindex:true,mutate(d){d.querySelectorAll('body > section,script:not([src])').forEach(e=>e.remove());d.querySelector('footer').insertAdjacentHTML('beforebegin',shell('Página no encontrada','La dirección solicitada no corresponde a una página disponible.','<a class="btn" href="/productos.html">Consultar catálogo</a>'));}});
 // Legacy dynamic page remains a safe fallback for unknown identifiers; known IDs are redirected at the edge.
+require('./build-blog.cjs')({ page, read, origin });
 page('producto.html','producto.html',{noindex:true,title:'Consultar producto del catálogo | Mat Depot'});
 fs.writeFileSync(path.join(out,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+allUrls.map(u=>'<url><loc>'+esc(u)+'</loc></url>').join('')+'</urlset>');
 fs.writeFileSync(path.join(out,'robots.txt'),'User-agent: *\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: Claude-SearchBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nSitemap: '+origin+'/sitemap.xml\n');

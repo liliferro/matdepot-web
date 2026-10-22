@@ -1,0 +1,30 @@
+const fs = require('node:fs'), assert = require('node:assert/strict'), { JSDOM } = require('jsdom');
+const articlePath = '/blog/mejor-piso-para-gimnasio.html';
+for (const path of ['/blog.html', articlePath]) {
+  const dom = new JSDOM(fs.readFileSync('public' + path, 'utf8'));
+  const d = dom.window.document;
+  assert.equal(d.querySelectorAll('h1').length, 1);
+  assert.equal(d.querySelector('link[rel="canonical"]').href, 'https://www.matdepotmex.com' + path);
+  assert.equal(d.querySelector('meta[name="robots"]'), null);
+  assert.equal(d.querySelector('.nav-links [aria-current="page"]').getAttribute('href'), '/blog.html');
+  const ids = [...d.querySelectorAll('[id]')].map(e => e.id);
+  assert.equal(new Set(ids).size, ids.length, 'duplicate IDs');
+  for (const link of d.querySelectorAll('a[href^="#"]')) assert(d.getElementById(link.getAttribute('href').slice(1)), 'broken anchor');
+  if (path === articlePath) {
+    const graph = JSON.parse(d.querySelector('script[type="application/ld+json"]').textContent)['@graph'];
+    const posting = graph.find(g => g['@type'] === 'BlogPosting');
+    assert(posting && graph.some(g => g['@type'] === 'BreadcrumbList'));
+    assert.equal(posting.headline, d.querySelector('h1').textContent);
+    assert.equal(posting.datePublished, d.querySelector('time').dateTime);
+    assert.equal(d.querySelector('meta[property="og:type"]').content, 'article');
+    assert.match(d.querySelector('.blog-body > p').textContent, /mejor piso para un gimnasio/);
+    assert.equal(d.querySelectorAll('[data-gym-calculator]').length, 1);
+    assert(d.querySelector('script[src="/assets/calculadora-gimnasio.js"]'));
+    assert.equal(d.querySelector('a[href="calculadora-gimnasio.html"]'), null);
+    assert.equal(d.querySelectorAll('main article a[href*="/tapetes/"]').length, 3);
+  }
+  dom.window.close();
+}
+const sitemap = fs.readFileSync('public/sitemap.xml', 'utf8');
+assert(sitemap.includes(articlePath)); assert(sitemap.includes('/blog.html'));
+console.log('Blog passed: indexability, canonical URLs, structured data, navigation, unique headings/anchors and embedded calculator.');

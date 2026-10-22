@@ -14,5 +14,5 @@ for(const file of files){
  if(file.includes('/tapetes/')){assert(d.querySelector('article'));assert(d.querySelector('#detail').textContent.length>100);assert(!d.querySelector('script:not([src]):not([type="application/ld+json"])'));}
  if(file.endsWith('/productos.html'))assert.equal(d.querySelectorAll('.catalog-card-wrap').length,35);
 }
-const sitemap=fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');assert.equal((sitemap.match(/<loc>/g)||[]).length,48);assert(!sitemap.includes('gracias.html'));assert(!sitemap.includes('?id='));
-console.log(JSON.stringify({html_pages:files.length,static_products:35,indexable_urls:48,image_elements:images,local_references:links,status:'passed'}));
+const sitemap=fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');assert.equal((sitemap.match(/<loc>/g)||[]).length,50);assert(!sitemap.includes('gracias.html'));assert(!sitemap.includes('?id='));
+console.log(JSON.stringify({html_pages:files.length,static_products:35,indexable_urls:50,image_elements:images,local_references:links,status:'passed'}));

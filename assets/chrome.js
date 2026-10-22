@@ -28,6 +28,7 @@
       <ul class="nav-links" id="md-menu">
         <li><a href="index.html"            ${isActive("index.html")          ? 'aria-current="page"' : ""}>Inicio</a></li>
         <li><a href="productos.html"        ${isActive("productos.html")      ? 'aria-current="page"' : ""}>Productos</a></li>
+        <li><a href="blog.html" ${isActive("blog.html") || location.pathname.includes('/blog/') ? 'aria-current="page"' : ''}>Blog</a></li>
         <li><a href="quienes-somos.html"    ${isActive("quienes-somos.html")  ? 'aria-current="page"' : ""}>Nosotros</a></li>
         <li><a href="ubicacion.html"        ${isActive("ubicacion.html")      ? 'aria-current="page"' : ""}>Ubicación</a></li>
         <li><a href="contacto.html"         ${isActive("contacto.html")       ? 'aria-current="page"' : ""}>Contacto</a></li>
@@ -85,6 +86,7 @@
         <h4>Compañía</h4>
         <ul>
           <li><a href="quienes-somos.html">Nosotros</a></li>
+          <li><a href="blog.html">Blog</a></li>
           <li><a href="contacto.html">Contacto</a></li>
           <li><a href="ubicacion.html">Ubicación</a></li>
           <li><a href="aviso-privacidad.html">Aviso de privacidad</a></li>
