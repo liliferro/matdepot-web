@@ -5,7 +5,7 @@ const renderTool = require('./blog-tools.cjs');
 const enrich = require('./blog-summary.cjs');
 const esc = s => String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 module.exports = function buildBlog({ page, read, origin }) {
-  const catalog = {window:{}}; vm.runInNewContext(read('assets/catalogo.js'),catalog);
+  const catalog = {window:{},encodeURIComponent,URLSearchParams}; vm.runInNewContext(read('assets/catalogo.js'),catalog);
   const first = {slug:'mejor-piso-para-gimnasio',title:'¿Cuál es el mejor piso para un gimnasio? Guía para elegir por zona',seoTitle:'¿Cuál es el mejor piso para un gimnasio? | MatDepot',description:'Elige el mejor piso para un gimnasio según sus zonas. Compara hule en rollo y modular, revisa espesores y calcula el área para solicitar tu cotización.',group:'Gimnasios',category:'gimnasios',product:'tapete-para-gimnasio-modular-de-13-mm',date:'2026-10-21',tool:'gym',related:['piso-gimnasio-rollo-o-modular','espesor-piso-gimnasio','instalar-piso-hule-concreto-loseta']};
   const {categories} = JSON.parse(read('data/content.json'));
   const posts = [first,...JSON.parse(read('data/blog-posts.json'))];

@@ -7,7 +7,7 @@
   const path = location.pathname.split("/").pop() || "index.html";
   const isActive = (target) => path === target || (target === "index.html" && (path === "" || path === "/"));
 
-  const wa = window.MD_CONTACT?.waUrl || "https://wa.me/5215544943014";
+  const wa = window.mdWhatsAppUrl?.() || window.MD_CONTACT?.waUrl || "https://wa.me/5215544943014";
 
   // ---------- HEADER ----------
   const header = `
@@ -135,4 +135,18 @@
     document.addEventListener("click", e => { if (!nav.contains(e.target)) setOpen(false); });
     nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => setOpen(false)));
   }
+
+  const salesUrl = window.mdWhatsAppUrl?.() || wa;
+  const phone = window.MD_WA_PHONE || "5215544943014";
+  document.querySelectorAll("a[href], a[id]").forEach(a => {
+    if (a.dataset.shareArticle) return;
+    const id = a.id;
+    const known = ["wa-cta", "wa-link", "wa-item", "wa-loc", "urgent-wa", "prod-wa", "cta-wa"].includes(id);
+    let sales = false;
+    try {
+      const url = new URL(a.getAttribute("href") || "", location.href);
+      sales = url.protocol === "https:" && url.hostname === "wa.me" && url.pathname === "/" + phone;
+    } catch {}
+    if (known || sales) a.href = salesUrl;
+  });
 })();

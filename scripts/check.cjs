@@ -18,6 +18,22 @@ for(const file of files){
  }
  if(file.includes('/tapetes/')){assert(d.querySelector('article'));assert(d.querySelector('#detail').textContent.length>100);assert(!d.querySelector('script:not([src]):not([type="application/ld+json"])'));}
  if(file.endsWith('/productos.html'))assert.equal(d.querySelectorAll('.catalog-card-wrap').length,35);
+ const sales=[...d.querySelectorAll('a[href*="wa.me"], a[href*="api.whatsapp.com"], a[href*="web.whatsapp.com"]')];
+ assert(sales.some(a=>!a.hasAttribute('data-share-article')),file+' missing sales WhatsApp link');
+ for(const a of sales){
+  const href=a.getAttribute('href');
+  const u=new URL(href,'https://www.matdepotmex.com');
+  if(a.hasAttribute('data-share-article')){
+   assert.equal(u.hostname,'wa.me',file);
+   assert.equal(u.pathname,'/',file);
+   assert.equal(u.searchParams.get('phone'),null,file);
+   assert(!href.includes('5215544943014'),file);
+   continue;
+  }
+  assert.equal(u.hostname,'wa.me',file);
+  assert.equal(u.pathname,'/5215544943014',file+' '+href);
+  assert.match(u.searchParams.get('text')||'',/^Hola, quiero cotizar(?:: .+| tapetes o pisos)\. \(ref: [A-Z0-9-]+\)$/,file);
+ }
 }
 const sitemap=fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');assert.equal((sitemap.match(/<loc>/g)||[]).length,51+require('../data/blog-posts.json').length);assert(!sitemap.includes('gracias.html'));assert(!sitemap.includes('?id='));
 console.log(JSON.stringify({html_pages:files.length,static_products:35,indexable_urls:(sitemap.match(/<loc>/g)||[]).length,image_elements:images,local_references:links,status:'passed'}));

@@ -107,10 +107,9 @@ document.getElementById("detail").innerHTML = `
     </div>
   </div>`;
 
-const productWhatsApp = new URL(window.MD_CONTACT.waUrl);
-productWhatsApp.searchParams.set("text", `Hola, me interesa cotizar: ${p.name}.`);
-document.getElementById("prod-wa").href = productWhatsApp.href;
-document.getElementById("cta-wa").href = productWhatsApp.href;
+const productWhatsApp = window.mdWhatsAppUrl();
+document.getElementById("prod-wa").href = productWhatsApp;
+document.getElementById("cta-wa").href = productWhatsApp;
 document.getElementById("cta-form").href = `contacto.html?prod=${encodeURIComponent(p.slug)}`;
 
 // apps blocks
