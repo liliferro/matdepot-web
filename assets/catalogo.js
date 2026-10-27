@@ -1374,8 +1374,118 @@ window.MD_FILTERS = [
   { id: "personalizado", name: "Personalizados" }
 ];
 
+window.MD_WA_PHONE = "5215544943014";
+window.MD_WA_REFS = {
+  pages: {
+    "/": "INICIO",
+    "/index.html": "INICIO",
+    "/productos.html": "PRODUCTOS",
+    "/contacto.html": "CONTACTO",
+    "/quienes-somos.html": "NOSOTROS",
+    "/ubicacion.html": "UBICACION",
+    "/gracias.html": "GRACIAS",
+    "/aviso-privacidad.html": "AVISO",
+    "/comparar.html": "COMPARAR",
+    "/preguntas-frecuentes.html": "FAQ",
+    "/404.html": "NO-ENCONTRADA",
+    "/blog.html": "BLOG",
+    "/producto.html": "PRODUCTO"
+  },
+  products: {
+    "piso-para-areas-infantiles": "PISO-INFANTIL",
+    "tapete-para-alberca-y-areas-humedas": "TAP-ALBERCA",
+    "tapete-de-pvc-con-base-textil": "TAP-PVC-TEXTIL",
+    "tapete-de-pvc-con-base-textil-y-circulos": "TAP-PVC-CIRCULOS",
+    "tapete-antiderrapante-americano": "TAP-AMERICANO",
+    "tapete-antiderrapante-de-espiga": "TAP-ESPIGA",
+    "tapete-antiderrapante-decktop": "TAP-DECKTOP",
+    "tapete-antiderrapante-liso": "TAP-AD-LISO",
+    "tapete-antiderrapante-mil-rayas": "TAP-MIL-RAYAS",
+    "tapete-antiderrapante-tachonado": "TAP-TACHONADO",
+    "tapete-antiderrapante-tachonado-con-base-textil": "TAP-TACHON-TEXTIL",
+    "tapete-de-hule-antiderrapante-estriado-con-base-textil": "TAP-ESTRIADO",
+    "tapete-de-hule-liso-con-base-textil": "TAP-HULE-LISO",
+    "tapete-antiestatico": "TAP-ANTIESTATICO",
+    "tapete-antifatiga-negro-de-uso-general": "TAP-ANTIFATIGA",
+    "tapete-esponjoso-con-franjas-amarillas": "TAP-FRANJAS",
+    "tapete-de-seguridad-de-pvc-para-trafico-pesado": "TAP-PVC-PESADO",
+    "tapete-dielectrico": "TAP-DIELECTRICO",
+    "tapete-multiusos-de-uso-rudo": "TAP-MULTIUSOS",
+    "tapete-para-artes-marciales-y-crossfit": "TAP-CROSSFIT",
+    "tapete-para-cocina": "TAP-COCINA",
+    "tapete-para-establo": "TAP-ESTABLO",
+    "tapete-para-gimnasio-en-rollo-con-chispas-verdes": "TAP-GIM-VERDE",
+    "tapete-de-hule-reciclado-epdm-con-chispas-azules": "TAP-EPDM-AZUL",
+    "tapete-modular-con-chispas-plateadas": "TAP-MOD-PLATA",
+    "tapete-modular-para-gimnasio-en-diferentes-colores": "TAP-MOD-COLOR",
+    "tapete-para-gimnasio-con-chispas-rojas": "TAP-GIM-ROJO",
+    "tapete-para-gimnasio-de-hule-reciclado": "TAP-GIM-RECICLADO",
+    "tapete-para-gimnasio-en-rollo-con-chispas-azules": "TAP-GIM-AZUL",
+    "tapete-para-gimnasio-modular-de-13-mm": "TAP-GIM-13MM",
+    "tapete-para-gimnasio-modular-de-7-mm": "TAP-GIM-7MM",
+    "tapete-publicitario": "TAP-PUBLICITARIO",
+    "tapete-rizo": "TAP-RIZO",
+    "tapete-gimnasio-negro-en-rollo-tipo-a": "TAP-GIM-TIPO-A",
+    "tapete-gimnasio-negro-en-rollo-tipo-b": "TAP-GIM-TIPO-B"
+  },
+  categories: {
+    "antiderrapantes": "CAT-ANTIDERRAPANTE",
+    "antifatiga": "CAT-ANTIFATIGA",
+    "gimnasios": "CAT-GIMNASIO",
+    "seguridad-electrica": "CAT-ELECTRICO",
+    "areas-humedas": "CAT-HUMEDAS"
+  },
+  blog: {
+    "mejor-piso-para-gimnasio": "BLOG-MEJOR-PISO",
+    "piso-gimnasio-rollo-o-modular": "BLOG-ROLLO-MODULAR",
+    "espesor-piso-gimnasio": "BLOG-ESPESOR",
+    "instalar-piso-hule-concreto-loseta": "BLOG-INSTALACION",
+    "limpiar-piso-gimnasio": "BLOG-LIMPIEZA",
+    "tapete-trabajo-de-pie": "BLOG-DE-PIE",
+    "antifatiga-o-antiderrapante": "BLOG-ANTI-O-AD",
+    "tapetes-agua-aceite-grasa": "BLOG-GRASA",
+    "tapete-cocina-industrial": "BLOG-COCINA",
+    "comparar-cotizaciones-tapetes": "BLOG-COTIZACIONES",
+    "datos-cotizar-tapetes": "BLOG-DATOS",
+    "precio-piso-hule-m2": "BLOG-PRECIO-M2"
+  },
+  guides: {
+    "tapete-dielectrico-precio-voltajes": "GUIA-DIELECTRICO"
+  }
+};
+window.mdPageRef = function (pathname, search) {
+  const refs = window.MD_WA_REFS;
+  const path = pathname || "/";
+  const params = new URLSearchParams(search || "");
+  const productSlug = path.match(/\/tapetes\/([^/]+)\.html$/);
+  if (productSlug) return refs.products[productSlug[1]] || window.mdDeriveRef(productSlug[1], "TAP");
+  if (path === "/producto.html" && params.get("id")) return refs.products[params.get("id")] || window.mdDeriveRef(params.get("id"), "TAP");
+  const blogSlug = path.match(/\/blog\/([^/]+)\.html$/);
+  if (blogSlug) return refs.blog[blogSlug[1]] || window.mdDeriveRef(blogSlug[1], "BLOG");
+  const categorySlug = path.match(/\/categorias\/([^/]+)\.html$/);
+  if (categorySlug) return refs.categories[categorySlug[1]] || window.mdDeriveRef(categorySlug[1], "CAT");
+  const guideSlug = path.match(/\/guias\/([^/]+)\.html$/);
+  if (guideSlug) return refs.guides[guideSlug[1]] || window.mdDeriveRef(guideSlug[1], "GUIA");
+  return refs.pages[path] || window.mdDeriveRef(path.split("/").pop().replace(/\.html$/, "") || "pagina", "PAG");
+};
+window.mdDeriveRef = function (slug, prefix) {
+  const body = String(slug || "pagina").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase().replace(/[^A-Z0-9]+/g, "-").replace(/^-|-$/g, "");
+  return ((prefix ? prefix + "-" : "") + body).slice(0, 28).replace(/-$/, "") || "PAGINA";
+};
+window.mdWhatsAppUrl = function (pathname, search) {
+  const here = (typeof location === "object" && location) ? location : { pathname: "/", search: "" };
+  const path = pathname || here.pathname || "/";
+  const query = search == null ? (pathname ? "" : here.search || "") : search;
+  const code = window.mdPageRef(path, query);
+  const params = new URLSearchParams(query);
+  const fromPath = (path.match(/\/tapetes\/([^/]+)\.html$/) || [])[1];
+  const slug = fromPath || (path === "/producto.html" ? params.get("id") : "") || params.get("prod") || "";
+  const product = slug && window.MD_CATALOG ? window.MD_CATALOG.find(item => item.slug === slug) : null;
+  const sentence = product ? "Hola, quiero cotizar: " + product.name + "." : "Hola, quiero cotizar tapetes o pisos.";
+  return "https://wa.me/" + window.MD_WA_PHONE + "?text=" + encodeURIComponent(sentence + " (ref: " + code + ")");
+};
 window.MD_CONTACT = {
   tel1: "(55) 9626 5258", tel2: "(55) 9626 5259", wa: "(55) 4494 3014",
-  waUrl: "https://wa.me/5215544943014?text=Hola%2C%20estoy%20interesado(a)%20en%20sus%20productos.%20Quiero%20m%C3%A1s%20informaci%C3%B3n.",
+  get waUrl() { return window.mdWhatsAppUrl(); },
   email: "matdepotmx@gmail.com", address: "C. Popocatépetl 42, San Javier, C.P. 54030, Tlalnepantla de Baz, Estado de México"
 };

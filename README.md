@@ -36,9 +36,10 @@ Se admite un enlace inicial `/comparar.html?comparar=slug-1,slug-2`. Los identif
 `assets/analytics.js` utiliza el ID de GA4 proporcionado en la auditoría: `G-LC7M7BHNSN`. La propiedad, titularidad y recepción deben confirmarse en la administración de Google Analytics.
 
 - Analítica desactivada hasta aceptación; almacenamiento publicitario denegado.
-- Eventos: `view_item`, `select_item`, `request_quote_click`, `compare_products`, `contact_whatsapp`, `contact_phone`, `contact_email`, `filter_catalog`, `form_start`, `generate_lead`.
+- Eventos: `view_item`, `select_item`, `compare_products`, `contact_whatsapp`, `contact_phone`, `contact_email`, `filter_catalog`, `form_start`, `generate_lead`.
 - No se envían los datos personales del formulario ni términos de búsqueda libres.
-- `generate_lead` requiere un envío previo en la misma sesión y un `lead_id` coincidente; no se repite al recargar. Es una señal de retorno del formulario, no un recibo del buzón ni un lead comercial validado.
+- `generate_lead` se dispara una sola vez al enviar el formulario, en la misma sesión, antes de salir hacia FormSubmit. El retorno a `/gracias.html` no emite otro lead. Es una señal de envío, no un recibo del buzón ni un lead comercial validado.
+- `contact_whatsapp` se dispara una vez por clic en el WhatsApp del negocio. El mensaje abre `wa.me` con un código de la página de origen. Compartir un artículo no cuenta como lead.
 - No se asigna valor económico ficticio a las conversiones.
 - Configuración GA4 verificada: `contact_whatsapp` y `generate_lead` son eventos clave; WhatsApp cuenta una vez por sesión. Formularios automáticos desactivados para evitar duplicar `form_start`. Detalles, dimensiones y límites en [docs/analytics.md](docs/analytics.md).
 

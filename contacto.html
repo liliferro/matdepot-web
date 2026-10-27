@@ -104,10 +104,10 @@
 const c = window.MD_CONTACT;
 document.getElementById("tel1").textContent = c.tel1;
 document.getElementById("tel2").textContent = c.tel2;
-const waA = document.getElementById("wa-item"); waA.textContent = c.wa; waA.href = c.waUrl;
+const waA = document.getElementById("wa-item"); waA.textContent = c.wa; waA.href = window.mdWhatsAppUrl();
 const eA  = document.getElementById("email-item"); eA.textContent = c.email; eA.href = "mailto:" + c.email;
 document.getElementById("addr").textContent = c.address;
-document.getElementById("wa-link").href = c.waUrl;
+document.getElementById("wa-link").href = window.mdWhatsAppUrl();
 
 // product select
 const sel = document.getElementById("f-cat");
