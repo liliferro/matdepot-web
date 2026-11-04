@@ -34,7 +34,7 @@ WhatsApp y formulario se mantienen separados. No se genera un segundo `generate_
 
 ## Formulario y retorno desde FormSubmit
 
-El formulario sigue enviándose a FormSubmit y, al terminar, vuelve a `https://www.matdepotmex.com/gracias.html` sin parámetros de campaña ni `lead_id`. `generate_lead` se envía en la página de contacto, con `transport_type=beacon`, antes de esa salida. Así el lead queda en la sesión y el canal originales.
+El formulario sigue enviándose a FormSubmit y, al terminar, vuelve a `https://www.matdepotmex.com/gracias.html` sin parámetros de campaña ni `lead_id`. `generate_lead` se envía en la página que contiene el formulario `#contact-form` (contacto y tapetes de hule en Tlalnepantla), con `transport_type=beacon`, antes de salir hacia `/gracias.html`. Así el lead queda en la sesión y el canal originales. `page_location` identifica cuál de las dos páginas originó el envío.
 
 `/gracias.html` no vuelve a emitir `generate_lead`, aunque la visita traiga un `lead_id` antiguo. Si el referrer es formsubmit.co, la configuración de gtag usa `ignore_referrer` y no reenvía ese referrer: el retorno no se atribuye como sesión nueva de referencia formsubmit.co ni genera un segundo lead. Una inactividad mayor al tiempo de sesión de GA4 puede abrir otra sesión directa; esa visita ya no cuenta el formulario.
 
@@ -51,6 +51,8 @@ El número sigue siendo `5215544943014`. El texto es `Hola, quiero cotizar tapet
 | /contacto.html | CONTACTO |
 | /quienes-somos.html | NOSOTROS |
 | /ubicacion.html | UBICACION |
+| /sobre-mat-depot.html | SOBRE |
+| /tapetes-de-hule-tlalnepantla.html | TLALNEPANTLA |
 | /gracias.html | GRACIAS |
 | /aviso-privacidad.html | AVISO |
 | /comparar.html | COMPARAR |

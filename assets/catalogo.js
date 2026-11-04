@@ -1383,6 +1383,8 @@ window.MD_WA_REFS = {
     "/contacto.html": "CONTACTO",
     "/quienes-somos.html": "NOSOTROS",
     "/ubicacion.html": "UBICACION",
+    "/sobre-mat-depot.html": "SOBRE",
+    "/tapetes-de-hule-tlalnepantla.html": "TLALNEPANTLA",
     "/gracias.html": "GRACIAS",
     "/aviso-privacidad.html": "AVISO",
     "/comparar.html": "COMPARAR",

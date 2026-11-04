@@ -57,6 +57,7 @@
         <p class="foot-cta">Material que resiste.</p>
         <div class="foot-contact">
           ${c.address}<br>
+          Lun – Vie · 9:00 – 18:00<br>
           <a href="tel:5596265258">${c.tel1}</a> · <a href="tel:5596265259">${c.tel2}</a><br>
           <a href="mailto:${c.email}">${c.email}</a>
         </div>
@@ -89,6 +90,8 @@
           <li><a href="blog.html">Blog</a></li>
           <li><a href="contacto.html">Contacto</a></li>
           <li><a href="ubicacion.html">Ubicación</a></li>
+          <li><a href="sobre-mat-depot.html">Sobre Mat Depot</a></li>
+          <li><a href="tapetes-de-hule-tlalnepantla.html">Tapetes de hule en Tlalnepantla</a></li>
           <li><a href="aviso-privacidad.html">Aviso de privacidad</a></li>
         </ul>
       </div>
