@@ -11,7 +11,18 @@ const categoryFaq=slug=>{const g=faqGroups.find(g=>g.category===slug);return g?`
 const productUrl=p=>'/tapetes/'+p.slug+'.html';
 const links=()=>'<nav class="category-links" aria-label="Categorías de productos">'+categories.map(c=>`<a href="/categorias/${c.slug}.html">${esc(c.name)}</a>`).join('')+'</nav>';
 const card=(p,i=0,compare=false)=>`${compare?`<article class="catalog-card-wrap" data-slug="${p.slug}">`:''}<a class="cat-card" href="${productUrl(p)}"><div class="cat-card__media cat-card__media--photo"><img src="/${p.images[0]}" alt="${esc(p.name)}" loading="lazy"><span class="cat-card__num">${String(i+1).padStart(2,'0')}</span></div><div><span class="cat-card__name">${esc(p.name)}</span><p>${esc(p.short)}</p><div class="cat-card__tags">${p.sectors.map(s=>`<span class="tag">${esc(s)}</span>`).join('')}</div></div><span class="cat-card__cta">Ver ficha técnica →</span></a>${compare?'</article>':''}`;
-const baseGraph=[{'@type':['Organization','LocalBusiness'],'@id':origin+'/#organization',name:'Mat Depot',legalName:'Mat Depot, S.A. de C.V.',url:origin+'/',telephone:['+525596265258','+525596265259'],email:contact.email,address:{'@type':'PostalAddress',streetAddress:'C. Popocatépetl 42, San Javier',postalCode:'54030',addressLocality:'Tlalnepantla de Baz',addressRegion:'Estado de México',addressCountry:'MX'},sameAs:['https://www.instagram.com/matdepotmex','https://www.linkedin.com/in/mat-depot-70b19937a/','https://youtube.com/@matdepot25','https://www.tiktok.com/@matdepot']},{'@type':'WebSite','@id':origin+'/#website',url:origin+'/',name:'Mat Depot',inLanguage:'es-MX',publisher:{'@id':origin+'/#organization'}}];
+const sameAs=['https://www.instagram.com/matdepotmex','https://www.facebook.com/share/1CJdVqXQmH/','https://www.linkedin.com/in/mat-depot-70b19937a/','https://youtube.com/@matdepot25','https://www.tiktok.com/@matdepot'];
+const address={'@type':'PostalAddress',streetAddress:'C. Popocatépetl 42, San Javier',postalCode:'54030',addressLocality:'Tlalnepantla de Baz',addressRegion:'Estado de México',addressCountry:'MX'};
+const logoUrl=origin+'/assets/apple-touch-icon.png';
+const logo=()=>({'@type':'ImageObject',url:logoUrl,contentUrl:logoUrl,width:180,height:180});
+const hours={'@type':'OpeningHoursSpecification',dayOfWeek:['https://schema.org/Monday','https://schema.org/Tuesday','https://schema.org/Wednesday','https://schema.org/Thursday','https://schema.org/Friday'],opens:'09:00',closes:'18:00'};
+const contactPoint=[{'@type':'ContactPoint',telephone:'+525596265259',contactType:'customer service',areaServed:'MX',availableLanguage:'es'},{'@type':'ContactPoint',telephone:'+525544943014',contactType:'sales',areaServed:'MX',availableLanguage:'es'}];
+const business={name:'Mat Depot',url:origin+'/',email:contact.email,telephone:'+525596265258',address,sameAs,contactPoint};
+const baseGraph=[
+ {'@type':'Organization','@id':origin+'/#organization',legalName:'Mat Depot, S.A. de C.V.',logo:logo(),image:logoUrl,...business},
+ {'@type':'LocalBusiness','@id':origin+'/#localbusiness',logo:logo(),image:logoUrl,parentOrganization:{'@id':origin+'/#organization'},openingHoursSpecification:hours,areaServed:[{'@type':'City',name:'Tlalnepantla de Baz'},{'@type':'State',name:'Estado de México'},{'@type':'Country',name:'México'}],...business},
+ {'@type':'WebSite','@id':origin+'/#website',url:origin+'/',name:'Mat Depot',inLanguage:'es-MX',publisher:{'@id':origin+'/#organization'}}
+];
 fs.rmSync(out,{recursive:true,force:true});fs.mkdirSync(out,{recursive:true});fs.cpSync(path.join(root,'assets'),path.join(out,'assets'),{recursive:true});
 fs.copyFileSync(path.join(root,'assets/favicon.ico'),path.join(out,'favicon.ico'));
 const allUrls=[];
@@ -111,6 +122,31 @@ page('ubicacion.html','comparar.html',{title:'Comparador de productos | Mat Depo
  d.body.classList.add('comparison-page');
  const comparison=d.createElement('script');comparison.src='/assets/comparison.js';d.body.append(comparison);
 }});
+const disambiguation='Mat Depot no tiene relación con matdepot.com.mx, que corresponde a otra empresa.';
+const sobreUrl=origin+'/sobre-mat-depot.html';
+const zonaUrl=origin+'/tapetes-de-hule-tlalnepantla.html';
+const sobreTitle='Sobre Mat Depot | Sitio oficial matdepotmex.com';
+const sobreDescription='Mat Depot, S.A. de C.V. vende tapetes y pisos de hule y PVC. Sitio oficial matdepotmex.com, con operación en Tlalnepantla de Baz, Estado de México.';
+const zonaTitle='Tapetes de hule en Tlalnepantla y mayoreo en Edomex | Mat Depot';
+const zonaDescription='Tapetes de hule en Tlalnepantla de Baz y mayoreo para el Estado de México. Consulta el catálogo de Mat Depot y solicita entrega o cotización.';
+page('sobre-mat-depot.html','sobre-mat-depot.html',{title:sobreTitle,description:sobreDescription,graph:[
+ {'@type':'AboutPage','@id':sobreUrl+'#webpage',url:sobreUrl,name:sobreTitle,description:sobreDescription,inLanguage:'es-MX',isPartOf:{'@id':origin+'/#website'},about:{'@id':origin+'/#organization'},mainEntity:{'@id':origin+'/#organization'}},
+ {'@type':'Organization','@id':origin+'/#organization',disambiguatingDescription:disambiguation},
+ {'@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Inicio',item:origin+'/'},{'@type':'ListItem',position:2,name:'Sobre Mat Depot',item:sobreUrl}]}
+]});
+const zonaGraph=[
+ {'@type':'WebPage','@id':zonaUrl+'#webpage',url:zonaUrl,name:zonaTitle,description:zonaDescription,inLanguage:'es-MX',isPartOf:{'@id':origin+'/#website'},about:{'@id':origin+'/#localbusiness'},mainEntity:{'@id':origin+'/#localbusiness'}},
+ {'@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Inicio',item:origin+'/'},{'@type':'ListItem',position:2,name:'Tapetes de hule en Tlalnepantla',item:zonaUrl}]}
+];
+page('tapetes-de-hule-tlalnepantla.html','tapetes-de-hule-tlalnepantla.html',{title:zonaTitle,description:zonaDescription,graph:zonaGraph,mutate(d){
+ const mainEntity=[...d.querySelectorAll('#faq-zona details')].map(details=>{
+  const text=[...details.querySelectorAll(':scope > p')].map(p=>p.textContent.trim()).filter(Boolean).join(' ');
+  if(!text)throw Error('Respuesta FAQ vacía');
+  return {'@type':'Question',name:details.querySelector('summary').textContent.trim(),acceptedAnswer:{'@type':'Answer',text}};
+ });
+ if(mainEntity.length<4)throw Error('FAQ local incompleta');
+ zonaGraph.push({'@type':'FAQPage','@id':zonaUrl+'#faq',url:zonaUrl,inLanguage:'es-MX',mainEntity});
+}});
 for(const [file,title]of Object.entries({'contacto.html':'Cotiza tapetes y pisos para tu proyecto | Mat Depot','quienes-somos.html':'Proveedor de tapetes y pisos en México | Mat Depot','ubicacion.html':'Ubicación y envíos desde Tlalnepantla | Mat Depot','aviso-privacidad.html':'Aviso de privacidad y uso de datos | Mat Depot','gracias.html':'Solicitud enviada y contacto por WhatsApp | Mat Depot'}))page(file,file,{title,mutate(d){
  if(file==='quienes-somos.html')d.querySelector('.page-banner .container').insertAdjacentHTML('beforeend','<p class="lead">Mat Depot suministra tapetes y pisos de hule y PVC para espacios industriales, comerciales y deportivos. Atiende solicitudes de mayoreo, menudeo y proyectos a medida, con asesoría técnica para revisar uso, tráfico y superficie. Su operación se ubica en Tlalnepantla de Baz y ofrece cobertura de entrega nacional.</p>');
  if(file==='aviso-privacidad.html')d.querySelector('.prose').insertAdjacentHTML('beforeend','<h2>Formulario y analítica del sitio</h2><p>El formulario utiliza FormSubmit para procesar y enviar la solicitud al correo comercial matdepotmx@gmail.com. Google Analytics se carga únicamente si aceptas la analítica. Mide visitas e interacciones; el sitio no envía a Analytics el nombre, teléfono, correo ni descripción del proyecto.</p><p>Puedes aceptar o rechazar la analítica y cambiar tu elección desde Preferencias de privacidad en el pie de página. La elección se conserva en este navegador. Los datos de contacto del formulario se utilizan para atender tu solicitud.</p>');
@@ -151,5 +187,5 @@ require('./build-guides.cjs')({ page, products, origin, shell, esc });
 page('producto.html','producto.html',{noindex:true,title:'Consultar producto del catálogo | Mat Depot'});
 fs.writeFileSync(path.join(out,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+allUrls.map(u=>'<url><loc>'+esc(u)+'</loc></url>').join('')+'</urlset>');
 fs.writeFileSync(path.join(out,'robots.txt'),'User-agent: *\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: Claude-SearchBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nSitemap: '+origin+'/sitemap.xml\n');
-fs.writeFileSync(path.join(out,'llms.txt'),'# Mat Depot\n\n> Catálogo comercial de tapetes y pisos de hule y PVC para proyectos industriales, comerciales y deportivos. Atención desde Tlalnepantla de Baz, México.\n\n## Contacto\n\n- [Cotizaciones]('+origin+'/contacto.html): '+contact.email+'; WhatsApp '+contact.wa+'.\n- Precios, existencias, condiciones de entrega y documentación técnica se confirman al cotizar. No se publica una garantía general de disponibilidad.\n\n## Catálogo\n\n'+products.map(p=>'- ['+p.name+']('+origin+productUrl(p)+'): '+p.short).join('\n')+'\n\n## Ayuda\n\n- [Preguntas frecuentes]('+origin+'/preguntas-frecuentes.html)\n- [Ubicación]('+origin+'/ubicacion.html)\n');
+fs.writeFileSync(path.join(out,'llms.txt'),'# Mat Depot\n\n> Catálogo comercial de tapetes y pisos de hule y PVC para proyectos industriales, comerciales y deportivos. Atención desde Tlalnepantla de Baz, México. Sitio oficial: '+origin+'/. '+disambiguation+'\n\n## Identidad\n\n- [Sobre Mat Depot]('+sobreUrl+'): razón social, actividad, ubicación y contacto.\n- [Tapetes de hule en Tlalnepantla]('+zonaUrl+'): catálogo de hule y mayoreo para el Estado de México.\n\n## Contacto\n\n- [Cotizaciones]('+origin+'/contacto.html): '+contact.email+'; WhatsApp '+contact.wa+'.\n- Precios, existencias, condiciones de entrega y documentación técnica se confirman al cotizar. No se publica una garantía general de disponibilidad.\n\n## Catálogo\n\n'+products.map(p=>'- ['+p.name+']('+origin+productUrl(p)+'): '+p.short).join('\n')+'\n\n## Ayuda\n\n- [Preguntas frecuentes]('+origin+'/preguntas-frecuentes.html)\n- [Ubicación]('+origin+'/ubicacion.html)\n- [Sobre Mat Depot]('+sobreUrl+')\n- [Tapetes de hule en Tlalnepantla]('+zonaUrl+')\n');
 console.log('Generated '+allUrls.length+' indexable pages, '+products.length+' static product pages.');
