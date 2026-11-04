@@ -41,6 +41,21 @@
       "statusCode": 301
     },
     {
+      "source": "/tapete-de-hule-antifatiga",
+      "destination": "/categorias/antifatiga.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-de-hule-antifatiga/",
+      "destination": "/categorias/antifatiga.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapete-de-hule-antifatiga.html",
+      "destination": "/categorias/antifatiga.html",
+      "statusCode": 301
+    },
+    {
       "source": "/producto.html",
       "has": [
         {
