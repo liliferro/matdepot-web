@@ -12,6 +12,14 @@ const productUrl=p=>'/tapetes/'+p.slug+'.html';
 const links=()=>'<nav class="category-links" aria-label="Categorías de productos">'+categories.map(c=>`<a href="/categorias/${c.slug}.html">${esc(c.name)}</a>`).join('')+'</nav>';
 const card=(p,i=0,compare=false)=>`${compare?`<article class="catalog-card-wrap" data-slug="${p.slug}">`:''}<a class="cat-card" href="${productUrl(p)}"><div class="cat-card__media cat-card__media--photo"><img src="/${p.images[0]}" alt="${esc(p.name)}" loading="lazy"><span class="cat-card__num">${String(i+1).padStart(2,'0')}</span></div><div><span class="cat-card__name">${esc(p.name)}</span><p>${esc(p.short)}</p><div class="cat-card__tags">${p.sectors.map(s=>`<span class="tag">${esc(s)}</span>`).join('')}</div></div><span class="cat-card__cta">Ver ficha técnica →</span></a>${compare?'</article>':''}`;
 const baseGraph=[{'@type':['Organization','LocalBusiness'],'@id':origin+'/#organization',name:'Mat Depot',legalName:'Mat Depot, S.A. de C.V.',url:origin+'/',telephone:['+525596265258','+525596265259'],email:contact.email,address:{'@type':'PostalAddress',streetAddress:'C. Popocatépetl 42, San Javier',postalCode:'54030',addressLocality:'Tlalnepantla de Baz',addressRegion:'Estado de México',addressCountry:'MX'},sameAs:['https://www.instagram.com/matdepotmex','https://www.linkedin.com/in/mat-depot-70b19937a/','https://youtube.com/@matdepot25','https://www.tiktok.com/@matdepot']},{'@type':'WebSite','@id':origin+'/#website',url:origin+'/',name:'Mat Depot',inLanguage:'es-MX',publisher:{'@id':origin+'/#organization'}}];
+// Match the hours and nationwide coverage already visible on the location page.
+Object.assign(baseGraph[0],{
+ description:'Proveedor de tapetes y pisos de hule y PVC en Tlalnepantla de Baz. Mayoreo y menudeo, envíos en México y visitas al almacén bajo cita previa.',
+ logo:origin+'/assets/favicon.svg',
+ image:origin+'/assets/products/tapete-antifatiga-negro-de-uso-general-01.webp',
+ areaServed:{'@type':'Country',name:'México'},
+ openingHoursSpecification:[{'@type':'OpeningHoursSpecification',dayOfWeek:['Monday','Tuesday','Wednesday','Thursday','Friday'],opens:'09:00',closes:'18:00'}]
+});
 fs.rmSync(out,{recursive:true,force:true});fs.mkdirSync(out,{recursive:true});fs.cpSync(path.join(root,'assets'),path.join(out,'assets'),{recursive:true});
 fs.copyFileSync(path.join(root,'assets/favicon.ico'),path.join(out,'favicon.ico'));
 const allUrls=[];
@@ -124,6 +132,9 @@ for(const p of products){
   const note=d.createElement('p');note.className='source-note';note.textContent='Fuente de los datos: catálogo comercial de Mat Depot publicado en este sitio. Confirma especificaciones, existencias y documentación del modelo al solicitar tu cotización.';article.lastElementChild.append(note);
   if(p.slug==='tapete-dielectrico'){article.lastElementChild.insertAdjacentHTML('beforeend',read('data/dielectrico-compra.html'));}
   if(p.slug==='tapete-dielectrico')note.textContent+=' El certificado no está publicado aquí; no utilices esta ficha para deducir una tensión de trabajo segura.';
+  if(p.apps.includes('antifatiga') || p.sectors.some(s=>['Gimnasios','Dojos','Áreas deportivas','Box y CrossFit'].includes(s))){
+   article.lastElementChild.insertAdjacentHTML('beforeend','<section class="prose"><h2>Cotización por cantidad y destino</h2><p>Mat Depot atiende mayoreo y menudeo. Envía el nombre de este modelo, las medidas del área, la cantidad y el código postal de entrega. Utiliza las dimensiones y el espesor de la ficha para comparar alternativas; confirma la presentación de venta, las existencias, el precio y el plazo antes de comprar.</p><p>Si la zona tiene humedad, aceites, cargas o caída de pesas, describe esas condiciones al solicitar asesoría. El espesor por sí solo no confirma la compatibilidad del producto.</p><p><a href="/blog/datos-cotizar-tapetes.html">Preparar los datos de mi cotización</a></p></section>');
+  }
   const relevant=categories.filter(c=>faqGroups.some(g=>g.category===c.slug) && (c.filter?p.apps.includes(c.filter):p.sectors.some(s=>['Gimnasios','Dojos','Áreas deportivas','Box y CrossFit'].includes(s))));
   if(p.slug==='tapete-para-cocina' && !relevant.some(c=>c.slug==='areas-humedas'))relevant.push(categories.find(c=>c.slug==='areas-humedas'));
   article.lastElementChild.insertAdjacentHTML('beforeend',`<nav class="faq-product-links" aria-label="Ayuda para elegir y cotizar"><h2>Resuelve tus dudas antes de cotizar</h2><ul>${relevant.map(c=>`<li><a href="/categorias/${c.slug}.html#preguntas-frecuentes">${p.slug==='tapete-para-cocina'&&c.slug==='areas-humedas'?'Preguntas sobre tapetes para cocina':'Preguntas sobre '+esc(c.name.toLowerCase())}</a></li>`).join('')}<li><a href="/preguntas-frecuentes.html#datos-cotizacion">Qué datos enviar para cotizar</a></li><li><a href="/comparar.html">Comparar productos</a></li></ul></nav>`);
