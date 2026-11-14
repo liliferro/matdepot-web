@@ -15,6 +15,21 @@ Antes de comprar material, reúne fotografías, medidas y antecedentes de humeda
 
 Una fotografía puede orientar la conversación, pero no sustituye las mediciones o verificaciones que requiera el instalador. No apliques un límite genérico de humedad encontrado para otro material: el método de medición y el criterio deben corresponder al sistema elegido.
 
+## Instalar sobre azulejo o cerámica: qué debe confirmar la propuesta
+
+Una loseta cerámica o un azulejo existente no define por sí solo si el piso de hule debe ir pegado o flotante. Antes de conservar esa base, el instalador debe revisar el estado de las piezas, las juntas, la humedad y la compatibilidad del sistema elegido. No cubras una base con piezas sueltas sin resolver primero la causa y la preparación necesaria.
+
+| Punto de revisión | Información que debe quedar por escrito |
+|---|---|
+| Piezas y juntas existentes | Cómo se reparan piezas sueltas, diferencias de nivel y juntas; qué preparación necesita la superficie |
+| Acabado de la cerámica | Si requiere limpieza específica, preparación mecánica o imprimación compatible, y quién la realiza |
+| Pegado o flotante | Método permitido por el fabricante para el modelo y la base concreta; un ensamble modular no lo determina por sí solo |
+| Adhesivo, si corresponde | Marca y referencia aprobadas para ambos materiales; instrucciones vigentes de aplicación |
+| Tiempo de oreo y puesta en servicio | Tiempos del sistema según temperatura, humedad y condiciones de obra; distinguir tránsito peatonal de colocación de equipos |
+| Encuentros y perímetro | Separación o remate exigido por el modelo, expresado en mm en la propuesta; solución de puertas y cambios de nivel |
+
+Mat Depot no publica en estas fichas una receta de adhesivo, tiempo de oreo o junta perimetral universal para cerámica. Solicita la instrucción del fabricante antes de iniciar; no uses valores de otro modelo. Envía fotografías de la superficie, sus juntas y encuentros junto con el producto de hule seleccionado para que el alcance pueda confirmarse.
+
 ## Puertas, equipos y transiciones también cuentan
 
 Anota la ubicación de puertas, rampas, coladeras y cambios de material. Al añadir un recubrimiento cambia el nivel terminado, y ese cambio debe contemplarse en remates y encuentros. Mide lo que puedas y señala claramente lo que aún no se ha verificado.

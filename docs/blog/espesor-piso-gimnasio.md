@@ -19,7 +19,13 @@ Dos zonas pueden tener la misma superficie y necesitar evaluaciones diferentes. 
 
 El [modular de 7 mm](https://www.matdepotmex.com/tapetes/tapete-para-gimnasio-modular-de-7-mm.html) y el [modular de 13 mm](https://www.matdepotmex.com/tapetes/tapete-para-gimnasio-modular-de-13-mm.html) se publican como losetas negras de 50 × 50 cm. El [rollo negro tipo B](https://www.matdepotmex.com/tapetes/tapete-gimnasio-negro-en-rollo-tipo-b.html) publica 5 mm de espesor, 1 m de ancho y 10 m de largo.
 
-Estos datos permiten distinguir presentaciones, pero no constituyen una tabla de cargas ni un ensayo de aislamiento acústico. Si el requisito del proyecto depende de un desempeño medido, solicita la documentación del modelo o del sistema completo que lo respalde.
+| Modelo del catálogo | Espesor publicado | Presentación | Qué confirmar para tu zona |
+|---|---|---|---|
+| [Rollo negro tipo B](/tapetes/tapete-gimnasio-negro-en-rollo-tipo-b.html) | 5 mm | 1 × 10 m | Base, fijación y compatibilidad con equipos y actividades |
+| [Modular de 7 mm](/tapetes/tapete-para-gimnasio-modular-de-7-mm.html) | 7 mm | 50 × 50 cm | Medida útil del ensamble, remates y uso previsto |
+| [Modular de 13 mm](/tapetes/tapete-para-gimnasio-modular-de-13-mm.html) | 13 mm | 50 × 50 cm | Condiciones de impacto admitidas y protección adicional si corresponde |
+
+Estos datos permiten distinguir presentaciones, pero no constituyen una tabla de cargas ni un ensayo de aislamiento acústico. Si el requisito del proyecto depende de un desempeño medido, solicita la documentación del modelo o del sistema completo que lo respalde. Un espesor mayor no acredita por sí solo que se puedan dejar caer pesas.
 
 ## Prepara una ficha de uso por zona
 
