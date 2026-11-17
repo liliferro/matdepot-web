@@ -22,6 +22,8 @@ Object.assign(baseGraph[0],{
 });
 fs.rmSync(out,{recursive:true,force:true});fs.mkdirSync(out,{recursive:true});fs.cpSync(path.join(root,'assets'),path.join(out,'assets'),{recursive:true});
 fs.copyFileSync(path.join(root,'assets/favicon.ico'),path.join(out,'favicon.ico'));
+// Keep Bing ownership verification available at the site root after every build.
+fs.copyFileSync(path.join(root,'BingSiteAuth.xml'),path.join(out,'BingSiteAuth.xml'));
 const allUrls=[];
 function page(source,output,options={}){
  const dom=new JSDOM(read(source),{url:origin+'/'+(options.renderPath||output),runScripts:'outside-only'});const w=dom.window,d=w.document;
