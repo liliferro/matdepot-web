@@ -755,6 +755,301 @@
       "source": "/tapete-gimnasio-negro-en-rollo-tipo-b",
       "destination": "/tapetes/tapete-gimnasio-negro-en-rollo-tipo-b.html",
       "statusCode": 301
+    },
+    {
+      "source": "/tapete-esponjoso-con-franjas-amaril",
+      "destination": "/tapetes/tapete-esponjoso-con-franjas-amarillas.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/nosotros",
+      "destination": "/quienes-somos.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/aviso-de-privacidad",
+      "destination": "/aviso-privacidad.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/piso-para-areas-infantiles",
+      "destination": "/tapetes/piso-para-areas-infantiles.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-antiderrapante-americano",
+      "destination": "/tapetes/tapete-antiderrapante-americano.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-antiderrapante-de-espiga",
+      "destination": "/tapetes/tapete-antiderrapante-de-espiga.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-antiderrapante-decktop",
+      "destination": "/tapetes/tapete-antiderrapante-decktop.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-antiderrapante-liso",
+      "destination": "/tapetes/tapete-antiderrapante-liso.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-antiderrapante-mil-rayas",
+      "destination": "/tapetes/tapete-antiderrapante-mil-rayas.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-antiderrapante-tachonado-con-base-textil",
+      "destination": "/tapetes/tapete-antiderrapante-tachonado-con-base-textil.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-antiderrapante-tachonado",
+      "destination": "/tapetes/tapete-antiderrapante-tachonado.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-antiestatico",
+      "destination": "/tapetes/tapete-antiestatico.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-antifatiga-negro-de-uso-general",
+      "destination": "/tapetes/tapete-antifatiga-negro-de-uso-general.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-de-hule-antiderrapante-estriado-con-base-textil",
+      "destination": "/tapetes/tapete-de-hule-antiderrapante-estriado-con-base-textil.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-de-hule-liso-con-base-textil",
+      "destination": "/tapetes/tapete-de-hule-liso-con-base-textil.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-de-hule-reciclado-epdm-con-chispas-azules",
+      "destination": "/tapetes/tapete-de-hule-reciclado-epdm-con-chispas-azules.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-de-pvc-con-base-textil-y-circulos",
+      "destination": "/tapetes/tapete-de-pvc-con-base-textil-y-circulos.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-de-pvc-con-base-textil",
+      "destination": "/tapetes/tapete-de-pvc-con-base-textil.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-de-seguridad-de-pvc-para-trafico-pesado",
+      "destination": "/tapetes/tapete-de-seguridad-de-pvc-para-trafico-pesado.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-dielectrico",
+      "destination": "/tapetes/tapete-dielectrico.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-esponjoso-con-franjas-amarillas",
+      "destination": "/tapetes/tapete-esponjoso-con-franjas-amarillas.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-gimnasio-negro-en-rollo-tipo-a",
+      "destination": "/tapetes/tapete-gimnasio-negro-en-rollo-tipo-a.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-gimnasio-negro-en-rollo-tipo-b",
+      "destination": "/tapetes/tapete-gimnasio-negro-en-rollo-tipo-b.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-modular-con-chispas-plateadas",
+      "destination": "/tapetes/tapete-modular-con-chispas-plateadas.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-modular-para-gimnasio-en-diferentes-colores",
+      "destination": "/tapetes/tapete-modular-para-gimnasio-en-diferentes-colores.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-multiusos-de-uso-rudo",
+      "destination": "/tapetes/tapete-multiusos-de-uso-rudo.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-para-alberca-y-areas-humedas",
+      "destination": "/tapetes/tapete-para-alberca-y-areas-humedas.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-para-artes-marciales-y-crossfit",
+      "destination": "/tapetes/tapete-para-artes-marciales-y-crossfit.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-para-cocina",
+      "destination": "/tapetes/tapete-para-cocina.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-para-establo",
+      "destination": "/tapetes/tapete-para-establo.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-para-gimnasio-con-chispas-rojas",
+      "destination": "/tapetes/tapete-para-gimnasio-con-chispas-rojas.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-para-gimnasio-de-hule-reciclado",
+      "destination": "/tapetes/tapete-para-gimnasio-de-hule-reciclado.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-para-gimnasio-en-rollo-con-chispas-azules",
+      "destination": "/tapetes/tapete-para-gimnasio-en-rollo-con-chispas-azules.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-para-gimnasio-en-rollo-con-chispas-verdes",
+      "destination": "/tapetes/tapete-para-gimnasio-en-rollo-con-chispas-verdes.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-para-gimnasio-modular-de-13-mm",
+      "destination": "/tapetes/tapete-para-gimnasio-modular-de-13-mm.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-para-gimnasio-modular-de-7-mm",
+      "destination": "/tapetes/tapete-para-gimnasio-modular-de-7-mm.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-publicitario",
+      "destination": "/tapetes/tapete-publicitario.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/tapetes/tapete-rizo",
+      "destination": "/tapetes/tapete-rizo.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/categorias/antiderrapantes",
+      "destination": "/categorias/antiderrapantes.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/categorias/antifatiga",
+      "destination": "/categorias/antifatiga.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/categorias/areas-humedas",
+      "destination": "/categorias/areas-humedas.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/categorias/gimnasios",
+      "destination": "/categorias/gimnasios.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/categorias/seguridad-electrica",
+      "destination": "/categorias/seguridad-electrica.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/antifatiga-o-antiderrapante",
+      "destination": "/blog/antifatiga-o-antiderrapante.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/comparar-cotizaciones-tapetes",
+      "destination": "/blog/comparar-cotizaciones-tapetes.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/datos-cotizar-tapetes",
+      "destination": "/blog/datos-cotizar-tapetes.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/espesor-piso-gimnasio",
+      "destination": "/blog/espesor-piso-gimnasio.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/instalar-piso-hule-concreto-loseta",
+      "destination": "/blog/instalar-piso-hule-concreto-loseta.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/limpiar-piso-gimnasio",
+      "destination": "/blog/limpiar-piso-gimnasio.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/mejor-piso-para-gimnasio",
+      "destination": "/blog/mejor-piso-para-gimnasio.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/piso-gimnasio-rollo-o-modular",
+      "destination": "/blog/piso-gimnasio-rollo-o-modular.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/precio-piso-hule-m2",
+      "destination": "/blog/precio-piso-hule-m2.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/tapete-cocina-industrial",
+      "destination": "/blog/tapete-cocina-industrial.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/tapete-trabajo-de-pie",
+      "destination": "/blog/tapete-trabajo-de-pie.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/tapetes-agua-aceite-grasa",
+      "destination": "/blog/tapetes-agua-aceite-grasa.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/sectores/cocinas",
+      "destination": "/sectores/cocinas.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/sectores/comercio",
+      "destination": "/sectores/comercio.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/sectores/industria",
+      "destination": "/sectores/industria.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/guias/tapete-dielectrico-precio-voltajes",
+      "destination": "/guias/tapete-dielectrico-precio-voltajes.html",
+      "statusCode": 301
     }
   ],
   "headers": [

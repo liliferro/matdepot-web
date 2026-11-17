@@ -76,6 +76,8 @@
     return false;
   };
   function enable() {
+    // Preview deployments and local QA must not contaminate the production property.
+    if(!['www.matdepotmex.com','matdepotmex.com'].includes(location.hostname))return;
     if(enabled)return; enabled=true;
     captureAttribution();
     document.dispatchEvent(new CustomEvent('md:analytics-enabled'));

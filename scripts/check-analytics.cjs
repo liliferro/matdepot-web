@@ -2,9 +2,9 @@ const fs = require('node:fs');
 const assert = require('node:assert/strict');
 const { JSDOM } = require('jsdom');
 const read = f => fs.readFileSync(f, 'utf8');
-async function setup(path, consent, stored = {}, referrer = '') {
+async function setup(path, consent, stored = {}, referrer = '', host = 'www.matdepotmex.com') {
   const file = path.split('?')[0];
-  const options = {url:'https://www.matdepotmex.com'+path, runScripts:'outside-only'};
+  const options = {url:'https://'+host+path, runScripts:'outside-only'};
   if (referrer) options.referrer = referrer;
   const dom = new JSDOM(read('public' + file), options);
   const w = dom.window;
@@ -169,5 +169,13 @@ async function setup(path, consent, stored = {}, referrer = '') {
   const home=new URL(scope.window.mdWhatsAppUrl('/','')).searchParams.get('text');
   assert.equal(home,'Hola, quiero cotizar tapetes o pisos. (ref: INICIO)');
   assert.equal(new URL(scope.window.mdWhatsAppUrl('/tapetes/'+slug+'.html','')).pathname,'/5215544943014');
+  for(const host of ['matdepot-preview.vercel.app','localhost']){
+    const preview=await setup('/contacto.html','granted',{},'',host);
+    preview.d.querySelector('#wa-link').click();
+    assert.equal(preview.events().length,0,'preview must not emit production events');
+    assert.equal(preview.d.querySelectorAll('script[src*="googletagmanager.com"]').length,0);
+    assert.equal(preview.w['ga-disable-G-LC7M7BHNSN'],true);
+    preview.dom.window.close();
+  }
   console.log('Analytics passed: consent, one lead per form submit, one WhatsApp event per click, thank-you referrer and reference codes. No requests sent to Google or forms.');
 })().catch(e=>{console.error(e);process.exitCode=1;});

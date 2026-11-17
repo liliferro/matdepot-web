@@ -25,6 +25,7 @@ fs.copyFileSync(path.join(root,'assets/favicon.ico'),path.join(out,'favicon.ico'
 // Keep Bing ownership verification available at the site root after every build.
 fs.copyFileSync(path.join(root,'BingSiteAuth.xml'),path.join(out,'BingSiteAuth.xml'));
 const allUrls=[];const lastmods=new Map();
+const categorySeo=JSON.parse(read('data/category-seo.json'));
 function page(source,output,options={}){
  const dom=new JSDOM(read(source),{url:origin+'/'+(options.renderPath||output),runScripts:'outside-only'});const w=dom.window,d=w.document;
  w.eval(read('assets/catalogo.js'));w.eval(read('assets/chrome.js'));
@@ -80,7 +81,11 @@ function page(source,output,options={}){
   img.width=size[0];img.height=size[1];img.setAttribute('decoding','async');
   if(!img.hasAttribute('alt'))throw Error('Missing alt '+output);
  });
- d.querySelector('.hero__visual img')?.setAttribute('fetchpriority','high');
+ const primaryImage=d.querySelector('.hero__visual img')||d.querySelector('.prod-gallery img');
+ if(primaryImage){
+  primaryImage.setAttribute('fetchpriority','high');primaryImage.removeAttribute('loading');
+  const imagePreload=d.createElement('link');imagePreload.rel='preload';imagePreload.setAttribute('as','image');imagePreload.href=primaryImage.getAttribute('src');imagePreload.type='image/webp';imagePreload.setAttribute('fetchpriority','high');d.head.append(imagePreload);
+ }
  d.querySelectorAll('footer a[href*="productos.html#"]').forEach(a=>a.href=a.getAttribute('href').replace('#','?filtro='));
  const company=d.querySelector('.foot-top > div:last-child ul');if(company)company.insertAdjacentHTML('beforeend','<li><a href="/preguntas-frecuentes.html">Preguntas frecuentes</a></li>');
  if(options.noindex && !d.querySelector('meta[name="robots"]')){const m=d.createElement('meta');m.name='robots';m.content='noindex,follow';d.head.append(m);}
@@ -89,7 +94,7 @@ function page(source,output,options={}){
   allUrls.push(canonical);
   // Dates reflect content/schema changes, never the deployment clock.
   const article=graph.find(g=>g['@type']==='BlogPosting');
-  const modified=article?.dateModified||article?.datePublished||'2026-11-16';
+  const modified=output.startsWith('categorias/')?'2026-11-17':article?.dateModified||article?.datePublished||'2026-11-16';
   lastmods.set(canonical,modified.slice(0,10));
  }
  dom.window.close();
@@ -153,7 +158,7 @@ function shell(title,intro,body){return `<section class="page-banner"><div class
 const common='<h2>Cómo preparar tu cotización</h2><p>Selecciona las alternativas que quieres consultar y anota la cantidad aproximada, las dimensiones del área y el destino de entrega. Si todavía no sabes qué producto corresponde, solicita asesoría y describe el uso previsto. Las fotografías ayudan a identificar opciones, pero la compra debe basarse en las características confirmadas del modelo.</p><p>El precio, las existencias y el plazo se confirman al cotizar. Utiliza el formulario o WhatsApp para compartir los datos del proyecto y resolver lo que no aparece en la ficha. No se publica una disponibilidad automática ni un compromiso de entrega para todos los modelos. Guarda el enlace de la ficha para identificar con claridad el producto al contactar al equipo.</p>';
 for(const c of categories){
  const selected=products.filter(p=>c.filter?p.apps.includes(c.filter):p.sectors.some(s=>['Gimnasios','Dojos','Áreas deportivas','Box y CrossFit'].includes(s)));
- page('ubicacion.html','categorias/'+c.slug+'.html',{title:c.name+' para tu proyecto | Mat Depot',description:c.intro,mutate(d){
+ page('ubicacion.html','categorias/'+c.slug+'.html',{title:categorySeo[c.slug].title,description:categorySeo[c.slug].description,mutate(d){
  d.querySelectorAll('body > section,script:not([src])').forEach(e=>e.remove());
  d.querySelector('footer').insertAdjacentHTML('beforebegin',shell(c.name,c.intro,`<div class="prose"><h2>Qué revisar antes de elegir</h2>${c.paragraphs.map(p=>'<p>'+esc(p)+'</p>').join('')}${common}</div>${links()}${categoryFaq(c.slug)}<h2 class="h2">Productos de esta categoría</h2><div class="cat-grid" style="margin-top:24px">${selected.map((p,i)=>card(p,i)).join('')}</div><p><a class="btn" href="/productos.html?filtro=${c.filter||c.sector}">Filtrar y comparar</a></p>`));
  }});
@@ -178,6 +183,6 @@ require('./build-guides.cjs')({ page, products, origin, shell, esc });
 page('producto.html','producto.html',{noindex:true,title:'Consultar producto del catálogo | Mat Depot'});
 fs.writeFileSync(path.join(out,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+allUrls.map(u=>'<url><loc>'+esc(u)+'</loc><lastmod>'+lastmods.get(u)+'</lastmod></url>').join('')+'</urlset>');
 fs.writeFileSync(path.join(out,'robots.txt'),'User-agent: *\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: Claude-SearchBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nSitemap: '+origin+'/sitemap.xml\n');
-fs.writeFileSync(path.join(out,'llms.txt'),'# Mat Depot\n\n> Catálogo comercial de tapetes y pisos de hule y PVC para proyectos industriales, comerciales y deportivos. Atención desde Tlalnepantla de Baz, México.\n\n## Contacto\n\n- [Cotizaciones]('+origin+'/contacto.html): '+contact.email+'; WhatsApp '+contact.wa+'.\n- Precios, existencias, condiciones de entrega y documentación técnica se confirman al cotizar. No se publica una garantía general de disponibilidad.\n\n## Catálogo\n\n'+products.map(p=>'- ['+p.name+']('+origin+productUrl(p)+'): '+p.short).join('\n')+'\n\n## Ayuda\n\n- [Preguntas frecuentes]('+origin+'/preguntas-frecuentes.html)\n- [Ubicación]('+origin+'/ubicacion.html)\n');
+fs.writeFileSync(path.join(out,'llms.txt'),'# Mat Depot\n\n> Catálogo comercial de tapetes y pisos de hule y PVC para proyectos industriales, comerciales y deportivos. Atención desde Tlalnepantla de Baz, México.\n\n## Contacto\n\n- [Cotizaciones]('+origin+'/contacto.html): '+contact.email+'; WhatsApp '+contact.wa+'.\n- Precios, existencias, condiciones de entrega y documentación técnica se confirman al cotizar. No se publica una garantía general de disponibilidad.\n\n## Categorías\n\n'+categories.map(c=>'- ['+c.name+']('+origin+'/categorias/'+c.slug+'.html): '+categorySeo[c.slug].description).join('\n')+'\n\n## Sectores\n\n'+JSON.parse(read('data/sectors.json')).map(c=>'- ['+c.name+']('+origin+'/sectores/'+c.slug+'.html)').join('\n')+'\n\n## Guías y herramientas\n\n- [Blog]('+origin+'/blog.html): Guías de selección y herramientas interactivas.\n- [Comparador]('+origin+'/comparar.html): Hasta tres productos con especificaciones del catálogo.\n- [Calculadora de superficie]('+origin+'/blog/mejor-piso-para-gimnasio.html#calculadora): Estimación de metros cuadrados para cotizar.\n- [Precio por metro cuadrado]('+origin+'/blog/precio-piso-hule-m2.html): Cómo organizar un presupuesto; no es una lista de precios.\n- [Catálogo extendido en texto]('+origin+'/llms-full.txt): Datos publicados de cada modelo.\n\n## Catálogo\n\n'+products.map(p=>'- ['+p.name+']('+origin+productUrl(p)+'): '+p.short).join('\n')+'\n\n## Ayuda\n\n- [Preguntas frecuentes]('+origin+'/preguntas-frecuentes.html)\n- [Ubicación]('+origin+'/ubicacion.html)\n');
 fs.writeFileSync(path.join(out,'llms-full.txt'),'# Mat Depot · Datos del catálogo\n\nFuente: '+origin+'/productos.html\nPrecios, existencias y documentación se confirman al cotizar.\nContacto: '+contact.email+'\n\n'+products.map(p=>'## '+p.name+'\n\n'+origin+productUrl(p)+'\n\n'+p.intro+'\n\n'+Object.entries(p.specs).map(([k,v])=>'- '+k+': '+v).join('\n')).join('\n\n'));
 console.log('Generated '+allUrls.length+' indexable pages, '+products.length+' static product pages.');
