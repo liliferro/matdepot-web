@@ -889,3 +889,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid currentColor; outline
  .hero__cta .btn { flex:1 1 140px; }
 }
 @media(max-width:360px) { #prod-grid { grid-template-columns:minmax(0,1fr); } }
+
+/* Avoid stacking two section paddings and the prose heading margin on home. */
+.home-pillars { padding-bottom:24px; }
+#mayoreo { padding-top:24px; padding-bottom:48px; }
+#mayoreo h2 { margin-top:0; }
+#mayoreo p:last-child { margin-bottom:0; }
