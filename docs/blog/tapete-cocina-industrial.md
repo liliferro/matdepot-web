@@ -42,3 +42,10 @@ Revisa si ambas incluyen cantidades equivalentes, remates, entrega e instalació
 Consulta las [preguntas de áreas húmedas y cocinas](https://www.matdepotmex.com/categorias/areas-humedas.html#preguntas-frecuentes) para dudas breves. Para revisar especificaciones disponibles puedes usar el [comparador](https://www.matdepotmex.com/comparar.html).
 
 [Envía a MatDepot el plano o las medidas de cada estación](https://www.matdepotmex.com/contacto.html), junto con los líquidos y la rutina prevista. La fuente del formato citado es la ficha comercial; esta guía no declara una certificación sanitaria ni resistencia universal a grasas o temperatura.
+
+
+## Referencia de orientación
+
+La guía de HSE recomienda identificar de dónde provienen los derrames y adaptar la limpieza al piso y al contaminante. También señala que la propia limpieza puede dejar superficies húmedas que requieren control de acceso. Consulta [HSE: Contamination and cleaning](https://www.hse.gov.uk/slips/cleancampaign.htm).
+
+Esta fuente internacional orienta la evaluación del entorno; no certifica productos Mat Depot ni sustituye la documentación del modelo o la revisión de los requisitos aplicables en México. Fuente consultada el 16 de noviembre de 2026.

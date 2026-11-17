@@ -41,7 +41,7 @@
       const button = card.querySelector('.compare-toggle');
       const active = selected.includes(card.dataset.slug);
       button.setAttribute('aria-pressed', String(active));
-      button.textContent = active ? 'Quitar de comparación' : replacing !== null ? 'Elegir este producto' : 'Agregar a la comparación';
+      button.textContent = active ? 'Quitar comparación' : replacing !== null ? 'Elegir este producto' : 'Comparar';
       button.setAttribute('aria-label', button.textContent + ': ' + catalog.find(p => p.slug === card.dataset.slug).name);
       card.querySelector('.compare-view').hidden = !active;
     });
@@ -105,7 +105,7 @@
     byId('compare-electrical-note').hidden = !selected.includes('tapete-dielectrico');
   }
   cards.forEach(card => {
-    const button = make('button', 'Agregar a la comparación', 'compare-toggle'); button.type = 'button';
+    const button = make('button', 'Comparar', 'compare-toggle'); button.type = 'button';
     button.setAttribute('aria-label', 'Comparar ' + catalog.find(p => p.slug === card.dataset.slug).name);
     button.onclick = () => {
       const slug = card.dataset.slug;

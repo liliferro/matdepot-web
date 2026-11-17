@@ -44,3 +44,10 @@ Si un producto combina varias funciones, pide que la propuesta identifique cuál
 Describe el puesto, sus medidas y los factores que cambian durante el turno. Adjunta fotos generales y acercamientos de bordes o zonas húmedas. Después compara fichas usando el [comparador de MatDepot](https://www.matdepotmex.com/comparar.html) y [solicita orientación](https://www.matdepotmex.com/contacto.html).
 
 Fuentes de dimensiones: fichas comerciales enlazadas. Esta guía distingue criterios de compra; no certifica un nivel de agarre ni promete efectos médicos.
+
+
+## Referencia de orientación
+
+CCOHS distingue la función antifatiga de la antideslizante y recomienda revisar el entorno, los bordes y la limpieza al seleccionar un tapete. Consulta [CCOHS: Anti-fatigue Mats](https://www.ccohs.ca/oshanswers/ergonomics/mats.html).
+
+Esta fuente internacional orienta la evaluación del entorno; no certifica productos Mat Depot ni sustituye la documentación del modelo o la revisión de los requisitos aplicables en México. Fuente consultada el 16 de noviembre de 2026.

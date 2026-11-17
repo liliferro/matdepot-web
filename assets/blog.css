@@ -64,3 +64,8 @@
 @media(max-width:700px) { .tool-recommendations { grid-template-columns:1fr; } }
 @media(max-width:600px) { .tool-costs { grid-template-columns:1fr; } }
 @media(max-width: 700px) { .blog-card { grid-template-columns: 1fr; padding: 18px; gap: 18px; } .blog-main { padding-inline: 16px; } }
+
+.table-scroll-hint { font-size:14px; color:var(--c-steel); margin-bottom:8px; }
+.blog-table { max-width:100%; overscroll-behavior-x:contain; }
+.blog-body { min-width:0; }
+.blog-main .blog-share { min-height:44px; font-size:13px; border-color:var(--c-steel); color:var(--c-carbon); }

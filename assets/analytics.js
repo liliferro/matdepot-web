@@ -9,6 +9,41 @@
   let enabled = false, initialized = false;
   const read = (key, session=false) => { try { return JSON.parse((session?sessionStorage:localStorage).getItem(key)); } catch { return null; } };
   const save = (key, value, session=false) => { try { (session?sessionStorage:localStorage).setItem(key,JSON.stringify(value)); } catch {} };
+  const attributionKey='md-attribution-v1';
+  const campaignKeys=['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+  const campaignValue=value=>typeof value==='string' && /^[a-zA-Z0-9_ .~:-]{1,100}$/.test(value) && !/\d{7,}/.test(value) ? value : '';
+  function captureAttribution(){
+    const params=new URLSearchParams(location.search), campaign={};
+    for(const key of campaignKeys){const value=campaignValue(params.get(key));if(value)campaign[key]=value;}
+    const saved=read(attributionKey,true);
+    if(Object.keys(campaign).length || !saved){
+      let referrer='';try{const u=new URL(document.referrer);if(u.origin!==location.origin&&u.hostname!=='formsubmit.co')referrer=u.hostname;}catch{}
+      save(attributionKey,{...campaign,landing_page:location.pathname,referrer_host:referrer},true);
+    }
+    syncAttribution();
+  }
+  function syncAttribution(){
+    const source=enabled ? read(attributionKey,true) : null;
+    const form=document.getElementById('contact-form');
+    if(form){
+      form.querySelectorAll('[data-attribution]').forEach(n=>n.remove());
+      for(const [name,value] of Object.entries(source||{})){
+        const input=document.createElement('input');input.type='hidden';input.name=name;input.value=value;input.dataset.attribution='true';form.append(input);
+      }
+    }
+    document.querySelectorAll('a[href]').forEach(a=>{
+      let u;try{u=new URL(a.dataset.mdOriginalWa||a.href);}catch{return;}
+      if(!salesWhatsApp(u)||a.dataset.shareArticle)return;
+      a.dataset.mdOriginalWa=u.href;
+      if(source?.utm_source){
+        const label=[source.utm_source,source.utm_medium,source.utm_campaign].filter(Boolean).join(' / ');
+        const text=u.searchParams.get('text')||'';
+        const ref=text.match(/\s*\(ref: [A-Z0-9-]+\)\s*$/)?.[0]||'';
+        u.searchParams.set('text',(ref?text.slice(0,-ref.length):text)+'\nOrigen: '+label+ref);
+      }
+      a.href=u.href;
+    });
+  }
   const product = slug => window.MD_CATALOG?.find(p => p.slug === slug);
   const item = () => window.MD_CATALOG?.find(p => location.pathname === '/tapetes/'+p.slug+'.html');
   const selectedItem = () => product(document.getElementById('f-cat')?.selectedOptions[0]?.dataset.slug);
@@ -42,6 +77,8 @@
   };
   function enable() {
     if(enabled)return; enabled=true;
+    captureAttribution();
+    document.dispatchEvent(new CustomEvent('md:analytics-enabled'));
     window['ga-disable-'+id] = false;
     gtag('consent','update',{analytics_storage:'granted'});
     if(initialized)return;
@@ -62,6 +99,8 @@
       window['ga-disable-'+id] = true;
       if(enabled)gtag('consent','update',{analytics_storage:'denied'});
       enabled=false;
+      try{sessionStorage.removeItem(attributionKey);}catch{}
+      syncAttribution();
     }
     document.getElementById('cookie-choice').hidden=true;
   }
@@ -75,11 +114,23 @@
     if(read('md-analytics-consent')==='granted')enable();
     const form=document.getElementById('contact-form');
     if(form){
-      let started=false;
+      let started=false, submitted=false;
+      const errorFields=new Set();
+      form.addEventListener('invalid',event=>{
+        const allowed=['f-name','f-email','f-phone','f-cat','f-traffic','f-msg'];
+        const field=allowed.includes(event.target.id)?event.target.id:'consentimiento';
+        if(!errorFields.has(field)){mdTrack('form_error',{form_id:'cotizacion',campo:field});errorFields.add(field);}
+      },true);
+      form.addEventListener('input',event=>errorFields.delete(event.target.id));
+      window.addEventListener('pagehide',()=>{
+        if(started&&!submitted)mdTrack('form_exit_before_submit',{form_id:'cotizacion',transport_type:'beacon'});
+      });
       form.addEventListener('focusin',()=>{if(!started)started=mdTrack('form_start',{form_id:'cotizacion',page_location:pageLocation()});});
-      window.addEventListener('pageshow',()=>{delete form.dataset.mdLeadQueued;});
+      window.addEventListener('pageshow',()=>{delete form.dataset.mdLeadQueued;submitted=false;});
       form.addEventListener('submit',event=>{
         if(form.dataset.mdLeadQueued==='1'){event.preventDefault();return;}
+        submitted=true;
+        syncAttribution();
         const leadId='md-'+(window.crypto?.randomUUID?crypto.randomUUID():Date.now());
         const selected=document.getElementById('f-cat')?.selectedOptions[0];
         const productSlug=selected?.dataset.slug||'';
@@ -124,8 +175,23 @@
       else if(salesWhatsApp(url))mdTrack('contact_whatsapp',{...data,method:'whatsapp',lead_channel:'whatsapp',page_location:pageLocation(),wa_ref:waRef(url)});
       else if(href.startsWith('tel:'))mdTrack('contact_phone',{...data,linea:href.includes('5258')?'linea1':'linea2'});
       else if(href.startsWith('mailto:'))mdTrack('contact_email',data);
+      else if(url.origin===location.origin && /\.pdf$/i.test(url.pathname))mdTrack('file_download',{...data,file_name:url.pathname.split('/').pop(),file_extension:'pdf'});
       else if(targetProduct)mdTrack('select_item',{...data,item_list_id:location.pathname,items:[gaItem(targetProduct)]});
     });
+    if('IntersectionObserver' in window){
+      const viewed=new Set();
+      const observer=new IntersectionObserver(entries=>{
+        if(!enabled)return;
+        const items=entries.filter(e=>e.isIntersecting).map(e=>{
+          const a=e.target;const slug=new URL(a.href).pathname.split('/').pop().replace(/\.html$/,'');
+          const p=product(slug);if(!p||viewed.has(slug))return null;viewed.add(slug);return gaItem(p);
+        }).filter(Boolean);
+        if(items.length)mdTrack('view_item_list',{item_list_id:location.pathname,items});
+      },{threshold:0.25});
+      const observe=()=>{document.querySelectorAll('a.cat-card').forEach(a=>{observer.unobserve(a);observer.observe(a);});};
+      document.addEventListener('md:catalog-visible',observe);
+      document.addEventListener('md:analytics-enabled',observe);observe();
+    }
     document.addEventListener('md:compare',e=>{
       const actions=['add','remove','replace','clear','differences'];
       if(!actions.includes(e.detail?.action))return;

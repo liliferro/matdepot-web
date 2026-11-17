@@ -40,3 +40,10 @@ Cuando se considere una muestra o prueba acordada, define qué observar: ajuste 
 Si varios puestos son diferentes, no extrapoles automáticamente una sola selección a todos. Agrúpalos por condiciones y cotiza cada conjunto con sus medidas.
 
 Consulta los [tapetes antifatiga](https://www.matdepotmex.com/categorias/antifatiga.html), utiliza el [comparador](https://www.matdepotmex.com/comparar.html) y [comparte la ficha del puesto](https://www.matdepotmex.com/contacto.html). Las medidas anteriores proceden del catálogo comercial de MatDepot y deben confirmarse en la propuesta.
+
+
+## Referencia de orientación
+
+El Centro Canadiense de Salud y Seguridad Ocupacional recomienda considerar el puesto, el calzado y el suelo conjuntamente. La elección no depende solo de que un tapete sea más blando o grueso. Consulta [CCOHS: Anti-fatigue Mats](https://www.ccohs.ca/oshanswers/ergonomics/mats.html).
+
+Esta fuente internacional orienta la evaluación del entorno; no certifica productos Mat Depot ni sustituye la documentación del modelo o la revisión de los requisitos aplicables en México. Fuente consultada el 16 de noviembre de 2026.

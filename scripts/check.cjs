@@ -35,5 +35,5 @@ for(const file of files){
   assert.match(u.searchParams.get('text')||'',/^Hola, quiero cotizar(?:: .+| tapetes o pisos)\. \(ref: [A-Z0-9-]+\)$/,file);
  }
 }
-const sitemap=fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');assert.equal((sitemap.match(/<loc>/g)||[]).length,51+require('../data/blog-posts.json').length);assert(!sitemap.includes('gracias.html'));assert(!sitemap.includes('?id='));
+const sitemap=fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');assert.equal((sitemap.match(/<loc>/g)||[]).length,51+require('../data/blog-posts.json').length+require('../data/sectors.json').length);assert(!sitemap.includes('gracias.html'));assert(!sitemap.includes('?id='));
 console.log(JSON.stringify({html_pages:files.length,static_products:35,indexable_urls:(sitemap.match(/<loc>/g)||[]).length,image_elements:images,local_references:links,status:'passed'}));

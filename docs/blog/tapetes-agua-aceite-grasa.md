@@ -45,3 +45,10 @@ Una prueba acordada debe tener condiciones y criterios definidos; no debe presen
 Envía el resumen junto con fotografías a través de [contacto de MatDepot](https://www.matdepotmex.com/contacto.html). La orientación será más precisa si describes el líquido y la operación, en lugar de pedir únicamente un tapete resistente.
 
 Fuente del formato citado: ficha comercial enlazada. No se dispone aquí de una tabla de compatibilidad química ni de ensayos de agarre para esas sustancias.
+
+
+## Referencia de orientación
+
+HSE incluye agua, aceite y polvo entre los contaminantes que deben revisarse en la prevención de resbalones. Recomienda atender su origen y comprobar que la limpieza sea adecuada al piso y a la sustancia presente. Consulta [HSE: Contamination and cleaning](https://www.hse.gov.uk/slips/cleancampaign.htm).
+
+Esta fuente internacional orienta la evaluación del entorno; no certifica productos Mat Depot ni sustituye la documentación del modelo o la revisión de los requisitos aplicables en México. Fuente consultada el 16 de noviembre de 2026.

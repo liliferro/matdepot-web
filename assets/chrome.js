@@ -32,6 +32,8 @@
         <li><a href="quienes-somos.html"    ${isActive("quienes-somos.html")  ? 'aria-current="page"' : ""}>Nosotros</a></li>
         <li><a href="ubicacion.html"        ${isActive("ubicacion.html")      ? 'aria-current="page"' : ""}>Ubicación</a></li>
         <li><a href="contacto.html"         ${isActive("contacto.html")       ? 'aria-current="page"' : ""}>Contacto</a></li>
+      <li class="mobile-sales"><a href="contacto.html">Cotizar mi proyecto</a></li>
+        <li class="mobile-sales"><a href="${wa}" target="_blank" rel="noopener">WhatsApp</a></li>
       </ul>
       <div class="nav-cta">
         <a class="btn btn--ghost-light btn--sm" href="${wa}" target="_blank" rel="noopener">WhatsApp</a>
@@ -57,7 +59,7 @@
         <p class="foot-cta">Material que resiste.</p>
         <div class="foot-contact">
           ${c.address}<br>
-          <a href="tel:5596265258">${c.tel1}</a> · <a href="tel:5596265259">${c.tel2}</a><br>
+          <a href="tel:+525596265258">${c.tel1}</a> · <a href="tel:+525596265259">${c.tel2}</a><br>
           <a href="mailto:${c.email}">${c.email}</a>
         </div>
       </div>
@@ -75,11 +77,11 @@
       <div>
         <h4>Sectores</h4>
         <ul>
-          <li><a href="productos.html#industria">Industria</a></li>
-          <li><a href="productos.html#cocinas">Cocinas</a></li>
-          <li><a href="productos.html#gimnasios">Gimnasios</a></li>
-          <li><a href="productos.html#comercio">Comercio</a></li>
-          <li><a href="productos.html#electrico">Eléctrico</a></li>
+          <li><a href="/sectores/industria.html">Industria</a></li>
+          <li><a href="/sectores/cocinas.html">Cocinas</a></li>
+          <li><a href="/categorias/gimnasios.html">Gimnasios</a></li>
+          <li><a href="/sectores/comercio.html">Comercio</a></li>
+          <li><a href="/categorias/seguridad-electrica.html">Eléctrico</a></li>
         </ul>
       </div>
       <div>

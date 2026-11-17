@@ -37,9 +37,11 @@
           <div class="field"><label for="f-name">Nombre completo *</label><input id="f-name" name="name" autocomplete="name" required></div>
           <div class="field"><label for="f-company">Empresa</label><input id="f-company" name="organization" autocomplete="organization"></div>
         </div>
+        <p id="contact-help">Déjanos tu email o teléfono para responderte. Los detalles del proyecto son opcionales; ayudan a preparar tu cotización.</p>
+        <noscript><p>Sin JavaScript, indica tu email para recibir respuesta.</p></noscript>
         <div class="form-row">
-          <div class="field"><label for="f-email">Email *</label><input id="f-email" name="email" autocomplete="email" type="email" inputmode="email" required></div>
-          <div class="field"><label for="f-phone">Teléfono *</label><input id="f-phone" name="tel" autocomplete="tel" type="tel" inputmode="tel" required></div>
+          <div class="field"><label for="f-email">Email (o teléfono) *</label><input id="f-email" name="email" autocomplete="email" type="email" inputmode="email" aria-describedby="contact-help" required></div>
+          <div class="field"><label for="f-phone">Teléfono (o email) *</label><input id="f-phone" name="tel" autocomplete="tel" type="tel" inputmode="tel" aria-describedby="contact-help"></div>
         </div>
         <div class="form-row">
           <div class="field"><label for="f-cat">Producto de interés</label>
@@ -52,8 +54,8 @@
             </select>
           </div>
         </div>
-        <div class="field"><label for="f-msg">Cuéntanos del espacio · superficie · medidas aproximadas *</label>
-          <textarea id="f-msg" name="message" maxlength="10000" required></textarea>
+        <div class="field"><label for="f-msg">Cuéntanos del espacio · superficie · medidas aproximadas (opcional)</label>
+          <textarea id="f-msg" name="message" maxlength="10000"></textarea>
         </div>
         <label class="consent-check"><input type="checkbox" name="consentimiento" value="Aceptado" required> <span>He leído el <a href="aviso-privacidad.html">aviso de privacidad</a> y autorizo el uso de mis datos para atender esta solicitud.</span></label>
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
@@ -69,11 +71,11 @@
         <div class="contact-list" style="margin-top:24px">
           <div class="contact-item">
             <span class="mono">Teléfono · línea 1</span>
-            <span class="val"><a id="tel1" href="tel:5596265258"></a></span>
+            <span class="val"><a id="tel1" href="tel:+525596265258"></a></span>
           </div>
           <div class="contact-item">
             <span class="mono">Teléfono · línea 2</span>
-            <span class="val"><a id="tel2" href="tel:5596265259"></a></span>
+            <span class="val"><a id="tel2" href="tel:+525596265259"></a></span>
           </div>
           <div class="contact-item">
             <span class="mono">WhatsApp</span>
@@ -122,6 +124,15 @@ if (preset) {
 }
 
 const form = document.getElementById("contact-form");
+const email = document.getElementById('f-email'), telephone = document.getElementById('f-phone');
+email.required = false;
+function validateContact() {
+  const missing = !email.value.trim() && !telephone.value.trim();
+  email.setCustomValidity(missing ? 'Indica un email o un teléfono para responderte.' : '');
+}
+email.addEventListener('input', validateContact);
+telephone.addEventListener('input', validateContact);
+validateContact();
 form.addEventListener("submit", () => {
   document.getElementById("form-status").textContent = "Procesando solicitud. Completa la verificación de seguridad para enviarla.";
 });

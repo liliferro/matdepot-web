@@ -29,8 +29,9 @@
    if(query && !norm([p.name,p.short,...Object.values(p.specs),...p.uses].join(' ')).includes(query))return false;
    return Object.entries(fields).every(([id,key])=>!el('catalog-'+id).value||p.specs[key]===el('catalog-'+id).value);
   }).sort((a,b)=>a.name.localeCompare(b.name,'es')*(el('catalog-order').value==='za'?-1:1));
-  const selected=new Set(filtered.map(p=>p.slug));cards.forEach(c=>c.hidden=!selected.has(c.dataset.slug));
-  filtered.forEach(p=>grid.append(cards.find(c=>c.dataset.slug===p.slug)));
+  const selected=new Set(filtered.map(p=>p.slug));cards.forEach(c=>{c.hidden=!selected.has(c.dataset.slug);c.dataset.filtered=String(selected.has(c.dataset.slug));});
+  filtered.forEach((p,i)=>{const card=cards.find(c=>c.dataset.slug===p.slug);card.querySelector('.cat-card__num').textContent=String(i+1).padStart(2,'0');grid.append(card);});
+  document.dispatchEvent(new CustomEvent('md:catalog-filter'));
   el('result-count').textContent=filtered.length+' resultados';el('no-results').hidden=filtered.length!==0;
   if(update){
    const url=new URL(location.href);url.search='';url.hash='';

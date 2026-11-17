@@ -6,6 +6,41 @@
   "installCommand": "npm ci --ignore-scripts",
   "redirects": [
     {
+      "source": "/aviso-privacidad",
+      "destination": "/aviso-privacidad.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/preguntas-frecuentes",
+      "destination": "/preguntas-frecuentes.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/comparar",
+      "destination": "/comparar.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/quienes-somos",
+      "destination": "/quienes-somos.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/ubicacion",
+      "destination": "/ubicacion.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/contacto",
+      "destination": "/contacto.html",
+      "statusCode": 301
+    },
+    {
       "source": "/guias/precio-piso-hule-m2.html",
       "destination": "/blog/precio-piso-hule-m2.html",
       "statusCode": 301
@@ -729,6 +764,31 @@
         {
           "key": "X-Robots-Tag",
           "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://www.google.com https://maps.google.com; form-action 'self' https://formsubmit.co; upgrade-insecure-requests"
         }
       ]
     }
