@@ -22,6 +22,7 @@ module.exports = function enhance(d, output, origin, graph) {
     const urls=['/sectores/industria.html','/sectores/cocinas.html','/categorias/gimnasios.html','/sectores/comercio.html','/categorias/seguridad-electrica.html','/categorias/areas-humedas.html'];
     d.querySelectorAll('.sectors .sector').forEach((el,i)=>{const a=d.createElement('a');a.className=el.className;a.href=urls[i];a.innerHTML=el.innerHTML;el.replaceWith(a);});
   }
+  const motion=d.createElement('script');motion.src='/assets/motion.js';motion.defer=true;d.head.append(motion);
   const scripts=['/assets/catalog-more.js'];
   if(d.querySelector('#prod-grid')){const s=d.createElement('script');s.src=scripts[0];s.defer=true;d.head.append(s);}
 };

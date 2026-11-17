@@ -892,3 +892,39 @@ a:focus-visible, button:focus-visible { outline: 2px solid currentColor; outline
 #mayoreo { padding-top:24px; padding-bottom:48px; }
 #mayoreo h2 { margin-top:0; }
 #mayoreo p:last-child { margin-bottom:0; }
+
+/* Subtle motion: native controls stay immediate and content never starts hidden. */
+.nav.open .burger span { background:transparent; }
+.nav.open .burger span::before { transform:translateY(6px) rotate(45deg); }
+.nav.open .burger span::after { transform:translateY(-6px) rotate(-45deg); }
+@keyframes md-menu-enter {
+  from { opacity:.65; transform:translateY(-6px); }
+  to { opacity:1; transform:translateY(0); }
+}
+@keyframes md-answer-enter { from { opacity:.65; } to { opacity:1; } }
+@media (prefers-reduced-motion:no-preference) {
+  .btn,.compare-toggle,.catalog-filter-toggle {
+    transition:transform 140ms ease,background-color 160ms ease,color 160ms ease,border-color 160ms ease;
+  }
+  .filter { transition:background-color 160ms ease,color 160ms ease,border-color 160ms ease; }
+  .btn:active:not(:disabled),.compare-toggle:active:not(:disabled) { transform:scale(.985); }
+  .field input,.field select,.field textarea { transition:border-color 160ms ease; }
+  .burger span { transition:background-color 160ms ease; }
+  .burger span::before,.burger span::after { transition:transform 180ms ease; }
+  .faq details[open] > :not(summary) { animation:md-answer-enter 160ms ease-out; }
+}
+@media (max-width:1024px) and (prefers-reduced-motion:no-preference) {
+  .nav.open .nav-links { animation:md-menu-enter 180ms cubic-bezier(.2,.7,.2,1); }
+}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+  .sector { transition:transform 180ms ease; }
+  .sector:hover { transform:translateY(-2px); }
+}
+@media (hover:none),(pointer:coarse) {
+  .btn:hover,.wa-fab:hover,.btn:hover .arrow,.cat-card:hover .cat-card__media--photo img { transform:none; }
+}
+@media (prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto; }
+  *,*::before,*::after { animation:none!important; transition:none!important; }
+  .btn:hover,.wa-fab:hover,.btn:hover .arrow,.cat-card:hover .cat-card__media--photo img,.sector:hover { transform:none; }
+}
