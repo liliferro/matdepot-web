@@ -37,3 +37,50 @@ for(const match of llms.matchAll(/\]\(https:\/\/www\.matdepotmex\.com([^)]*)\)/g
  const file=match[1].split('#')[0];assert(fs.existsSync('public'+(file==='/'?'/index.html':file)),file);
 }
 console.log('SEO follow-up passed: nested routes, product image priority and valid llms links.');
+assert(v.redirects.some(r=>r.source==='/(.*)'&&r.statusCode===308&&r.destination==='https://www.matdepotmex.com/$1'&&r.has?.some(h=>h.type==='host'&&h.value==='matdepotmex.com')));
+const robots=fs.readFileSync('public/robots.txt','utf8');
+for(const bot of ['GPTBot','OAI-SearchBot','ChatGPT-User','ClaudeBot','Claude-User','Claude-SearchBot','PerplexityBot','Perplexity-User','Google-Extended','Applebot-Extended']){
+ assert(new RegExp('User-agent: '+bot+'\\nAllow: /').test(robots), bot);
+}
+assert(llms.includes('/categorias/antifatiga.html')&&llms.includes('/sectores/cocinas.html')&&llms.includes('/guias/tapete-dielectrico-precio-voltajes.html'));
+const home=page('index.html');
+const homeGraph=JSON.parse(home.window.document.querySelector('script[type="application/ld+json"]').textContent)['@graph'];
+const org=homeGraph.find(g=>g['@type']==='Organization');
+const local=homeGraph.find(g=>g['@type']==='LocalBusiness');
+assert(org&&local&&org['@id']!==local['@id']);
+assert(!JSON.stringify(homeGraph).includes('linkedin.com'));
+assert.equal(org.contactPoint[0].contactType,'sales');
+assert.equal(org.contactPoint[0].telephone,'+525544943014');
+assert(home.window.document.querySelector('.hero__visual img').getAttribute('srcset').includes(' 480w'));
+assert(home.window.document.querySelector('.hero__visual img').getAttribute('sizes'));
+home.window.close();
+const catalog=page('productos.html');
+assert(catalog.window.document.querySelector('.cat-card img').getAttribute('srcset'));
+assert(catalog.window.document.querySelector('.cat-card img').getAttribute('sizes'));
+catalog.window.close();
+const dielectric=page('tapetes/tapete-dielectrico.html');
+assert(!/precio/i.test(dielectric.window.document.title));
+assert(dielectric.window.document.querySelector('a[href="/guias/tapete-dielectrico-precio-voltajes.html"]').textContent.includes('ver precios y clases'));
+assert(dielectric.window.document.querySelector('.prod-gallery img').getAttribute('srcset'));
+dielectric.window.close();
+const wet=page('categorias/areas-humedas.html');
+assert(!wet.window.document.body.textContent.includes('¿Cualquier tapete de hule sirve para una cocina'));
+assert(wet.window.document.querySelector('a[href="/blog/tapete-cocina-industrial.html"]'));
+wet.window.close();
+const industry=page('sectores/industria.html');
+assert(!/antifatiga/i.test(industry.window.document.title));
+assert.equal(industry.window.document.querySelector('a[href="/categorias/antifatiga.html"]').textContent,'tapetes antifatiga');
+industry.window.close();
+for(const file of ['categorias/antifatiga.html','categorias/antiderrapantes.html','categorias/gimnasios.html','categorias/seguridad-electrica.html','categorias/areas-humedas.html','sectores/industria.html','sectores/cocinas.html','sectores/comercio.html']){
+ const dom=page(file);const description=dom.window.document.querySelector('meta[name="description"]').content;
+ const length=[...description].length;
+ assert(length>=140&&length<=155, file+' description '+length);
+ assert(/CDMX|Edomex/.test(dom.window.document.title), file);
+ dom.window.close();
+}
+const dates=[...sitemap.matchAll(/<loc>([^<]+)<\/loc><lastmod>([^<]+)<\/lastmod>/g)].map(match=>[match[1],match[2]]);
+assert(dates.some(([,date])=>date==='2026-11-16'),'unchanged URLs keep their previous lastmod');
+assert(dates.some(([url,date])=>url.endsWith('/tapetes/tapete-dielectrico.html')&&date==='2026-11-19'));
+assert(dates.some(([url,date])=>url.endsWith('/tapetes/tapete-rizo.html')&&date==='2026-11-16'));
+assert(!dates.every(([,date])=>date==='2026-11-19'));
+console.log('Days 0-7 checks passed: metadata length, schema split, robots, llms, srcset, 308 redirect and selective lastmod.');

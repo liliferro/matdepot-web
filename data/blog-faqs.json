@@ -1,0 +1,38 @@
+{
+  "mejor-piso-para-gimnasio": [
+    ["¿Qué formato publica la loseta modular de 13 mm?", "La ficha del tapete para gimnasio modular de 13 mm indica loseta negra de 50 cm × 50 cm, ensamblable. Esa pieza sirve para contar módulos de una zona; no define el piso de máquinas ni de circulación."]
+  ],
+  "piso-gimnasio-rollo-o-modular": [
+    ["¿Qué ancho y largos publica el rollo con chispas verdes?", "La ficha indica 1 m de ancho, espesores de 5 mm o 9 mm y largos de 5 m, 10 m y 20 m. La loseta modular de 13 mm, en cambio, mide 50 cm × 50 cm."]
+  ],
+  "espesor-piso-gimnasio": [
+    ["¿Qué espesores tienen las losetas negras de 50 cm × 50 cm?", "El catálogo publica dos fichas: loseta modular de 7 mm y loseta modular de 13 mm, ambas de 50 cm × 50 cm. El espesor se revisa por zona; no hay una sola medida para todo el gimnasio."]
+  ],
+  "instalar-piso-hule-concreto-loseta": [
+    ["¿Qué acabado y medida publica el rollo negro tipo B?", "La ficha lo describe como EPDM de 5 mm, rollo de 1 m × 10 m, acabado liso sin poros y peso específico de 1.07 g/cm³. Esas cifras no sustituyen la revisión de humedad y nivel de la base."]
+  ],
+  "limpiar-piso-gimnasio": [
+    ["¿Qué acabado publica el rollo negro tipo A?", "La ficha indica EPDM de 5 mm, rollo de 1 m × 10 m, acabado poroso y peso específico de 0.8 g/cm³. El tipo B, de la misma medida, se publica como liso sin poros y 1.07 g/cm³."]
+  ],
+  "tapete-trabajo-de-pie": [
+    ["¿Qué medida publica el tapete antifatiga negro de uso general?", "La ficha indica 10 mm de espesor y pieza de 90 cm × 1.20 m, en negro o gris. Esa pieza es la referencia de compra en la categoría de tapetes antifatiga."]
+  ],
+  "antifatiga-o-antiderrapante": [
+    ["¿En qué se distinguen el esponjoso con franjas y la pieza antifatiga de 10 mm?", "El esponjoso con franjas amarillas publica 9.5 mm de espesor, 90 cm de ancho y largos de 3 m, 6 m, 12 m o 18 m. La pieza antifatiga de uso general publica 10 mm y 90 cm × 1.20 m."]
+  ],
+  "tapetes-agua-aceite-grasa": [
+    ["¿Qué diferencia de formato hay entre el tapete de alberca y el de cocina?", "La ficha de alberca es un rollo de 15 m, 90 cm de ancho y 5.5 mm. El tapete para cocina es una loseta modular de 91 cm × 91 cm y 13 mm. Ninguna de las dos cifras demuestra resistencia a un aceite concreto."]
+  ],
+  "tapete-cocina-industrial": [
+    ["¿Qué medida publica el tapete para cocina del catálogo?", "La ficha indica loseta modular negra de 91 cm × 91 cm y 13 mm de espesor. Con esa medida se arma el plano de las estaciones; la compatibilidad con grasa se confirma para el modelo."]
+  ],
+  "comparar-cotizaciones-tapetes": [
+    ["¿Qué unidad publica el tapete de hule reciclado de 8 mm?", "La ficha indica pieza de 1 m × 1 m y 8 mm de espesor. Al comparar dos propuestas, la unidad tiene que ser la misma: una pieza de 1 m² no equivale a un rollo de otro largo."]
+  ],
+  "datos-cotizar-tapetes": [
+    ["¿Qué largos publica el tapete esponjoso con franjas amarillas?", "La ficha indica 9.5 mm de espesor, 90 cm de ancho y largos de 3 m, 6 m, 12 m o 18 m. Esos largos son el dato de cantidad que se envía al cotizar ese modelo."]
+  ],
+  "precio-piso-hule-m2": [
+    ["¿Qué formatos del rollo con chispas verdes se pueden pasar a metros cuadrados?", "La ficha publica 1 m de ancho, espesores de 5 mm o 9 mm y largos de 5 m, 10 m y 20 m. Un rollo de 1 m × 10 m cubre 10 m² nominales; el importe por m² sale de la cotización, no de esta página."]
+  ]
+}
