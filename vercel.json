@@ -6,6 +6,17 @@
   "installCommand": "npm ci --ignore-scripts",
   "redirects": [
     {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "matdepotmex.com"
+        }
+      ],
+      "destination": "https://www.matdepotmex.com/$1",
+      "statusCode": 308
+    },
+    {
       "source": "/aviso-privacidad",
       "destination": "/aviso-privacidad.html",
       "statusCode": 301

@@ -1,7 +1,7 @@
 const fs = require('node:fs'), assert = require('node:assert/strict'), { JSDOM } = require('jsdom');
 const articlePath = '/blog/mejor-piso-para-gimnasio.html';
 const posts = require('../data/blog-posts.json');
-const titles=new Set(), descriptions=new Set();
+const titles=new Set(), descriptions=new Set(), seenFaq=new Set();
 for (const path of ['/blog.html', articlePath, ...posts.map(p=>'/blog/'+p.slug+'.html')]) {
   const dom = new JSDOM(fs.readFileSync('public' + path, 'utf8'));
   const d = dom.window.document;
@@ -17,8 +17,21 @@ for (const path of ['/blog.html', articlePath, ...posts.map(p=>'/blog/'+p.slug+'
   assert(!descriptions.has(description)); descriptions.add(description);
   if (path.startsWith('/blog/')) {
     const graph = JSON.parse(d.querySelector('script[type="application/ld+json"]').textContent)['@graph'];
+    assert(!d.title.includes('MatDepot'), path+' still uses MatDepot');
+    assert(d.title.endsWith('| Mat Depot'), path);
     const posting = graph.find(g => g['@type'] === 'BlogPosting');
     assert(posting && graph.some(g => g['@type'] === 'BreadcrumbList'));
+    const faqSchema=graph.find(g=>g['@type']==='FAQPage');
+    const visible=[...d.querySelectorAll('.blog-faq details')];
+    assert(faqSchema && faqSchema.mainEntity.length===visible.length, path+' FAQ schema');
+    for(const [i,q] of faqSchema.mainEntity.entries()){
+      assert.equal(q.name, visible[i].querySelector('summary').textContent);
+      assert.equal(q.acceptedAnswer.text, visible[i].querySelector('p').textContent);
+      assert.notEqual(q.name, '¿Qué debo confirmar antes de comprar?');
+      assert(/\d/.test(q.acceptedAnswer.text), q.name);
+      assert(!seenFaq.has(q.name), 'duplicated FAQ '+q.name);
+      seenFaq.add(q.name);
+    }
     assert.equal(posting.headline, d.querySelector('h1').textContent);
     assert.equal(posting.datePublished, d.querySelector('time').dateTime);
     assert(posting.articleSection);
@@ -47,5 +60,7 @@ const sitemap = fs.readFileSync('public/sitemap.xml', 'utf8');
 assert(sitemap.includes(articlePath)); assert(sitemap.includes('/blog.html'));
 for(const post of posts)assert(sitemap.includes('/blog/'+post.slug+'.html'));
 const index=new JSDOM(fs.readFileSync('public/blog.html','utf8'));
-assert.equal(index.window.document.querySelectorAll('.blog-card').length,posts.length+1);index.window.close();
+assert.equal(index.window.document.querySelectorAll('.blog-card').length,posts.length+1);
+assert(!index.window.document.title.includes('MatDepot'));
+index.window.close();
 console.log('Blog passed: indexability, canonical URLs, structured data, navigation, unique headings/anchors and embedded calculator.');
