@@ -36,6 +36,7 @@ Se admite un enlace inicial `/comparar.html?comparar=slug-1,slug-2`. Los identif
 `assets/analytics.js` utiliza el ID de GA4 proporcionado en la auditoría: `G-LC7M7BHNSN`. La propiedad, titularidad y recepción deben confirmarse en la administración de Google Analytics.
 
 - Analítica desactivada hasta aceptación; almacenamiento publicitario denegado.
+- La etiqueta no se inicializa fuera de `matdepotmex.com` / `www.matdepotmex.com`, ni si el referrer contiene `vercel.com` o `vercel.app`, ni con `?no_ga=1` (guarda `localStorage.mdx_no_ga=1`; `?no_ga=0` lo borra).
 - Eventos: `view_item`, `select_item`, `compare_products`, `contact_whatsapp`, `contact_phone`, `contact_email`, `filter_catalog`, `form_start`, `generate_lead`.
 - No se envían los datos personales del formulario ni términos de búsqueda libres.
 - `generate_lead` se dispara una sola vez al enviar el formulario, en la misma sesión, antes de salir hacia FormSubmit. El retorno a `/gracias.html` no emite otro lead. Es una señal de envío, no un recibo del buzón ni un lead comercial validado.

@@ -134,9 +134,21 @@ La atribución de origen/medio y dispositivo utiliza dimensiones nativas de GA4.
 
 Las definiciones y el marcado afectan datos futuros; no reclasifican el histórico. La interfaz puede tardar en mostrar los datos nuevos. El consentimiento condiciona la cobertura de medición.
 
+## Tráfico excluido
+
+La etiqueta `https://www.googletagmanager.com/gtag/js?id=G-LC7M7BHNSN` (propiedad `536869166`) no se inicializa —no hay `gtag('js')`, `gtag('config')` ni petición del script— cuando se cumple cualquiera de estas condiciones:
+
+1. El hostname no es exactamente `www.matdepotmex.com` ni `matdepotmex.com`. Quedan fuera `*.vercel.app`, `localhost` y cualquier otro host.
+2. `document.referrer` contiene `vercel.com` o `vercel.app` (panel de Vercel o un preview). La comparación no distingue mayúsculas.
+3. La URL trae `?no_ga=1`, o este navegador ya guardó `localStorage['mdx_no_ga']==='1'`. El parámetro `no_ga=1` escribe esa clave al cargar la página, aunque todavía no haya consentimiento. `?no_ga=0` borra la clave y vuelve a permitir la medición si el host y el referrer también lo permiten.
+
+El consentimiento sigue siendo obligatorio en las visitas que sí se miden. No cambian los nombres de evento ni la lógica de `contact_whatsapp`, `generate_lead` y `form_start` en esas visitas. Si la etiqueta no arranca, esos eventos no se envían y el formulario sigue enviándose sin esperar a Google.
+
+Para excluir un navegador del equipo en el dominio público: abrir `https://www.matdepotmex.com/?no_ga=1` una vez. Para volver a medirlo: `https://www.matdepotmex.com/?no_ga=0`.
+
 ## Verificación y límites
 
-`npm run build` y `npm test` con Node 22.22+ o 24.15+ comprueban enlaces del sitio, comparador y analítica. Las pruebas usan un DOM local sin cargar scripts remotos ni enviar eventos a Google o formularios. Incluyen consentimiento/revocación, vistas, selección, un `contact_whatsapp` por clic, un `generate_lead` por envío, ausencia de `form_submit` y `request_quote_click`, el referrer de FormSubmit en la página de gracias y los códigos de WhatsApp.
+`npm run build` y `npm test` con Node 22.22+ o 24.15+ comprueban enlaces del sitio, comparador y analítica. Las pruebas usan un DOM local sin cargar scripts remotos ni enviar eventos a Google o formularios. Incluyen consentimiento/revocación, vistas, selección, un `contact_whatsapp` por clic, un `generate_lead` por envío, ausencia de `form_submit` y `request_quote_click`, el referrer de FormSubmit en la página de gracias y los códigos de WhatsApp. También comprueban que la etiqueta se carga en `www.matdepotmex.com` y `matdepotmex.com` tras el consentimiento, y que no se carga en otro host, con referrer de Vercel o con `no_ga` activo.
 
 Se verificó la configuración administrativa en GA4. La recepción de los eventos nuevos tras despliegue debe observarse con tráfico real o una sesión de prueba identificada; las pruebas locales no equivalen a confirmar recepción en Google. La entrega del correo y la calificación comercial siguen siendo verificaciones separadas.
 
