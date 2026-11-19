@@ -90,12 +90,26 @@ async function setup(path, consent, stored = {}, referrer = '', host = 'www.matd
 
   const back=await setup('/gracias.html','granted',{},'https://formsubmit.co/thank-you');
   assert.equal(back.events('generate_lead').length,0,'thank-you page must not emit a second lead');
+  assert.equal(back.events('lead_confirmado').length,1,'thank-you page confirms the lead once');
+  assert.equal(back.events('lead_confirmado')[0].lead_channel,'form');
+  assert.equal(back.events('lead_confirmado')[0].form_id,'cotizacion');
+  assert.equal(Object.hasOwn(back.events('lead_confirmado')[0],'lead_id'),false);
   const backConfig=[...back.w.dataLayer].find(entry=>entry[0]==='config')[2];
   assert.equal(backConfig.ignore_referrer,true);
   assert.equal(Object.hasOwn(backConfig,'page_referrer'),false);
   back.dom.window.close();
   const direct=await setup('/gracias.html?lead_id=md-old','granted',{'md-pending-lead':{id:'md-old',product:slug,traffic:'Alto',time:Date.now()}});
   assert.equal(direct.events('generate_lead').length,0);
+  assert.equal(direct.events('lead_confirmado').length,1);
+  assert.equal(direct.events('lead_confirmado')[0].lead_id,'md-old');
+  assert.equal(direct.events('lead_confirmado')[0].producto,slug);
+  assert.equal(direct.events('lead_confirmado')[0].nivel_trafico,'Alto');
+  const deniedThanks=await setup('/gracias.html','denied',{'md-pending-lead':{id:'md-old',product:slug,traffic:'Alto',time:Date.now()}});
+  assert.equal(deniedThanks.events('lead_confirmado').length,0,'confirmation requires consent');
+  deniedThanks.dom.window.close();
+  const previewThanks=await setup('/gracias.html','granted',{'md-pending-lead':{id:'md-old',product:slug,traffic:'Alto',time:Date.now()}},'','matdepot-preview.vercel.app');
+  assert.equal(previewThanks.events('lead_confirmado').length,0,'preview must not confirm a production lead');
+  previewThanks.dom.window.close();
   const directConfig=[...direct.w.dataLayer].find(entry=>entry[0]==='config')[2];
   assert.notEqual(directConfig.ignore_referrer,true);
   assert.equal(directConfig.page_location,'https://www.matdepotmex.com/gracias.html');

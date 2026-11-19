@@ -100,7 +100,6 @@
       <div class="foot-socials">
         <a href="https://www.instagram.com/matdepotmex" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
         <a href="https://www.facebook.com/share/1CJdVqXQmH/" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
-        <a href="https://www.linkedin.com/in/mat-depot-70b19937a/" target="_blank" rel="noopener" aria-label="LinkedIn">IN</a>
         <a href="https://youtube.com/@matdepot25" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
         <a href="https://www.tiktok.com/@matdepot" target="_blank" rel="noopener" aria-label="TikTok">TT</a>
       </div>

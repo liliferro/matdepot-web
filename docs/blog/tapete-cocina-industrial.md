@@ -39,7 +39,7 @@ Una ficha operativa puede incluir estación, modelo, número de piezas, responsa
 
 Revisa si ambas incluyen cantidades equivalentes, remates, entrega e instalación cuando corresponda. Si una propuesta omite dimensiones, material o condiciones de limpieza, solicita esa información antes de comparar el precio.
 
-Consulta las [preguntas de áreas húmedas y cocinas](https://www.matdepotmex.com/categorias/areas-humedas.html#preguntas-frecuentes) para dudas breves. Para revisar especificaciones disponibles puedes usar el [comparador](https://www.matdepotmex.com/comparar.html).
+La página de compra es la [ficha del tapete para cocina](https://www.matdepotmex.com/tapetes/tapete-para-cocina.html). Para armar la solicitud del restaurante, usa [restaurantes y cocinas: qué cotizar](https://www.matdepotmex.com/sectores/cocinas.html). Para revisar especificaciones disponibles puedes usar el [comparador](https://www.matdepotmex.com/comparar.html).
 
 [Envía a MatDepot el plano o las medidas de cada estación](https://www.matdepotmex.com/contacto.html), junto con los líquidos y la rutina prevista. La fuente del formato citado es la ficha comercial; esta guía no declara una certificación sanitaria ni resistencia universal a grasas o temperatura.
 

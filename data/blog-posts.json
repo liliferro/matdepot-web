@@ -2,7 +2,7 @@
   {
     "slug": "piso-gimnasio-rollo-o-modular",
     "title": "¿Piso para gimnasio en rollo o modular? Cómo decidir",
-    "seoTitle": "Piso de gimnasio: rollo o modular | MatDepot",
+    "seoTitle": "Piso de gimnasio: rollo o modular | Mat Depot",
     "description": "Compara piso para gimnasio en rollo o modular según distribución, uniones y reposición. Usa el selector para ver productos relacionados con tu proyecto.",
     "group": "Gimnasios",
     "category": "gimnasios",
@@ -13,12 +13,23 @@
       "instalar-piso-hule-concreto-loseta"
     ],
     "keyword": "piso para gimnasio en rollo o modular",
-    "date": "2026-10-21"
+    "date": "2026-10-21",
+    "modified": "2026-11-19",
+    "faqs": [
+      [
+        "¿Qué largos publica el rollo de gimnasio con chispas verdes?",
+        "5 m, 10 m y 20 m, con ancho de 1 m y espesor de 5 mm o 9 mm."
+      ],
+      [
+        "¿Qué medida tiene la loseta modular frente a ese rollo?",
+        "La loseta de 13 mm mide 50 cm × 50 cm y es ensamblable. El rollo se suministra en paños de 1 m de ancho."
+      ]
+    ]
   },
   {
     "slug": "espesor-piso-gimnasio",
     "title": "¿Qué espesor de piso necesita tu gimnasio? Datos para elegir",
-    "seoTitle": "Espesor de piso para gimnasio: cómo elegir | MatDepot",
+    "seoTitle": "Espesor de piso para gimnasio: cómo elegir | Mat Depot",
     "description": "El espesor de piso para gimnasio depende del uso y las cargas. Compara opciones del catálogo con el selector y revisa qué condiciones debes confirmar.",
     "group": "Gimnasios",
     "category": "gimnasios",
@@ -30,12 +41,22 @@
     ],
     "keyword": "espesor de piso para gimnasio",
     "date": "2026-10-21",
-    "modified": "2026-11-13"
+    "modified": "2026-11-19",
+    "faqs": [
+      [
+        "¿Qué espesores de loseta de 50 × 50 cm publica el catálogo?",
+        "Hay loseta modular ensamblable de 7 mm y de 13 mm. Ambas miden 50 cm × 50 cm."
+      ],
+      [
+        "¿Qué espesor declara el rollo de EPDM negro tipo B?",
+        "5 mm, en rollo de 1 m de ancho por 10 m de largo, con acabado liso sin poros y peso específico de 1.07 g/cm³."
+      ]
+    ]
   },
   {
     "slug": "instalar-piso-hule-concreto-loseta",
     "title": "¿Se puede instalar piso de hule sobre concreto o loseta?",
-    "seoTitle": "Instalar piso de hule: revisa la base | MatDepot",
+    "seoTitle": "Instalar piso de hule: revisa la base | Mat Depot",
     "description": "Antes de instalar piso de hule sobre concreto o loseta, revisa humedad, nivelación, juntas y puertas. Usa el checklist para preparar la visita de instalación.",
     "group": "Gimnasios",
     "category": "gimnasios",
@@ -47,12 +68,22 @@
     ],
     "keyword": "instalar piso de hule",
     "date": "2026-10-21",
-    "modified": "2026-11-13"
+    "modified": "2026-11-19",
+    "faqs": [
+      [
+        "¿Qué peso específico declara el rollo EPDM tipo B?",
+        "1.07 g/cm³, con acabado liso sin poros, 5 mm de espesor y rollo de 1 m × 10 m."
+      ],
+      [
+        "¿Esta guía publica un tiempo de oreo del adhesivo?",
+        "No hay un tiempo de oreo publicado. El rollo EPDM tipo B declara 5 mm y 1 m × 10 m; la preparación de la base se confirma con quien instala."
+      ]
+    ]
   },
   {
     "slug": "limpiar-piso-gimnasio",
     "title": "Cómo organizar la limpieza del piso de un gimnasio",
-    "seoTitle": "Limpieza del piso de gimnasio: cómo organizarla | MatDepot",
+    "seoTitle": "Limpieza del piso de gimnasio: cómo organizarla | Mat Depot",
     "description": "Organiza cómo limpiar el piso de un gimnasio: material, residuos, productos compatibles y secado. Crea una lista de tareas para tu equipo de mantenimiento.",
     "group": "Gimnasios",
     "category": "gimnasios",
@@ -63,13 +94,24 @@
       "piso-gimnasio-rollo-o-modular"
     ],
     "keyword": "limpiar el piso de un gimnasio",
-    "date": "2026-10-21"
+    "date": "2026-10-21",
+    "modified": "2026-11-19",
+    "faqs": [
+      [
+        "¿Qué acabado declara el rollo EPDM tipo A?",
+        "Acabado poroso, peso específico de 0.8 g/cm³, 5 mm de espesor y rollo de 1 m × 10 m."
+      ],
+      [
+        "¿El tipo A y el tipo B publican el mismo espesor?",
+        "Sí: ambos declaran 5 mm y 1 m × 10 m. El tipo A es poroso y pesa 0.8 g/cm³; el tipo B es liso sin poros y pesa 1.07 g/cm³."
+      ]
+    ]
   },
   {
     "slug": "tapete-trabajo-de-pie",
     "title": "¿Qué tapete elegir para un puesto de trabajo de pie?",
-    "seoTitle": "Tapetes para trabajo de pie: guía de selección | MatDepot",
-    "description": "Elige un tapete para trabajo de pie según movimiento, medidas y líquidos. Usa el selector para ver productos de MatDepot y consultar sus fichas.",
+    "seoTitle": "Tapetes para trabajo de pie: guía de selección | Mat Depot",
+    "description": "Elige un tapete para trabajo de pie según movimiento, medidas y líquidos. Usa el selector para ver productos de Mat Depot y consultar sus fichas.",
     "group": "Industria",
     "category": "antifatiga",
     "product": "tapete-antifatiga-negro-de-uso-general",
@@ -80,12 +122,22 @@
     ],
     "keyword": "tapete para trabajo de pie",
     "date": "2026-10-21",
-    "modified": "2026-11-16"
+    "modified": "2026-11-19",
+    "faqs": [
+      [
+        "¿Qué medidas publica el tapete antifatiga negro de uso general?",
+        "90 cm × 1.20 m y 10 mm de espesor, en color negro o gris."
+      ],
+      [
+        "¿Esa pieza cubre cualquier estación de trabajo?",
+        "No. Cubre 90 cm × 1.20 m. Si la persona se desplaza más allá de esa pieza de 10 mm, la cantidad de tapete cambia."
+      ]
+    ]
   },
   {
     "slug": "antifatiga-o-antiderrapante",
     "title": "Tapete antifatiga o antiderrapante: diferencias para comprar",
-    "seoTitle": "Tapete antifatiga o antiderrapante | MatDepot",
+    "seoTitle": "Tapete antifatiga o antiderrapante | Mat Depot",
     "description": "Compara tapete antifatiga o antiderrapante según la función y el entorno. Usa el selector para consultar productos y condiciones pendientes de verificar.",
     "group": "Industria",
     "category": "antifatiga",
@@ -97,12 +149,22 @@
     ],
     "keyword": "tapete antifatiga o antiderrapante",
     "date": "2026-10-21",
-    "modified": "2026-11-16"
+    "modified": "2026-11-19",
+    "faqs": [
+      [
+        "¿Qué largos publica el tapete esponjoso con franjas amarillas?",
+        "3, 6, 12 o 18 m, con ancho de 90 cm y espesor de 9.5 mm."
+      ],
+      [
+        "¿El antifatiga negro de uso general tiene el mismo espesor?",
+        "No. Publica 10 mm y una pieza de 90 cm × 1.20 m, no los largos de 3 a 18 m del esponjoso de 9.5 mm."
+      ]
+    ]
   },
   {
     "slug": "tapetes-agua-aceite-grasa",
     "title": "¿Qué tapete elegir para un área con agua, aceite o grasa?",
-    "seoTitle": "Tapetes para agua, aceite o grasa | MatDepot",
+    "seoTitle": "Tapetes para agua, aceite o grasa | Mat Depot",
     "description": "Busca tapetes para agua, aceite o grasa según la exposición. El selector muestra opciones del catálogo o indica cuándo debes confirmar compatibilidad.",
     "group": "Industria",
     "category": "antiderrapantes",
@@ -114,12 +176,22 @@
     ],
     "keyword": "tapetes para agua, aceite o grasa",
     "date": "2026-10-21",
-    "modified": "2026-11-16"
+    "modified": "2026-11-19",
+    "faqs": [
+      [
+        "¿Qué formato publica el tapete para cocina del catálogo?",
+        "Módulo de 91 cm × 91 cm y 13 mm, loseta modular ensamblable de color negro, con orificios de drenaje."
+      ],
+      [
+        "¿El tapete para alberca sustituye al de cocina si hay agua?",
+        "No. El de alberca publica 5.5 mm, 90 cm de ancho y rollo de 15 m para agua permanente y pies descalzos. La cocina es el módulo de 13 mm."
+      ]
+    ]
   },
   {
     "slug": "tapete-cocina-industrial",
     "title": "¿Cómo elegir un tapete para cocina industrial o restaurante?",
-    "seoTitle": "Tapete para cocina industrial: guía | MatDepot",
+    "seoTitle": "Tapete para cocina industrial: guía | Mat Depot",
     "description": "Elige un tapete para cocina industrial según la zona y los residuos. Consulta productos con el selector y verifica medidas, retiro y compatibilidad.",
     "group": "Cocinas",
     "category": "areas-humedas",
@@ -131,12 +203,22 @@
     ],
     "keyword": "tapete para cocina industrial",
     "date": "2026-10-21",
-    "modified": "2026-11-16"
+    "modified": "2026-11-19",
+    "faqs": [
+      [
+        "¿La ficha del tapete para cocina es la página de compra?",
+        "Sí. La ficha publica el módulo de 91 cm × 91 cm y 13 mm, con orificios de drenaje. Esta guía explica cómo elegir por estación."
+      ],
+      [
+        "¿Qué rollo de áreas húmedas no es el tapete de cocina?",
+        "El tapete para alberca: 5.5 mm, ancho de 90 cm y rollo de 15 m. El de cocina es una loseta de 13 mm, no ese rollo."
+      ]
+    ]
   },
   {
     "slug": "comparar-cotizaciones-tapetes",
     "title": "Cómo comparar cotizaciones de tapetes y pisos técnicos",
-    "seoTitle": "Comparar cotizaciones de tapetes | MatDepot",
+    "seoTitle": "Comparar cotizaciones de tapetes | Mat Depot",
     "description": "Aprende a comparar cotizaciones de tapetes por alcance, cantidad e instalación. Suma costos de dos propuestas con una calculadora de presupuesto en MXN.",
     "group": "Compras",
     "category": "general",
@@ -148,13 +230,24 @@
       "precio-piso-hule-m2"
     ],
     "keyword": "comparar cotizaciones de tapetes",
-    "date": "2026-10-21"
+    "date": "2026-10-21",
+    "modified": "2026-11-19",
+    "faqs": [
+      [
+        "¿Qué medida publica la loseta de hule reciclado para gimnasio?",
+        "1 m × 1 m y 8 mm de espesor."
+      ],
+      [
+        "¿La calculadora de esta guía usa precios del catálogo?",
+        "No. Suma dos propuestas con los importes que tú capturas. La loseta de ejemplo mide 1 m × 1 m y 8 mm, y el catálogo no publica su tarifa."
+      ]
+    ]
   },
   {
     "slug": "datos-cotizar-tapetes",
     "title": "¿Qué datos necesitas para cotizar tapetes o pisos técnicos?",
-    "seoTitle": "Datos para cotizar tapetes y pisos | MatDepot",
-    "description": "Reúne los datos para cotizar tapetes: uso, medidas, superficie, entrega y condiciones. Genera un resumen de tu proyecto para enviarlo a MatDepot.",
+    "seoTitle": "Datos para cotizar tapetes y pisos | Mat Depot",
+    "description": "Reúne los datos para cotizar tapetes: uso, medidas, superficie, entrega y condiciones. Genera un resumen de tu proyecto para enviarlo a Mat Depot.",
     "group": "Compras",
     "category": "general",
     "product": "tapete-esponjoso-con-franjas-amarillas",
@@ -164,12 +257,23 @@
       "tapete-trabajo-de-pie"
     ],
     "keyword": "datos para cotizar tapetes",
-    "date": "2026-10-21"
+    "date": "2026-10-21",
+    "modified": "2026-11-19",
+    "faqs": [
+      [
+        "¿Qué presentación cambia la cantidad del esponjoso con franjas amarillas?",
+        "El largo: 3, 6, 12 o 18 m. El ancho publicado es 90 cm y el espesor 9.5 mm."
+      ],
+      [
+        "¿Qué zonas de envío publica el sitio?",
+        "CDMX, Área Metropolitana y el resto de la República. El almacén está en el C.P. 54030 y el costo del envío se confirma con el código postal."
+      ]
+    ]
   },
   {
     "slug": "precio-piso-hule-m2",
     "title": "Precio de piso de hule por m²: cómo calcular y comparar tu cotización",
-    "seoTitle": "Precio de piso de hule por m² en México | MatDepot",
+    "seoTitle": "Precio de piso de hule por m² en México | Mat Depot",
     "description": "Consulta cómo comparar el precio de piso de hule por m²: formatos, espesores, instalación e impuestos. Calcula el costo de tu proyecto con importes en MXN.",
     "group": "Compras",
     "category": "gimnasios",
@@ -180,6 +284,17 @@
       "mejor-piso-para-gimnasio"
     ],
     "keyword": "precio de piso de hule por m²",
-    "date": "2026-10-22"
+    "date": "2026-10-22",
+    "modified": "2026-11-19",
+    "faqs": [
+      [
+        "¿Cuántos metros cuadrados tiene un rollo de 1 m de ancho?",
+        "El rollo con chispas verdes ofrece largos de 5, 10 y 20 m: 5, 10 o 20 m² por rollo, antes de recortes."
+      ],
+      [
+        "¿Esta guía muestra una tarifa de Mat Depot en MXN?",
+        "No. La calculadora suma importes que tú escribes. El rollo de referencia mide 1 m de ancho y el catálogo no publica un precio por m²."
+      ]
+    ]
   }
 ]
