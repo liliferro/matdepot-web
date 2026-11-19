@@ -43,6 +43,6 @@ Si el proyecto depende de limitar ruido o instalar cargas importantes, pide la e
 
 Divide el plano por actividades y pide una propuesta por zona. Anota qué datos están confirmados y cuáles faltan. Si una propuesta incluye una plataforma o protección adicional, compara el sistema completo, no únicamente el espesor de la capa visible.
 
-Para cantidades, utiliza la [calculadora de superficie](https://www.matdepotmex.com/blog/mejor-piso-para-gimnasio.html#calculadora). Para revisar diferencias de presentación, abre el [comparador](https://www.matdepotmex.com/comparar.html). Finalmente, [comparte tu ficha de uso con MatDepot](https://www.matdepotmex.com/contacto.html).
+Para comprar, parte de [pisos y tapetes para gimnasio](https://www.matdepotmex.com/categorias/gimnasios.html). Esta guía explica el espesor; [mejor piso para un gimnasio](https://www.matdepotmex.com/blog/mejor-piso-para-gimnasio.html) es la página para elegir por zona. Para cantidades, utiliza la [calculadora de superficie](https://www.matdepotmex.com/blog/mejor-piso-para-gimnasio.html#calculadora). Para revisar diferencias de presentación, abre el [comparador](https://www.matdepotmex.com/comparar.html). Finalmente, [comparte tu ficha de uso con Mat Depot](https://www.matdepotmex.com/contacto.html).
 
 Fuentes: fichas comerciales enlazadas. Esta guía no establece un espesor mínimo universal, una carga admisible ni una reducción de ruido garantizada.

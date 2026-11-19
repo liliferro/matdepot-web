@@ -93,6 +93,19 @@
     gtag('config',id,config);
     const script=document.createElement('script');script.async=true;script.src='https://www.googletagmanager.com/gtag/js?id='+id;document.head.append(script);
     const p=item();if(p)mdTrack('view_item',{items:[gaItem(p)]});
+    confirmLead();
+  }
+  function confirmLead(){
+    if(location.pathname!=='/gracias.html')return;
+    const pending=read('md-pending-lead',true);
+    const id=pending&&typeof pending.id==='string'&&pending.id.length>=2&&pending.id.length<=80&&!/[@\s]/.test(pending.id)?pending.id:'';
+    const dedupe='md-confirmed-lead-'+(id||'page');
+    if(read(dedupe,true))return;
+    const payload={lead_channel:'form',form_id:'cotizacion',page_location:pageLocation()};
+    if(id)payload.lead_id=id;
+    if(pending&&typeof pending.product==='string'&&pending.product)payload.producto=pending.product;
+    if(pending&&trafficLevels.has(pending.traffic))payload.nivel_trafico=pending.traffic;
+    if(mdTrack('lead_confirmado',payload))save(dedupe,true,true);
   }
   function choice(value) {
     save('md-analytics-consent',value);

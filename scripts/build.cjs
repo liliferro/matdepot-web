@@ -11,15 +11,25 @@ const categoryFaq=slug=>{const g=faqGroups.find(g=>g.category===slug);return g?`
 const productUrl=p=>'/tapetes/'+p.slug+'.html';
 const links=()=>'<nav class="category-links" aria-label="Categorías de productos">'+categories.map(c=>`<a href="/categorias/${c.slug}.html">${esc(c.name)}</a>`).join('')+'</nav>';
 const card=(p,i=0,compare=false)=>`${compare?`<article class="catalog-card-wrap" data-slug="${p.slug}">`:''}<a class="cat-card" href="${productUrl(p)}"><div class="cat-card__media cat-card__media--photo"><img src="/${p.images[0]}" alt="${esc(p.name)}" loading="lazy"><span class="cat-card__num">${String(i+1).padStart(2,'0')}</span></div><div><span class="cat-card__name">${esc(p.name)}</span><p>${esc(p.short)}</p><div class="cat-card__tags">${p.sectors.map(s=>`<span class="tag">${esc(s)}</span>`).join('')}</div></div><span class="cat-card__cta">Ver ficha técnica →</span></a>${compare?'</article>':''}`;
-const baseGraph=[{'@type':['Organization','LocalBusiness'],'@id':origin+'/#organization',name:'Mat Depot',legalName:'Mat Depot, S.A. de C.V.',url:origin+'/',telephone:['+525596265258','+525596265259'],email:contact.email,address:{'@type':'PostalAddress',streetAddress:'C. Popocatépetl 42, San Javier',postalCode:'54030',addressLocality:'Tlalnepantla de Baz',addressRegion:'Estado de México',addressCountry:'MX'},sameAs:['https://www.instagram.com/matdepotmex','https://www.linkedin.com/in/mat-depot-70b19937a/','https://youtube.com/@matdepot25','https://www.tiktok.com/@matdepot']},{'@type':'WebSite','@id':origin+'/#website',url:origin+'/',name:'Mat Depot',inLanguage:'es-MX',publisher:{'@id':origin+'/#organization'}}];
-// Match the hours and nationwide coverage already visible on the location page.
-Object.assign(baseGraph[0],{
- description:'Proveedor de tapetes y pisos de hule y PVC en Tlalnepantla de Baz. Mayoreo y menudeo, envíos en México y visitas al almacén bajo cita previa.',
- logo:origin+'/assets/favicon.svg',
- image:origin+'/assets/products/tapete-antifatiga-negro-de-uso-general-01.webp',
- areaServed:{'@type':'Country',name:'México'},
- openingHoursSpecification:[{'@type':'OpeningHoursSpecification',dayOfWeek:['Monday','Tuesday','Wednesday','Thursday','Friday'],opens:'09:00',closes:'18:00'}]
-});
+const baseGraph=[
+ {'@type':'Organization','@id':origin+'/#organization',name:'Mat Depot',legalName:'Mat Depot, S.A. de C.V.',url:origin+'/',logo:origin+'/assets/favicon.svg',email:contact.email,telephone:['+525596265258','+525596265259'],contactPoint:[{'@type':'ContactPoint',contactType:'sales',telephone:'+525544943014',email:contact.email,areaServed:'MX',availableLanguage:'es'}],sameAs:['https://www.instagram.com/matdepotmex','https://youtube.com/@matdepot25','https://www.tiktok.com/@matdepot']},
+ {'@type':'LocalBusiness','@id':origin+'/#local',name:'Mat Depot',parentOrganization:{'@id':origin+'/#organization'},url:origin+'/ubicacion.html',image:origin+'/assets/products/tapete-antifatiga-negro-de-uso-general-01.webp',telephone:'+525596265258',email:contact.email,address:{'@type':'PostalAddress',streetAddress:'C. Popocatépetl 42, San Javier',postalCode:'54030',addressLocality:'Tlalnepantla de Baz',addressRegion:'Estado de México',addressCountry:'MX'},openingHoursSpecification:[{'@type':'OpeningHoursSpecification',dayOfWeek:['Monday','Tuesday','Wednesday','Thursday','Friday'],opens:'09:00',closes:'18:00'}],areaServed:[{'@type':'State',name:'Estado de México'},{'@type':'City',name:'Ciudad de México'},{'@type':'Country',name:'México'}],hasOfferCatalog:{'@type':'OfferCatalog',name:'Tapetes y pisos de hule y PVC',url:origin+'/productos.html'}},
+ {'@type':'WebSite','@id':origin+'/#website',url:origin+'/',name:'Mat Depot',inLanguage:'es-MX',publisher:{'@id':origin+'/#organization'}}
+];
+const cardSizes='(max-width: 540px) calc(100vw - 48px), (max-width: 1024px) calc(50vw - 32px), 280px';
+const heroSizes='(max-width: 860px) 100vw, 560px';
+function srcsetFor(src){
+ const key=src.replace(/^\//,'');const size=sizes[key];if(!size)return '';
+ const base=path.basename(key,'.webp');const candidates=[];
+ for(const width of [480,960]){
+  if(size[0]<=width)continue;
+  const rel='assets/products/srcset/'+base+'-'+width+'w.webp';
+  if(!fs.existsSync(path.join(root,rel)))throw Error('Missing responsive image '+rel);
+  candidates.push('/'+rel+' '+width+'w');
+ }
+ candidates.push('/'+key+' '+size[0]+'w');
+ return candidates.join(', ');
+}
 fs.rmSync(out,{recursive:true,force:true});fs.mkdirSync(out,{recursive:true});fs.cpSync(path.join(root,'assets'),path.join(out,'assets'),{recursive:true});
 fs.copyFileSync(path.join(root,'assets/favicon.ico'),path.join(out,'favicon.ico'));
 // Keep Bing ownership verification available at the site root after every build.
@@ -33,7 +43,10 @@ function page(source,output,options={}){
  if(options.mutate)options.mutate(d,w);
  const relatedGuides=require('../data/blog-posts.json').filter(p=>output==='categorias/'+p.category+'.html'||(output==='preguntas-frecuentes.html'&&p.category==='general')||options.product?.slug===p.product);
  if(relatedGuides.length){const target=d.querySelector('main')||d.querySelector('body > section:last-of-type');if(target)target.insertAdjacentHTML('beforeend',`<aside class="container section--tight"><h2>Guías y herramientas para tu proyecto</h2><ul>${relatedGuides.map(p=>`<li><a href="/blog/${p.slug}.html">${esc(p.title)}</a></li>`).join('')}</ul></aside>`);}
- if(output==='categorias/gimnasios.html')d.querySelector('.prose').insertAdjacentHTML('beforeend','<p><a href="/blog/mejor-piso-para-gimnasio.html">Guía: cómo elegir piso para gimnasio y calcular la superficie de tu proyecto</a></p>');
+ if(output==='categorias/gimnasios.html')d.querySelector('.prose').insertAdjacentHTML('beforeend','<p>Esta categoría reúne los modelos para comprar. La guía <a href="/blog/mejor-piso-para-gimnasio.html">mejor piso para un gimnasio</a> explica cómo elegir por zona. Para la base, consulta <a href="/blog/instalar-piso-hule-concreto-loseta.html">instalar piso de hule sobre concreto o loseta</a>.</p>');
+ if(output==='categorias/seguridad-electrica.html')d.querySelector('.prose').insertAdjacentHTML('beforeend','<p><a href="/guias/tapete-dielectrico-precio-voltajes.html">Ver precios y clases</a> del tapete dieléctrico.</p>');
+ if(output==='categorias/areas-humedas.html')d.querySelector('.prose').insertAdjacentHTML('beforeend','<p>Las cocinas se cotizan en la guía <a href="/blog/tapete-cocina-industrial.html">tapete para cocina industrial</a> y en la ficha <a href="/tapetes/tapete-para-cocina.html">tapete para cocina</a>.</p>');
+ if(output==='categorias/antifatiga.html')d.querySelector('.prose').insertAdjacentHTML('beforeend','<p>Esta categoría es la página de compra. Para elegir el puesto, usa la guía <a href="/blog/tapete-trabajo-de-pie.html">tapete para trabajo de pie</a>.</p>');
  const canonical=origin+(output==='index.html'?'/':'/'+output);
  if(!d.querySelector('main')){
   const main=d.createElement('main');main.id='main-content';const footer=d.querySelector('.site-footer');
@@ -80,11 +93,17 @@ function page(source,output,options={}){
   const key=img.getAttribute('src').replace(/^\//,'');const size=sizes[key];if(!size)throw Error('Unknown image '+key);
   img.width=size[0];img.height=size[1];img.setAttribute('decoding','async');
   if(!img.hasAttribute('alt'))throw Error('Missing alt '+output);
+  if(img.closest('.cat-card, .hero__visual, .image-block')){
+   const set=srcsetFor(img.getAttribute('src'));
+   if(set){img.setAttribute('srcset',set);img.setAttribute('sizes',img.closest('.cat-card')?cardSizes:heroSizes);}
+  }
  });
  const primaryImage=d.querySelector('.hero__visual img')||d.querySelector('.prod-gallery img');
  if(primaryImage){
   primaryImage.setAttribute('fetchpriority','high');primaryImage.removeAttribute('loading');
-  const imagePreload=d.createElement('link');imagePreload.rel='preload';imagePreload.setAttribute('as','image');imagePreload.href=primaryImage.getAttribute('src');imagePreload.type='image/webp';imagePreload.setAttribute('fetchpriority','high');d.head.append(imagePreload);
+  const imagePreload=d.createElement('link');imagePreload.rel='preload';imagePreload.setAttribute('as','image');imagePreload.href=primaryImage.getAttribute('src');imagePreload.type='image/webp';imagePreload.setAttribute('fetchpriority','high');
+  if(primaryImage.getAttribute('srcset')){imagePreload.setAttribute('imagesrcset',primaryImage.getAttribute('srcset'));imagePreload.setAttribute('imagesizes',primaryImage.getAttribute('sizes'));}
+  d.head.append(imagePreload);
  }
  d.querySelectorAll('footer a[href*="productos.html#"]').forEach(a=>a.href=a.getAttribute('href').replace('#','?filtro='));
  const company=d.querySelector('.foot-top > div:last-child ul');if(company)company.insertAdjacentHTML('beforeend','<li><a href="/preguntas-frecuentes.html">Preguntas frecuentes</a></li>');
@@ -94,7 +113,8 @@ function page(source,output,options={}){
   allUrls.push(canonical);
   // Dates reflect content/schema changes, never the deployment clock.
   const article=graph.find(g=>g['@type']==='BlogPosting');
-  const modified=output.startsWith('categorias/')?'2026-11-17':article?.dateModified||article?.datePublished||'2026-11-16';
+  const changedContent=new Set(['categorias/antifatiga.html','categorias/antiderrapantes.html','categorias/gimnasios.html','categorias/seguridad-electrica.html','categorias/areas-humedas.html','sectores/industria.html','sectores/cocinas.html','sectores/comercio.html','blog.html','guias/tapete-dielectrico-precio-voltajes.html','tapetes/tapete-dielectrico.html','quienes-somos.html','ubicacion.html']);
+  const modified=article?.dateModified||article?.datePublished||(changedContent.has(output)?'2026-11-19':'2026-11-16');
   lastmods.set(canonical,modified.slice(0,10));
  }
  dom.window.close();
@@ -134,13 +154,13 @@ page('ubicacion.html','comparar.html',{title:'Comparador de productos | Mat Depo
  const comparison=d.createElement('script');comparison.src='/assets/comparison.js';d.body.append(comparison);
 }});
 for(const [file,title]of Object.entries({'contacto.html':'Cotiza tapetes y pisos para tu proyecto | Mat Depot','quienes-somos.html':'Proveedor de tapetes y pisos en México | Mat Depot','ubicacion.html':'Ubicación y envíos desde Tlalnepantla | Mat Depot','aviso-privacidad.html':'Aviso de privacidad y uso de datos | Mat Depot','gracias.html':'Solicitud enviada y contacto por WhatsApp | Mat Depot'}))page(file,file,{title,mutate(d){
- if(file==='quienes-somos.html')d.querySelector('.page-banner .container').insertAdjacentHTML('beforeend','<p class="lead">Mat Depot suministra tapetes y pisos de hule y PVC para espacios industriales, comerciales y deportivos. Atiende solicitudes de mayoreo, menudeo y proyectos a medida, con asesoría técnica para revisar uso, tráfico y superficie. Su operación se ubica en Tlalnepantla de Baz y ofrece cobertura de entrega nacional.</p>');
+ if(file==='quienes-somos.html')d.querySelector('.page-banner .container').insertAdjacentHTML('beforeend','<p class="lead">Mat Depot suministra tapetes y pisos de hule y PVC para espacios industriales, comerciales y deportivos. Atiende solicitudes de mayoreo, menudeo y proyectos a medida, con asesoría técnica para revisar uso, tráfico y superficie. Su operación se ubica en Tlalnepantla de Baz y ofrece cobertura de entrega nacional. Los pedidos de volumen se preparan en <a href="/#mayoreo">tapetes de hule al mayoreo en Edomex y CDMX</a>.</p>');
  if(file==='aviso-privacidad.html')d.querySelector('.prose').insertAdjacentHTML('beforeend','<h2>Formulario y analítica del sitio</h2><p>El formulario utiliza FormSubmit para procesar y enviar la solicitud al correo comercial matdepotmx@gmail.com. Google Analytics se carga únicamente si aceptas la analítica. Mide visitas e interacciones; el sitio no envía a Analytics el nombre, teléfono, correo ni descripción del proyecto.</p><p>Puedes aceptar o rechazar la analítica y cambiar tu elección desde Preferencias de privacidad en el pie de página. La elección se conserva en este navegador. Los datos de contacto del formulario se utilizan para atender tu solicitud.</p><p>Si aceptas la analítica, guardamos durante la sesión los identificadores de campaña UTM, la página de entrada y el dominio de referencia. Se adjuntan a tu solicitud para identificar su origen. Al rechazar o retirar el consentimiento, dejamos de conservar esta atribución. No guardamos identificadores publicitarios como gclid mientras el consentimiento publicitario esté denegado.</p>');
 }});
 for(const p of products){
  const schema={'@type':'Product','@id':origin+productUrl(p)+'#product',url:origin+productUrl(p),name:p.name,description:p.short,image:p.images.map(i=>origin+'/'+i),category:p.category,additionalProperty:Object.entries(p.specs).map(([name,value])=>({'@type':'PropertyValue',name,value}))};
  const crumbs={'@type':'BreadcrumbList',itemListElement:[['Inicio',origin+'/'],['Productos',origin+'/productos.html'],[p.name,origin+productUrl(p)]].map(([name,item],i)=>({'@type':'ListItem',position:i+1,name,item}))};
- page('producto.html',productUrl(p).slice(1),{renderPath:'producto.html?id='+p.slug,renderInline:true,product:p,title:p.slug==='tapete-dielectrico'?'Tapete dieléctrico: precio y documentación | Mat Depot':p.name+' | Mat Depot',description:p.slug==='tapete-dielectrico'?'Consulta el tapete dieléctrico de Mat Depot: medidas, precio por cotización y documentación necesaria para confirmar clase y tensión de uso. Envíos en México.':p.short,graph:[schema,crumbs],mutate(d){
+ page('producto.html',productUrl(p).slice(1),{renderPath:'producto.html?id='+p.slug,renderInline:true,product:p,title:p.slug==='tapete-dielectrico'?'Tapete dieléctrico: medidas y documentación | Mat Depot':p.name+' | Mat Depot',description:p.slug==='tapete-dielectrico'?'Consulta el tapete dieléctrico de Mat Depot: espesores de 3 y 6 mm, anchos de 1 m y 1.20 m y rollo de 25 m. Confirma clase y tensión con la documentación del modelo.':p.short,graph:[schema,crumbs],mutate(d){
   d.querySelector('#banner .lead').textContent=p.intro;
   const detail=d.querySelector('#detail');const article=d.createElement('article');article.className=detail.className;article.id='detail';article.innerHTML=detail.innerHTML;detail.replaceWith(article);
   const note=d.createElement('p');note.className='source-note';note.textContent='Fuente de los datos: catálogo comercial de Mat Depot publicado en este sitio. Confirma especificaciones, existencias y documentación del modelo al solicitar tu cotización.';article.lastElementChild.append(note);
@@ -151,7 +171,7 @@ for(const p of products){
   }
   const relevant=categories.filter(c=>faqGroups.some(g=>g.category===c.slug) && (c.filter?p.apps.includes(c.filter):p.sectors.some(s=>['Gimnasios','Dojos','Áreas deportivas','Box y CrossFit'].includes(s))));
   if(p.slug==='tapete-para-cocina' && !relevant.some(c=>c.slug==='areas-humedas'))relevant.push(categories.find(c=>c.slug==='areas-humedas'));
-  article.lastElementChild.insertAdjacentHTML('beforeend',`<nav class="faq-product-links" aria-label="Ayuda para elegir y cotizar"><h2>Resuelve tus dudas antes de cotizar</h2><ul>${relevant.map(c=>`<li><a href="/categorias/${c.slug}.html#preguntas-frecuentes">${p.slug==='tapete-para-cocina'&&c.slug==='areas-humedas'?'Preguntas sobre tapetes para cocina':'Preguntas sobre '+esc(c.name.toLowerCase())}</a></li>`).join('')}<li><a href="/preguntas-frecuentes.html#datos-cotizacion">Qué datos enviar para cotizar</a></li><li><a href="/comparar.html">Comparar productos</a></li></ul></nav>`);
+  article.lastElementChild.insertAdjacentHTML('beforeend',`<nav class="faq-product-links" aria-label="Ayuda para elegir y cotizar"><h2>Resuelve tus dudas antes de cotizar</h2><ul>${p.slug==='tapete-para-cocina'?'<li><a href="/blog/tapete-cocina-industrial.html">Tapete para cocina industrial</a></li>':''}${p.slug==='tapete-dielectrico'?'<li><a href="/guias/tapete-dielectrico-precio-voltajes.html">Ver precios y clases</a></li>':''}${relevant.map(c=>`<li><a href="/categorias/${c.slug}.html#preguntas-frecuentes">Preguntas sobre ${esc(c.name.toLowerCase())}</a></li>`).join('')}<li><a href="/preguntas-frecuentes.html#datos-cotizacion">Qué datos enviar para cotizar</a></li><li><a href="/comparar.html">Comparar productos</a></li></ul></nav>`);
  }});
 }
 function shell(title,intro,body){return `<section class="page-banner"><div class="container"><div class="crumbs"><a href="/">Inicio</a><span>/</span><a href="/productos.html">Productos</a></div><h1 class="h-display" style="color:var(--c-bone)">${esc(title)}</h1><p class="lead">${esc(intro)}</p></div></section><section class="section--tight"><div class="container">${body}</div></section>`;}
@@ -165,7 +185,7 @@ for(const c of categories){
 }
 for(const sector of JSON.parse(read('data/sectors.json'))){
  const selected=products.filter(p=>p.sectors.some(s=>sector.sectors.includes(s)));
- page('ubicacion.html','sectores/'+sector.slug+'.html',{title:sector.name+' | Mat Depot',description:sector.intro,mutate(d){
+ page('ubicacion.html','sectores/'+sector.slug+'.html',{title:sector.seoTitle,description:sector.description,mutate(d){
   d.querySelectorAll('body > section,script:not([src])').forEach(e=>e.remove());
   d.querySelector('footer').insertAdjacentHTML('beforebegin',shell(sector.name,sector.intro,`<div class="prose">${sector.sections.map(([h,p])=>`<h2>${esc(h)}</h2><p>${esc(p)}</p>`).join('')}<h2>Guías para preparar tu proyecto</h2><ul>${sector.guides.map(([label,url])=>`<li><a href="${url}">${esc(label)}</a></li>`).join('')}</ul></div><h2 class="h2">Productos para consultar</h2><div class="cat-grid" style="margin-top:24px">${selected.map((p,i)=>card(p,i)).join('')}</div><p><a class="btn" href="/contacto.html">Cotizar mi proyecto</a></p><p class="source-note">Fuente: fichas del catálogo comercial de Mat Depot. Medidas, existencias y compatibilidad se confirman al cotizar.</p>`));
  }});
@@ -182,7 +202,77 @@ require('./build-blog.cjs')({ page, read, origin });
 require('./build-guides.cjs')({ page, products, origin, shell, esc });
 page('producto.html','producto.html',{noindex:true,title:'Consultar producto del catálogo | Mat Depot'});
 fs.writeFileSync(path.join(out,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+allUrls.map(u=>'<url><loc>'+esc(u)+'</loc><lastmod>'+lastmods.get(u)+'</lastmod></url>').join('')+'</urlset>');
-fs.writeFileSync(path.join(out,'robots.txt'),'User-agent: *\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: Claude-SearchBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nSitemap: '+origin+'/sitemap.xml\n');
-fs.writeFileSync(path.join(out,'llms.txt'),'# Mat Depot\n\n> Catálogo comercial de tapetes y pisos de hule y PVC para proyectos industriales, comerciales y deportivos. Atención desde Tlalnepantla de Baz, México.\n\n## Contacto\n\n- [Cotizaciones]('+origin+'/contacto.html): '+contact.email+'; WhatsApp '+contact.wa+'.\n- Precios, existencias, condiciones de entrega y documentación técnica se confirman al cotizar. No se publica una garantía general de disponibilidad.\n\n## Categorías\n\n'+categories.map(c=>'- ['+c.name+']('+origin+'/categorias/'+c.slug+'.html): '+categorySeo[c.slug].description).join('\n')+'\n\n## Sectores\n\n'+JSON.parse(read('data/sectors.json')).map(c=>'- ['+c.name+']('+origin+'/sectores/'+c.slug+'.html)').join('\n')+'\n\n## Guías y herramientas\n\n- [Blog]('+origin+'/blog.html): Guías de selección y herramientas interactivas.\n- [Comparador]('+origin+'/comparar.html): Hasta tres productos con especificaciones del catálogo.\n- [Calculadora de superficie]('+origin+'/blog/mejor-piso-para-gimnasio.html#calculadora): Estimación de metros cuadrados para cotizar.\n- [Precio por metro cuadrado]('+origin+'/blog/precio-piso-hule-m2.html): Cómo organizar un presupuesto; no es una lista de precios.\n- [Catálogo extendido en texto]('+origin+'/llms-full.txt): Datos publicados de cada modelo.\n\n## Catálogo\n\n'+products.map(p=>'- ['+p.name+']('+origin+productUrl(p)+'): '+p.short).join('\n')+'\n\n## Ayuda\n\n- [Preguntas frecuentes]('+origin+'/preguntas-frecuentes.html)\n- [Ubicación]('+origin+'/ubicacion.html)\n');
+fs.writeFileSync(path.join(out,'robots.txt'),`User-agent: *
+Allow: /
+
+# Buscadores con IA (citan y enlazan fuentes)
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Entrenamiento de modelos
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: ${origin}/sitemap.xml
+`);
+fs.writeFileSync(path.join(out,'llms.txt'),`# Mat Depot
+
+> Proveedor de tapetes y pisos de hule y PVC para industria, comercio, cocinas y gimnasios. Atiende desde Tlalnepantla de Baz, Estado de México, con mayoreo y menudeo y envíos en México. Sitio oficial: ${origin}/
+
+## Datos de la empresa
+- Razón social: Mat Depot, S.A. de C.V.
+- Dirección: C. Popocatépetl 42, San Javier, C.P. 54030, Tlalnepantla de Baz, Estado de México. Visitas al almacén con cita previa.
+- Horario: lunes a viernes, de 9:00 a 18:00.
+- Teléfonos: (55) 9626 5258 y (55) 9626 5259. WhatsApp: (55) 4494 3014. Correo: ${contact.email}
+- Precios, existencias y plazos de entrega se confirman al cotizar.
+
+## Categorías
+- [Tapetes antifatiga](${origin}/categorias/antifatiga.html): trabajo de pie en industria y comercio.
+- [Tapetes antiderrapantes](${origin}/categorias/antiderrapantes.html): rollos de hule y PVC por tipo de superficie.
+- [Pisos y tapetes para gimnasio](${origin}/categorias/gimnasios.html): rollos y losetas de 5 a 25 mm.
+- [Áreas húmedas](${origin}/categorias/areas-humedas.html) y [seguridad eléctrica](${origin}/categorias/seguridad-electrica.html).
+
+## Sectores
+- [Industria y almacenes](${origin}/sectores/industria.html)
+- [Cocinas y restaurantes](${origin}/sectores/cocinas.html)
+- [Comercios y oficinas](${origin}/sectores/comercio.html)
+
+## Guías
+- [Precio de piso de hule por m²](${origin}/blog/precio-piso-hule-m2.html)
+- [Piso para gimnasio: rollo o modular](${origin}/blog/piso-gimnasio-rollo-o-modular.html)
+- [Espesor de piso para gimnasio](${origin}/blog/espesor-piso-gimnasio.html)
+- [Instalar piso de hule sobre concreto o loseta](${origin}/blog/instalar-piso-hule-concreto-loseta.html)
+- [Tapete antifatiga o antiderrapante](${origin}/blog/antifatiga-o-antiderrapante.html)
+- [Tapete para cocina industrial](${origin}/blog/tapete-cocina-industrial.html)
+- [Tapete dieléctrico: voltajes y documentación](${origin}/guias/tapete-dielectrico-precio-voltajes.html)
+
+## Catálogo completo
+- [Datos de las ${products.length} fichas](${origin}/llms-full.txt)
+- [Catálogo](${origin}/productos.html) · [Preguntas frecuentes](${origin}/preguntas-frecuentes.html) · [Ubicación](${origin}/ubicacion.html)
+`);
 fs.writeFileSync(path.join(out,'llms-full.txt'),'# Mat Depot · Datos del catálogo\n\nFuente: '+origin+'/productos.html\nPrecios, existencias y documentación se confirman al cotizar.\nContacto: '+contact.email+'\n\n'+products.map(p=>'## '+p.name+'\n\n'+origin+productUrl(p)+'\n\n'+p.intro+'\n\n'+Object.entries(p.specs).map(([k,v])=>'- '+k+': '+v).join('\n')).join('\n\n'));
 console.log('Generated '+allUrls.length+' indexable pages, '+products.length+' static product pages.');

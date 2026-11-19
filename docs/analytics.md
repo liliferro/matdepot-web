@@ -8,6 +8,7 @@ Implementación: 21 de octubre de 2026. Propiedad GA4 `536869166`, flujo web `14
 |---|---|---|
 | contact_whatsapp | Un clic en un enlace HTTPS al WhatsApp del negocio (`wa.me/5215544943014`, o el mismo número en api.whatsapp.com / web.whatsapp.com) | Evento clave de captación. Un evento por clic. No confirma que el mensaje se haya enviado. Compartir un artículo no lo dispara |
 | generate_lead | Envío válido del formulario de cotización, una vez, antes de salir hacia FormSubmit | Evento clave de solicitud por formulario. No se repite en `/gracias.html`. No confirma recepción en buzón ni calificación |
+| lead_confirmado | Carga de `/gracias.html` con consentimiento, una vez por sesión o por `lead_id` guardado | Llegada a la página de gracias. No sustituye a `generate_lead` ni confirma recepción en buzón. No se emite en previews ni sin consentimiento |
 | form_start | Primera interacción de foco del formulario con consentimiento | Inicio de formulario. No es un lead. La medición automática de formularios debe seguir desactivada en GA4 |
 | contact_phone / contact_email | Clic en teléfono / correo | Intención de contacto, sin marcado adicional como evento clave |
 | view_item | Ficha de producto tras consentimiento | Vista de producto; items contiene ID, nombre y categoría del catálogo |
@@ -36,7 +37,7 @@ WhatsApp y formulario se mantienen separados. No se genera un segundo `generate_
 
 El formulario sigue enviándose a FormSubmit y, al terminar, vuelve a `https://www.matdepotmex.com/gracias.html` sin parámetros de campaña ni `lead_id`. `generate_lead` se envía en la página de contacto, con `transport_type=beacon`, antes de esa salida. Así el lead queda en la sesión y el canal originales.
 
-`/gracias.html` no vuelve a emitir `generate_lead`, aunque la visita traiga un `lead_id` antiguo. Si el referrer es formsubmit.co, la configuración de gtag usa `ignore_referrer` y no reenvía ese referrer: el retorno no se atribuye como sesión nueva de referencia formsubmit.co ni genera un segundo lead. Una inactividad mayor al tiempo de sesión de GA4 puede abrir otra sesión directa; esa visita ya no cuenta el formulario.
+`/gracias.html` no vuelve a emitir `generate_lead`, aunque la visita traiga un `lead_id` antiguo. Con consentimiento emite `lead_confirmado` una vez: si la sesión guarda el envío pendiente, incluye su `lead_id`, producto y nivel de tráfico; si no, solo marca la visita a la página. Un refresco no lo repite. Si el referrer es formsubmit.co, la configuración de gtag usa `ignore_referrer` y no reenvía ese referrer: el retorno no se atribuye como sesión nueva de referencia formsubmit.co ni genera un segundo `generate_lead`. Una inactividad mayor al tiempo de sesión de GA4 puede abrir otra sesión directa; esa visita ya no cuenta el formulario.
 
 En GA4, la medición mejorada de interacciones con formularios debe permanecer desactivada. Si se reactiva, GA4 puede volver a registrar `form_submit` con destino formsubmit.co además de `generate_lead`.
 
