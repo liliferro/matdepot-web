@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const assert = require('node:assert/strict');
 const { JSDOM } = require('jsdom');
 const read = f => fs.readFileSync(f, 'utf8');
-async function setup(path, consent, stored = {}, referrer = '', host = 'www.matdepotmex.com') {
+async function setup(path, consent, stored = {}, referrer = '', host = 'www.matdepotmex.com', local = {}) {
   const file = path.split('?')[0];
   const options = {url:'https://'+host+path, runScripts:'outside-only'};
   if (referrer) options.referrer = referrer;
@@ -13,6 +13,7 @@ async function setup(path, consent, stored = {}, referrer = '', host = 'www.matd
   if(file === '/contacto.html') for(const s of w.document.querySelectorAll('script:not([src]):not([type])')) w.eval(s.textContent);
   if(consent) w.localStorage.setItem('md-analytics-consent', JSON.stringify(consent));
   for(const [key, value] of Object.entries(stored)) w.sessionStorage.setItem(key, JSON.stringify(value));
+  for(const [key, value] of Object.entries(local)) w.localStorage.setItem(key, value);
   w.eval(read('assets/analytics.js'));
   w.document.dispatchEvent(new w.Event('DOMContentLoaded'));
   if(file === '/comparar.html') w.eval(read('assets/comparison.js'));
@@ -25,6 +26,7 @@ async function setup(path, consent, stored = {}, referrer = '', host = 'www.matd
   p.d.querySelector('.wa-fab').click();
   assert.equal(p.events().length,0,'no analytics without consent');
   p.d.getElementById('accept-analytics').click();
+  assert.equal(p.d.querySelectorAll('script[src="https://www.googletagmanager.com/gtag/js?id=G-LC7M7BHNSN"]').length,1,'production host loads the GA4 tag after consent');
   assert.equal(p.events('view_item').length,1);
   assert.equal(p.events('view_item')[0].items[0].item_id,slug);
   const fabHref=new URL(p.d.querySelector('.wa-fab').href);
@@ -169,13 +171,64 @@ async function setup(path, consent, stored = {}, referrer = '', host = 'www.matd
   const home=new URL(scope.window.mdWhatsAppUrl('/','')).searchParams.get('text');
   assert.equal(home,'Hola, quiero cotizar tapetes o pisos. (ref: INICIO)');
   assert.equal(new URL(scope.window.mdWhatsAppUrl('/tapetes/'+slug+'.html','')).pathname,'/5215544943014');
-  for(const host of ['matdepot-preview.vercel.app','localhost']){
+  const gtagSrc='script[src*="googletagmanager.com/gtag/js"]';
+  for(const host of ['matdepot-preview.vercel.app','localhost','www.matdepotmex.com.evil.test']){
     const preview=await setup('/contacto.html','granted',{},'',host);
     preview.d.querySelector('#wa-link').click();
-    assert.equal(preview.events().length,0,'preview must not emit production events');
-    assert.equal(preview.d.querySelectorAll('script[src*="googletagmanager.com"]').length,0);
+    preview.d.getElementById('contact-form').dispatchEvent(new preview.w.Event('focusin'));
+    assert.equal(preview.events().length,0,'non-production host must not emit production events');
+    assert.equal(preview.events('contact_whatsapp').length,0);
+    assert.equal(preview.events('form_start').length,0);
+    assert.equal([...preview.w.dataLayer].some(entry=>entry[0]==='config'||entry[0]==='js'),false);
+    assert.equal(preview.d.querySelectorAll(gtagSrc).length,0);
     assert.equal(preview.w['ga-disable-G-LC7M7BHNSN'],true);
     preview.dom.window.close();
   }
-  console.log('Analytics passed: consent, one lead per form submit, one WhatsApp event per click, thank-you referrer and reference codes. No requests sent to Google or forms.');
+  for(const referrer of ['https://vercel.com/matdepot/matdepot-web','https://matdepot-web-git-main.vercel.app/','https://example.com/out?url=https://vercel.com/dashboard']){
+    const internal=await setup('/contacto.html','granted',{},referrer);
+    internal.d.querySelector('#wa-link').click();
+    internal.d.getElementById('contact-form').dispatchEvent(new internal.w.Event('focusin'));
+    internal.d.getElementById('contact-form').dispatchEvent(new internal.w.Event('submit',{cancelable:true}));
+    assert.equal(internal.events().length,0,'vercel referrer must not emit events');
+    assert.equal(internal.events('contact_whatsapp').length,0);
+    assert.equal(internal.events('form_start').length,0);
+    assert.equal(internal.events('generate_lead').length,0);
+    assert.equal([...internal.w.dataLayer].some(entry=>entry[0]==='config'),false);
+    assert.equal(internal.d.querySelectorAll(gtagSrc).length,0);
+    assert.equal(internal.w['ga-disable-G-LC7M7BHNSN'],true);
+    internal.dom.window.close();
+  }
+  const opted=await setup('/contacto.html?no_ga=1','granted');
+  assert.equal(opted.w.localStorage.getItem('mdx_no_ga'),'1');
+  opted.d.querySelector('#wa-link').click();
+  opted.d.getElementById('contact-form').dispatchEvent(new opted.w.Event('focusin'));
+  opted.d.getElementById('contact-form').dispatchEvent(new opted.w.Event('submit',{cancelable:true}));
+  assert.equal(opted.events('contact_whatsapp').length,0);
+  assert.equal(opted.events('form_start').length,0);
+  assert.equal(opted.events('generate_lead').length,0);
+  assert.equal(opted.d.querySelectorAll(gtagSrc).length,0);
+  assert.equal(opted.w['ga-disable-G-LC7M7BHNSN'],true);
+  opted.dom.window.close();
+  const remembered=await setup('/contacto.html','granted',{},'https://www.google.com/','www.matdepotmex.com',{'mdx_no_ga':'1'});
+  remembered.d.querySelector('#wa-link').click();
+  assert.equal(remembered.w.localStorage.getItem('mdx_no_ga'),'1');
+  assert.equal(remembered.events().length,0,'stored opt-out must keep GA4 off');
+  assert.equal(remembered.d.querySelectorAll(gtagSrc).length,0);
+  remembered.dom.window.close();
+  const restored=await setup('/contacto.html?no_ga=0&prod='+slug,'granted',{},'', 'www.matdepotmex.com',{'mdx_no_ga':'1'});
+  assert.equal(restored.w.localStorage.getItem('mdx_no_ga'),null);
+  assert.equal(restored.d.querySelectorAll('script[src="https://www.googletagmanager.com/gtag/js?id=G-LC7M7BHNSN"]').length,1);
+  restored.d.getElementById('contact-form').dispatchEvent(new restored.w.Event('focusin'));
+  restored.d.querySelector('#wa-link').click();
+  assert.equal(restored.events('form_start').length,1);
+  assert.equal(restored.events('contact_whatsapp').length,1);
+  assert.equal(restored.events('contact_whatsapp')[0].lead_channel,'whatsapp');
+  restored.dom.window.close();
+  const apex=await setup('/contacto.html','granted',{},'','matdepotmex.com');
+  assert.equal(apex.d.querySelectorAll('script[src="https://www.googletagmanager.com/gtag/js?id=G-LC7M7BHNSN"]').length,1,'apex production host loads the GA4 tag');
+  apex.d.getElementById('contact-form').dispatchEvent(new apex.w.Event('focusin'));
+  assert.equal(apex.events('form_start').length,1);
+  assert.equal(apex.events('form_start')[0].form_id,'cotizacion');
+  apex.dom.window.close();
+  console.log('Analytics passed: consent, one lead per form submit, one WhatsApp event per click, thank-you referrer, reference codes, and GA4 exclusions. No requests sent to Google or forms.');
 })().catch(e=>{console.error(e);process.exitCode=1;});

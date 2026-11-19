@@ -75,9 +75,25 @@
     if (url.hostname === 'api.whatsapp.com' || url.hostname === 'web.whatsapp.com') return (url.searchParams.get('phone')||'').replace(/\D/g,'') === phone;
     return false;
   };
+  // Production property 536869166 must not record previews, Vercel referrals, or opted-out browsers.
+  function syncNoGaFlag(){
+    try{
+      const flag=new URLSearchParams(location.search).get('no_ga');
+      if(flag==='1')localStorage.setItem('mdx_no_ga','1');
+      else if(flag==='0')localStorage.removeItem('mdx_no_ga');
+    }catch{}
+  }
+  function measurementBlocked(){
+    if(!['www.matdepotmex.com','matdepotmex.com'].includes(location.hostname))return true;
+    const referrer=(document.referrer||'').toLowerCase();
+    if(referrer.includes('vercel.com')||referrer.includes('vercel.app'))return true;
+    try{if(new URLSearchParams(location.search).get('no_ga')==='1')return true;}catch{}
+    try{if(localStorage.getItem('mdx_no_ga')==='1')return true;}catch{}
+    return false;
+  }
+  syncNoGaFlag();
   function enable() {
-    // Preview deployments and local QA must not contaminate the production property.
-    if(!['www.matdepotmex.com','matdepotmex.com'].includes(location.hostname))return;
+    if(measurementBlocked())return;
     if(enabled)return; enabled=true;
     captureAttribution();
     document.dispatchEvent(new CustomEvent('md:analytics-enabled'));
