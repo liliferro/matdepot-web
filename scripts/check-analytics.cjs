@@ -90,16 +90,37 @@ async function setup(path, consent, stored = {}, referrer = '', host = 'www.matd
 
   const back=await setup('/gracias.html','granted',{},'https://formsubmit.co/thank-you');
   assert.equal(back.events('generate_lead').length,0,'thank-you page must not emit a second lead');
+  assert.equal(back.events('lead_confirmado').length,1,'confirmed lead fires once when the thank-you page loads');
+  assert.equal(back.events('lead_confirmado')[0].form_id,'cotizacion');
+  assert.equal(back.events('lead_confirmado')[0].lead_channel,'form');
+  assert.equal(back.events('lead_confirmado')[0].pagina,'/gracias.html');
+  assert.equal(Object.hasOwn(back.events('lead_confirmado')[0],'lead_id'),false);
   const backConfig=[...back.w.dataLayer].find(entry=>entry[0]==='config')[2];
   assert.equal(backConfig.ignore_referrer,true);
   assert.equal(Object.hasOwn(backConfig,'page_referrer'),false);
   back.dom.window.close();
   const direct=await setup('/gracias.html?lead_id=md-old','granted',{'md-pending-lead':{id:'md-old',product:slug,traffic:'Alto',time:Date.now()}});
   assert.equal(direct.events('generate_lead').length,0);
+  assert.equal(direct.events('lead_confirmado').length,1);
+  assert.equal(direct.events('lead_confirmado')[0].lead_id,'md-old');
+  assert.equal(direct.events('lead_confirmado')[0].producto,slug);
+  assert.equal(direct.events('lead_confirmado')[0].page_location,'https://www.matdepotmex.com/gracias.html');
   const directConfig=[...direct.w.dataLayer].find(entry=>entry[0]==='config')[2];
   assert.notEqual(directConfig.ignore_referrer,true);
   assert.equal(directConfig.page_location,'https://www.matdepotmex.com/gracias.html');
   direct.dom.window.close();
+  const quiet=await setup('/gracias.html');
+  assert.equal(quiet.events('lead_confirmado').length,0,'thank-you without consent is not measured');
+  quiet.dom.window.close();
+  const blockedThanks=await setup('/gracias.html','granted',{'md-pending-lead':{id:'md-blocked',product:slug,time:Date.now()}},'https://vercel.com/matdepot/matdepot-web');
+  assert.equal(blockedThanks.events('lead_confirmado').length,0,'vercel referrer must not confirm a lead');
+  assert.equal(blockedThanks.events('generate_lead').length,0);
+  assert.equal(blockedThanks.d.querySelectorAll('script[src*="googletagmanager.com/gtag/js"]').length,0);
+  blockedThanks.dom.window.close();
+  const previewThanks=await setup('/gracias.html','granted',{},'','matdepot-preview.vercel.app');
+  assert.equal(previewThanks.events('lead_confirmado').length,0,'preview thank-you must not confirm a lead');
+  assert.equal(previewThanks.w['ga-disable-G-LC7M7BHNSN'],true);
+  previewThanks.dom.window.close();
 
   const cmp=await setup('/comparar.html','granted');
   assert.equal(cmp.events('compare_products').length,0,'initial rendering is not a comparison action');

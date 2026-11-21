@@ -11,7 +11,10 @@ for(const file of files){
  if(file.endsWith('/contacto.html'))assert.equal(d.querySelector('#contact-form').getAttribute('action'),'https://formsubmit.co/'+email);
  assert.equal(d.querySelectorAll('main').length,1,file+' main');assert.equal(d.querySelectorAll('link[rel=canonical]').length,1);
  for(const s of d.querySelectorAll('script[type="application/ld+json"]'))assert(JSON.parse(s.textContent)['@graph'].length>=2);
- for(const img of d.querySelectorAll('img')){assert(img.hasAttribute('alt'));assert(img.width>0&&img.height>0);images++;}
+ for(const img of d.querySelectorAll('img')){assert(img.hasAttribute('alt'));assert(img.width>0&&img.height>0);images++;
+  const srcset=img.getAttribute('srcset');
+  if(srcset){assert(img.getAttribute('sizes'),file+' missing sizes');for(const part of srcset.split(',')){const url=part.trim().split(/\s+/)[0];assert(url.startsWith('/'),file);assert(fs.existsSync(path.join(root,url.slice(1))),file+' missing '+url);}}
+ }
  for(const e of d.querySelectorAll('[href],[src]'))for(const attr of ['href','src']){
   const url=e.getAttribute(attr);if(!url||!url.startsWith('/')||url.startsWith('//'))continue;
   const target=new URL(url,'https://www.matdepotmex.com').pathname;assert(fs.existsSync(path.join(root,target==='/'?'index.html':target)),file+' missing '+target);links++;

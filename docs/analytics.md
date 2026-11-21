@@ -8,6 +8,7 @@ Implementación: 21 de octubre de 2026. Propiedad GA4 `536869166`, flujo web `14
 |---|---|---|
 | contact_whatsapp | Un clic en un enlace HTTPS al WhatsApp del negocio (`wa.me/5215544943014`, o el mismo número en api.whatsapp.com / web.whatsapp.com) | Evento clave de captación. Un evento por clic. No confirma que el mensaje se haya enviado. Compartir un artículo no lo dispara |
 | generate_lead | Envío válido del formulario de cotización, una vez, antes de salir hacia FormSubmit | Evento clave de solicitud por formulario. No se repite en `/gracias.html`. No confirma recepción en buzón ni calificación |
+| lead_confirmado | Carga de `/gracias.html` con consentimiento, una vez por sesión | Confirma que el visitante llegó a la página de gracias. No se emite sin consentimiento, en previews, con referrer de vercel.com o vercel.app, ni con `no_ga`. No repite `generate_lead` ni confirma recepción en el buzón |
 | form_start | Primera interacción de foco del formulario con consentimiento | Inicio de formulario. No es un lead. La medición automática de formularios debe seguir desactivada en GA4 |
 | contact_phone / contact_email | Clic en teléfono / correo | Intención de contacto, sin marcado adicional como evento clave |
 | view_item | Ficha de producto tras consentimiento | Vista de producto; items contiene ID, nombre y categoría del catálogo |
